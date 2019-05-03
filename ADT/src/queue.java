@@ -48,6 +48,7 @@ public class queue {
 			pRear.setPtrNext(pn);
 			pRear = pn;
 		}
+		System.out.println("Worked " + counter);
 	}
 	
 	public void scan() {
