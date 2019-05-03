@@ -22,7 +22,7 @@ public class queue {
 		return false;
 	}
 
-	public int pop() {
+	public int NEXT() {
 		int el = -1;
 		node pn = pFront;
 		
@@ -40,12 +40,11 @@ public class queue {
 		return el;
 	}
 
-	public void push() {
+	public void NEWENTRY() {
 		node pn = new node(++counter);
 		
 		if(isEmpty()) {
-			pFront = pRear = pn;
-		}else {
+			pFront = pRear = pn; }else {
 			pRear.setPtrNext(pn);
 			pRear = pn;
 		}
