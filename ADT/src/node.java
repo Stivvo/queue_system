@@ -1,39 +1,35 @@
 
 public class node {
-	private int code;
+	private int id;
 	private node ptr;
 	
 	public node() {
-		code = 0;
 		ptr = null;
+		id = 0;
+	}
+
+	public node(int el) {
+		id = el;
 	}
 	
-	public node(int code) {
-		if ( code > 3 || code < 0)
-			code = 0;
-		this.code = code;
-	}
-	
-	public node(int code, node ptr) {
-		if ( code > 2 || code < 0)
-			code = 0;
-		this.code = code;
+	public node(int el, node ptr) {
+		if(el < 0)
+			el = 0;
+		id = el;
 		
 		this.ptr = ptr;
 	}
 	
 	public void setInfo(int el) {
-		if(el < 0 || el > 2) 
-			el = 0;
-		this.code = el;
+		id = el;
 	}
 	
 	public void setPtrNext(node ptr) {
 		this.ptr = ptr;
 	}
 	
-	public int getInfo() {
-		return code;
+	public int getId() {
+		return id;
 	}
 	
 	public node getPtrNext() {

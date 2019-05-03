@@ -2,6 +2,7 @@
 public class queue {
 	private node pFront;
 	private node pRear;
+	private int counter;
 
 	public queue() {
 		pFront = pRear = null;
@@ -9,6 +10,10 @@ public class queue {
 	
 	public queue(node ptr) {
 		pFront = pRear = ptr;
+	}
+	
+	public int getId() {
+		return pFront.getId();
 	}
 	
 	public boolean isEmpty() {
@@ -23,11 +28,11 @@ public class queue {
 		
 		if(!isEmpty()) {
 			if(pFront == pRear) {
-				el = pFront.getInfo();
+				el = pFront.getId();
 				pFront = pRear = null;
 			}else {
 				pFront = pFront.getPtrNext();
-				el = pn.getInfo();
+				el = pn.getId();
 				pn = null;
 			}
 		}
@@ -35,8 +40,8 @@ public class queue {
 		return el;
 	}
 
-	public void push(int el) {
-		node pn = new node(el);
+	public void push() {
+		node pn = new node(++counter);
 		
 		if(isEmpty()) {
 			pFront = pRear = pn;
@@ -49,10 +54,14 @@ public class queue {
 	public void scan() {
 		node pn = pFront;
 		while(pn != null) {
-			System.out.print(pn.getInfo() + " -> ");
+			System.out.print(pn.getId() + " -> ");
 			pn = pn.getPtrNext();
 		}
 		System.out.print("NULL");
 		System.out.println();
+	}
+	
+	public node top() {
+		return pFront;
 	}
 }
