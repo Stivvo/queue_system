@@ -45,4 +45,14 @@ public class queue {
 			pRear = pn;
 		}
 	}
+	
+	public void scan() {
+		node pn = pFront;
+		while(pn != null) {
+			System.out.print(pn.getInfo() + " -> ");
+			pn = pn.getPtrNext();
+		}
+		System.out.print("NULL");
+		System.out.println();
+	}
 }
