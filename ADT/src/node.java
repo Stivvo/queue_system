@@ -22,9 +22,21 @@ public class node {
 		this.ptr = ptr;
 	}
 	
-	public setInfo(int el) {
-		if(el < 0 || el > 2) {
-			
-		}
+	public void setInfo(int el) {
+		if(el < 0 || el > 2) 
+			el = 0;
+		this.code = el;
+	}
+	
+	public void setPtrNext(node ptr) {
+		this.ptr = ptr;
+	}
+	
+	public int getInfo() {
+		return code;
+	}
+	
+	public node getPtrNext() {
+		return ptr;
 	}
 }
