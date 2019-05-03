@@ -11,12 +11,14 @@ import java.awt.event.MouseEvent;
 public class ADT {
 
 	private JFrame frame;
-	private queue queueA;
-	private queue queueB;
-	private queue queueC;
-	private Semaforo mutexA;
-	private Semaforo mutexB;
-	private Semaforo mutexC;
+	JLabel lblA;
+	JLabel lblB;
+	JLabel lblC;
+	
+	int n;
+	private Sportello[] p;
+	private queue[] q;
+	private Semaforo[] s;
 	
 	/**
 	 * Launch the application.
@@ -36,13 +38,38 @@ public class ADT {
 	/**
 	 * Create the application.
 	 */
-	public ADT() {
+	public ADT() {		
+		lblA = new JLabel();
+		lblB = new JLabel();
+		lblC = new JLabel();
+		
 		initialize();
-		queueA = new queue();
-		queueB = new queue();
-		queueC = new queue();
+		n = 3;
 		
+		p = new Sportello[n];
+		q = new queue[n];
+		s = new Semaforo[n];
 		
+		for (int i = 0; i < n; i++)
+		{
+			q[i] = new queue();
+			s[i] = new Semaforo(1);
+			
+			switch (i) {
+			case 0:
+				System.out.println("costruito sportello 0");
+				p[i] = new Sportello(q[i], s[i], lblA);
+				break;
+			case 1:
+				System.out.println("costruito sportello 1");
+				p[i] = new Sportello(q[i], s[i], lblB);
+				break;
+			case 2:
+				System.out.println("costruito sportello 2");
+				p[i] = new Sportello(q[i], s[i], lblC);
+				break;
+			}
+		}
 	}
 
 	/**
@@ -54,19 +81,19 @@ public class ADT {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblA = new JLabel("A");
+		lblA = new JLabel("A");
 		lblA.setFont(new Font("Calibri", Font.PLAIN, 20));
 		lblA.setHorizontalAlignment(SwingConstants.CENTER);
 		lblA.setBounds(57, 38, 61, 40);
 		frame.getContentPane().add(lblA);
 		
-		JLabel lblB = new JLabel("B");
+		lblB = new JLabel("B");
 		lblB.setHorizontalAlignment(SwingConstants.CENTER);
 		lblB.setFont(new Font("Calibri", Font.PLAIN, 20));
 		lblB.setBounds(188, 38, 61, 40);
 		frame.getContentPane().add(lblB);
 		
-		JLabel lblC = new JLabel("C");
+		lblC = new JLabel("C");
 		lblC.setHorizontalAlignment(SwingConstants.CENTER);
 		lblC.setFont(new Font("Calibri", Font.PLAIN, 20));
 		lblC.setBounds(324, 38, 61, 40);
@@ -76,7 +103,7 @@ public class ADT {
 		btnPrenotaSportelloA.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				queueA.NEWENTRY();
+				q[0].NEWENTRY();
 			}
 		});
 		btnPrenotaSportelloA.setBounds(23, 140, 127, 23);
@@ -86,7 +113,7 @@ public class ADT {
 		btnPrenotaSportelloB.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				queueB.NEWENTRY();
+				q[1].NEWENTRY();
 			}
 		});
 		btnPrenotaSportelloB.setBounds(160, 140, 127, 23);
@@ -96,7 +123,7 @@ public class ADT {
 		btnPrenotaSportelloC.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				queueC.NEWENTRY();
+				q[2].NEWENTRY();
 			}
 		});
 		btnPrenotaSportelloC.setBounds(297, 140, 127, 23);
