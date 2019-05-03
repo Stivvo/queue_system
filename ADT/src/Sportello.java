@@ -10,10 +10,14 @@ public class Sportello extends Thread
 	int cont; //numero di ticket prossimo da assegnare
 	static int n = 0; //numero identificativo dello sportello
 	queue q;
+	Semaforo s;
 	
-	public Sportello(queue q)
+	public Sportello(queue q, Semaforo s)
 	{//passare la coda da smistare e il numero della coda
 		cont = 0;
+		this.q = q;
+		this.s = s;
+		
 		setName(Integer.valueOf(n).toString());
 		n++;
 		start();
@@ -36,7 +40,9 @@ public class Sportello extends Thread
 				throw new RuntimeException(e);
 			}
 			
+			s.p();
 			System.out.println("Sportello: " + q.NEXT() + " servito");
+			s.v();
 		}
 	}
 }
