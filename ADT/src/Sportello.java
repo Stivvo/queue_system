@@ -1,5 +1,4 @@
 import java.util.Random;
-
 import javax.swing.JLabel;
 
 /**
@@ -14,13 +13,15 @@ public class Sportello extends Thread
 	queue q;
 	Semaforo s;
 	JLabel l;
+	JLabel ln;
 	
-	public Sportello(queue q, Semaforo s, JLabel l)
+	public Sportello(queue q, Semaforo s, JLabel l, JLabel ln)
 	{//passare la coda da smistare e il numero della coda
 		cont = 0;
 		this.q = q;
 		this.s = s;
 		this.l = l;
+		this.ln = ln;
 		
 		setName(Character.valueOf(n).toString());
 		n++;
@@ -37,11 +38,12 @@ public class Sportello extends Thread
 			if (!q.isEmpty())
 			{
 				Random rand = new Random();
-				t = rand.nextInt(9000) + 100;
+				t = rand.nextInt(7000) + 1000;
 				
 				
 				s.p();
 				temp = Integer.valueOf(q.NEXT()).toString();
+				ln.setText(q.getDim() + "");
 				s.v();
 				
 				for (int i = 0; i < 2; i++)
@@ -53,7 +55,7 @@ public class Sportello extends Thread
 				l.setText(getName() + temp);
 			}
 			else
-				t = 1000;
+				t = 2000;
 			
 			try
 			{
