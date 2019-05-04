@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 public class Sportello extends Thread
 {
 	int cont; //numero di ticket prossimo da assegnare
-	static int n = 0; //numero identificativo dello sportello
+	static char n = 'A'; //numero identificativo dello sportello
 	queue q;
 	Semaforo s;
 	JLabel l;
@@ -22,25 +22,35 @@ public class Sportello extends Thread
 		this.s = s;
 		this.l = l;
 		
-		setName(Integer.valueOf(n).toString());
+		setName(Character.valueOf(n).toString());
 		n++;
 		start();
 	}
 	
-	public int getN() {return Integer.valueOf(getName()).intValue();}
-	
 	public void run()
 	{	
 		int t = 0;
+		String temp;
+		
 		while(true)
 		{
 			if (!q.isEmpty())
 			{
 				Random rand = new Random();
 				t = rand.nextInt(9000) + 100;
+				
+				
 				s.p();
-				l.setText(Integer.valueOf(q.NEXT()).toString());
-				s.v();				
+				temp = Integer.valueOf(q.NEXT()).toString();
+				s.v();
+				
+				for (int i = 0; i < 2; i++)
+				{
+					if (temp.length() < 3)
+						temp = "0" + temp;
+						
+				}
+				l.setText(getName() + temp);
 			}
 			else
 				t = 1000;
