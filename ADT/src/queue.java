@@ -3,17 +3,11 @@ public class queue {
 	private node pFront;
 	private node pRear;
 	private int counter;
+	private int dim;
 
 	public queue() {
 		pFront = pRear = null;
-	}
-	
-	public queue(node ptr) {
-		pFront = pRear = ptr;
-	}
-	
-	public int getId() {
-		return pFront.getId();
+		counter = dim = 0;
 	}
 	
 	public boolean isEmpty() {
@@ -21,12 +15,15 @@ public class queue {
 			return true;
 		return false;
 	}
+	
+	public int getDim() {return dim;}
 
 	public int NEXT() {
 		int el = -1;
 		node pn = pFront;
 		
 		if(!isEmpty()) {
+			dim--;
 			if(pFront == pRear) {
 				el = pFront.getId();
 				pFront = pRear = null;
@@ -42,9 +39,11 @@ public class queue {
 
 	public void NEWENTRY() {
 		node pn = new node(++counter);
+		dim++;
 		
 		if(isEmpty()) {
-			pFront = pRear = pn; }else {
+			pFront = pRear = pn; 
+		}else {
 			pRear.setPtrNext(pn);
 			pRear = pn;
 		}
