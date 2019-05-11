@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.SocketException;
 
 public class Client {
 
@@ -41,27 +42,25 @@ public class Client {
 	/**
 	 * Create the application.
 	 */
-	public Client() {
-		initialize();
-		
-		try
-		{
+	public Client() 
+	{
+		try {
 			s = new Socket("localhost", 4999);
-		} 
-		catch (IOException e)
-		{
-			System.out.println("ERROR IN SOCKET");
-		}
+		} catch (SocketException exception) {
+			System.out.println(exception);
+	    } catch (IOException exception) {
+	    	System.out.println(exception);
+	    }
 		
-		try
-		{
+		try {
 			pr = new PrintWriter(s.getOutputStream());
-		} 
-		catch (IOException e)
-		{
-			System.out.println("ERROR IN PRINTWRITER");
+		} catch (SocketException exception) {
+		    System.out.println(exception);
+		} catch (IOException exception) {
+			System.out.println(exception);
 		}
 		
+		initialize();
 	}
 
 	/**

@@ -1,5 +1,3 @@
-QUEUE SYSTEM
-
 Eliminacode versione 2
 
 Strutturare un programma e scrivere il codice che abbia le seguenti caratteristiche.

@@ -2,27 +2,32 @@
 public class queue {
 	private node pFront;
 	private node pRear;
-	private int counter;
 	private int dim;
 
-	public queue() {
+	public queue() 
+	{
 		pFront = pRear = null;
-		counter = dim = 0;
+		dim = 0;
 	}
 	
-	public boolean isEmpty() {
+	public node top() {return pFront;}
+	
+	public int getDim() {return dim;}
+	
+	public boolean isEmpty() 
+	{
 		if(pFront == null && pRear == null)
 			return true;
 		return false;
 	}
-	
-	public int getDim() {return dim;}
 
-	public int NEXT() {
+	public int NEXT() 
+	{
 		int el = -1;
 		node pn = pFront;
 		
-		if(!isEmpty()) {
+		if(!isEmpty()) 
+		{
 			dim--;
 			if(pFront == pRear) {
 				el = pFront.getId();
@@ -33,33 +38,29 @@ public class queue {
 				pn = null;
 			}
 		}
-		
 		return el;
 	}
 
-	public void NEWENTRY() {
-		node pn = new node(++counter);
+	public void NEWENTRY(int code)
+	{
+		node pn = new node(code);
 		dim++;
 		
 		if(isEmpty()) {
-			pFront = pRear = pn; 
+			pFront = pRear = pn;
 		}else {
 			pRear.setPtrNext(pn);
 			pRear = pn;
 		}
 	}
 	
-	public void scan() {
+	public void scan() 
+	{
 		node pn = pFront;
 		while(pn != null) {
 			System.out.print(pn.getId() + " -> ");
 			pn = pn.getPtrNext();
 		}
-		System.out.print("NULL");
-		System.out.println();
-	}
-	
-	public node top() {
-		return pFront;
+		System.out.println("NULL");
 	}
 }
