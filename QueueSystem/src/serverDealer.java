@@ -28,11 +28,8 @@ public class serverDealer extends Thread{
 		super();
 		setName("ThreadServerDealer");
 		
-		for (int i = 0; i < 3; i++)
-		{
-			q[i] = q1[i];
-			s[i] = s1[i];
-		}
+		q = q1;
+		s = s1;
 		
 		LW[0] = LW1;
 		LW[1] = LW2;
