@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.SocketException;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Delaer {
 
@@ -114,5 +116,49 @@ public class Delaer {
 		JLabel lblScegliereSportelloDa = new JLabel("Scegliere sportello da prenotare: ");
 		lblScegliereSportelloDa.setBounds(12, 12, 326, 37);
 		frame.getContentPane().add(lblScegliereSportelloDa);
+		frame.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (e.getKeyChar() < 'a' || e.getKeyChar() > 'c') {
+					e.setKeyChar('\0');
+				}
+				
+				switch(e.getKeyChar()) {
+					case 'a':
+						System.out.println("a");
+						stampa(0, btnA);
+						break;
+					case 'b':
+						System.out.println("b");
+						stampa(1, btnB);
+						break;
+					case 'c':
+						System.out.println("c");
+						stampa(2, btnC);
+						break;
+				}
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyChar() < 'a' || e.getKeyChar() > 'c') {
+					e.setKeyChar('\0');
+				}
+				
+				switch(e.getKeyChar()) {
+					case 'a':
+						System.out.println("a");
+						stampa(0, btnA);
+						break;
+					case 'b':
+						System.out.println("b");
+						stampa(1, btnB);
+						break;
+					case 'c':
+						System.out.println("c");
+						stampa(2, btnC);
+						break;
+				}
+			}
+		});
 	}
 }

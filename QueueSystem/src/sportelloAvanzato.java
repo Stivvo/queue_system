@@ -8,6 +8,8 @@ import java.net.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class sportelloAvanzato {
 
@@ -49,6 +51,66 @@ public class sportelloAvanzato {
 	 */
 	private void initialize() throws UnknownHostException, IOException {
 		frame = new JFrame();
+		frame.getContentPane().addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyChar() < '1' || e.getKeyChar() > '5') {
+					e.consume();
+				}
+				
+				switch (e.getKeyChar()) {
+					case '1':
+						p.print('A');
+						p.flush();
+						break;
+					case '2':
+						p.print('B');
+						p.flush();
+						break;
+					case '3':
+						p.print('C');
+						p.flush();
+						break;
+					case '4':
+						p.print('D');
+						p.flush();
+						break;
+					case '5':
+						p.print('E');
+						p.flush();
+						break;
+				}
+			}
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyChar() < '1' || e.getKeyChar() > '5') {
+					e.consume();
+				}
+				
+				switch (e.getKeyChar()) {
+					case '1':
+						p.print('A');
+						p.flush();
+						break;
+					case '2':
+						p.print('B');
+						p.flush();
+						break;
+					case '3':
+						p.print('C');
+						p.flush();
+						break;
+					case '4':
+						p.print('D');
+						p.flush();
+						break;
+					case '5':
+						p.print('E');
+						p.flush();
+						break;
+				}
+			}
+		});
 		frame.setTitle("Counter");
 		
 		frame.addWindowListener(new WindowAdapter() {
