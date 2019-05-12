@@ -81,6 +81,7 @@ public class Delaer {
 		// -- A ---
 		
 		JButton btnA = new JButton("A0");
+		
 		btnA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				stampa(0, btnA);
@@ -116,9 +117,10 @@ public class Delaer {
 		JLabel lblScegliereSportelloDa = new JLabel("Scegliere sportello da prenotare: ");
 		lblScegliereSportelloDa.setBounds(12, 12, 326, 37);
 		frame.getContentPane().add(lblScegliereSportelloDa);
-		frame.addKeyListener(new KeyAdapter() {
+		
+		btnA.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyTyped(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {
 				if (e.getKeyChar() < 'a' || e.getKeyChar() > 'c') {
 					e.setKeyChar('\0');
 				}
@@ -138,8 +140,35 @@ public class Delaer {
 						break;
 				}
 			}
+		});
+		
+		btnB.addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyReleased(KeyEvent e) {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyChar() < 'a' || e.getKeyChar() > 'c') {
+					e.setKeyChar('\0');
+				}
+				
+				switch(e.getKeyChar()) {
+					case 'a':
+						System.out.println("a");
+						stampa(0, btnA);
+						break;
+					case 'b':
+						System.out.println("b");
+						stampa(1, btnB);
+						break;
+					case 'c':
+						System.out.println("c");
+						stampa(2, btnC);
+						break;
+				}
+			}
+		});
+		
+		btnC.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
 				if (e.getKeyChar() < 'a' || e.getKeyChar() > 'c') {
 					e.setKeyChar('\0');
 				}

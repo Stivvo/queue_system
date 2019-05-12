@@ -51,66 +51,6 @@ public class sportelloAvanzato {
 	 */
 	private void initialize() throws UnknownHostException, IOException {
 		frame = new JFrame();
-		frame.getContentPane().addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyChar() < '1' || e.getKeyChar() > '5') {
-					e.consume();
-				}
-				
-				switch (e.getKeyChar()) {
-					case '1':
-						p.print('A');
-						p.flush();
-						break;
-					case '2':
-						p.print('B');
-						p.flush();
-						break;
-					case '3':
-						p.print('C');
-						p.flush();
-						break;
-					case '4':
-						p.print('D');
-						p.flush();
-						break;
-					case '5':
-						p.print('E');
-						p.flush();
-						break;
-				}
-			}
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if (e.getKeyChar() < '1' || e.getKeyChar() > '5') {
-					e.consume();
-				}
-				
-				switch (e.getKeyChar()) {
-					case '1':
-						p.print('A');
-						p.flush();
-						break;
-					case '2':
-						p.print('B');
-						p.flush();
-						break;
-					case '3':
-						p.print('C');
-						p.flush();
-						break;
-					case '4':
-						p.print('D');
-						p.flush();
-						break;
-					case '5':
-						p.print('E');
-						p.flush();
-						break;
-				}
-			}
-		});
 		frame.setTitle("Counter");
 		
 		frame.addWindowListener(new WindowAdapter() {
@@ -129,6 +69,7 @@ public class sportelloAvanzato {
 		frame.getContentPane().setLayout(null);
 		
 		JButton btnA = new JButton("A");
+		
 		btnA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				p.print('A');
@@ -181,7 +122,185 @@ public class sportelloAvanzato {
 		btnE.setBounds(159, 258, 105, 27);
 		frame.getContentPane().add(btnE);
 		
+		btnA.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyChar() < '1' || e.getKeyChar() > '5') {
+					e.consume();
+				}
+				
+				switch (e.getKeyChar()) {
+					case '1':
+						p.print('A');
+						p.flush();
+						break;
+					
+					case '2':
+						p.print('B');
+						p.flush();
+						break;
+						
+					case '3':
+						p.print('C');
+						p.flush();
+						break;
+						
+					case '4':
+						p.print('D');
+						p.flush();
+						break;
+						
+					case '5':
+						p.print('E');
+						p.flush();
+						break;
+				}
+			}
+		});
 		
+		btnB.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyChar() < '1' || e.getKeyChar() > '5') {
+					e.consume();
+				}
+				
+				switch (e.getKeyChar()) {
+					case '1':
+						p.print('A');
+						p.flush();
+						break;
+					
+					case '2':
+						p.print('B');
+						p.flush();
+						break;
+						
+					case '3':
+						p.print('C');
+						p.flush();
+						break;
+						
+					case '4':
+						p.print('D');
+						p.flush();
+						break;
+						
+					case '5':
+						p.print('E');
+						p.flush();
+						break;
+				}
+			}
+		});
+		
+		btnC.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyChar() < '1' || e.getKeyChar() > '5') {
+					e.consume();
+				}
+				
+				switch (e.getKeyChar()) {
+					case '1':
+						p.print('A');
+						p.flush();
+						break;
+					
+					case '2':
+						p.print('B');
+						p.flush();
+						break;
+						
+					case '3':
+						p.print('C');
+						p.flush();
+						break;
+						
+					case '4':
+						p.print('D');
+						p.flush();
+						break;
+						
+					case '5':
+						p.print('E');
+						p.flush();
+						break;
+				}
+			}
+		});
+		
+		btnD.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyChar() < '1' || e.getKeyChar() > '5') {
+					e.consume();
+				}
+				
+				switch (e.getKeyChar()) {
+					case '1':
+						p.print('A');
+						p.flush();
+						break;
+					
+					case '2':
+						p.print('B');
+						p.flush();
+						break;
+						
+					case '3':
+						p.print('C');
+						p.flush();
+						break;
+						
+					case '4':
+						p.print('D');
+						p.flush();
+						break;
+						
+					case '5':
+						p.print('E');
+						p.flush();
+						break;
+				}
+			}
+		});
+		
+		btnE.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.getKeyChar() < '1' || e.getKeyChar() > '5') {
+					e.consume();
+				}
+				
+				switch (e.getKeyChar()) {
+					case '1':
+						p.print('A');
+						p.flush();
+						break;
+					
+					case '2':
+						p.print('B');
+						p.flush();
+						break;
+						
+					case '3':
+						p.print('C');
+						p.flush();
+						break;
+						
+					case '4':
+						p.print('D');
+						p.flush();
+						break;
+						
+					case '5':
+						p.print('E');
+						p.flush();
+						break;
+				}
+			}
+		});
 	}
 
 }
