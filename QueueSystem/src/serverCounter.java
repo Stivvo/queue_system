@@ -15,8 +15,9 @@ public class serverCounter extends Thread {
 	private queue[] q = new queue[3];
 	private Semaforo[] s = new Semaforo[3];
 	private JLabel l1, l2, l3;
+	private JLabel lC1, lC2, lC3;
 	
-	public serverCounter(queue[] q1, Semaforo[] s1, JLabel L1, JLabel L2, JLabel L3) throws IOException {
+	public serverCounter(queue[] q1, Semaforo[] s1, JLabel L1, JLabel L2, JLabel L3, JLabel LC1, JLabel LC2, JLabel LC3) throws IOException {
 		super();
 		
 		for (int i = 0; i < 3; i++)
@@ -29,6 +30,9 @@ public class serverCounter extends Thread {
 		l2 = L2;
 		l3 = L3;
 		
+		lC1 = LC1;
+		lC2 = LC2;
+		lC3 = LC3;
 		ss = new ServerSocket(8045);
 		sock = ss.accept();
 		InputStreamReader inp = new InputStreamReader(sock.getInputStream());
@@ -84,12 +88,15 @@ public class serverCounter extends Thread {
 				{
 				case 0:
 					l1.setText("" + q[j].NEXT());
+					lC1.setText(""+ (i+1));
 					break;
 				case 1:
 					l2.setText("" + q[j].NEXT());
+					lC2.setText(""+(i +1));
 					break;
 				case 2:
 					l3.setText("" + q[j].NEXT());
+					lC3.setText(""+(i + 1));
 					break;
 				}
 				

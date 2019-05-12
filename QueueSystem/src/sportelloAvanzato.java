@@ -62,7 +62,7 @@ public class sportelloAvanzato {
 				}
 			}
 		});
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 450, 350);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -94,7 +94,7 @@ public class sportelloAvanzato {
 			}
 		});
 		
-		btnC.setBounds(159, 149, 105, 27);
+		btnC.setBounds(159, 150, 105, 27);
 		frame.getContentPane().add(btnC);
 		
 		JButton btnD = new JButton("D");
@@ -105,7 +105,7 @@ public class sportelloAvanzato {
 			}
 		});
 		
-		btnD.setBounds(159, 149, 105, 27);
+		btnD.setBounds(159, 204, 105, 27);
 		frame.getContentPane().add(btnD);
 		
 		JButton btnE = new JButton("E");
@@ -116,7 +116,7 @@ public class sportelloAvanzato {
 			}
 		});
 		
-		btnE.setBounds(159, 149, 105, 27);
+		btnE.setBounds(159, 258, 105, 27);
 		frame.getContentPane().add(btnE);
 		
 		
