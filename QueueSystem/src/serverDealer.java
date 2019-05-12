@@ -29,6 +29,24 @@ public class serverDealer extends Thread{
 		reader = new BufferedReader(inp);
 	}
 	
+	public int switchCar(String s)
+	{
+		int i = 0;
+		switch (s.charAt(0)) 
+		{
+		case 'A':
+			i = 0;
+			break;
+		case 'B':
+			i = 1;
+			break;
+		case 'C':
+			i = 2;
+			break;
+		}
+		return i;
+	}
+	
 	public void run() {
 		String operate = "";
 		int i = 0;
@@ -39,20 +57,7 @@ public class serverDealer extends Thread{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			switch (operate.charAt(0)) 
-			{
-			case 'A':
-				i = 0;
-				break;
-			case 'B':
-				i = 1;
-				break;
-			case 'C':
-				i = 2;
-				break;
-			}
-			
+			i = this.switchCar(operate);
 			s[i].p();
 			q[i].NEWENTRY(Integer.parseInt(operate.substring(1)));
 			s[i].v();

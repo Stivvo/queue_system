@@ -43,6 +43,23 @@ public class serverCounter extends Thread {
 		reader = new BufferedReader(inp);
 	}
 	
+	public int switchCar(String s)
+	{
+		int i = 0;
+		switch (s.charAt(0)) 
+		{
+		case 'A':
+			i = 0;
+			break;
+		case 'B':
+			i = 1;
+			break;
+		case 'C':
+			i = 2;
+			break;
+		}
+		return i;
+	}
 	
 	public void run()  {
 		int i = 0;
@@ -51,12 +68,9 @@ public class serverCounter extends Thread {
 			try {
 				operate = reader.readLine();
 			} catch (IOException e) {
-			
 				e.printStackTrace();
 			}
-			
-			i = ((int)operate.charAt(0)) - 65;
-			
+			i = this.switchCar(operate);
 			s[i].p();
 			l[i].setText(""+q[i].NEXT());
 			s[i].v();
