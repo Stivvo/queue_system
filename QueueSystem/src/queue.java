@@ -20,7 +20,7 @@ public class queue
 	
 	public Boolean isEmpty() 
 	{
-		if(pFront == null || pRear == null)
+		if(pFront == null && pRear == null)
 			return true;
 		return false;
 	}
@@ -33,8 +33,10 @@ public class queue
 		dim--;
 		int i = pFront.getInfo().getTicket();
 		
-		if(pFront == pRear) 
-			return pFront.getInfo().getTicket();
+		if(pFront == pRear)
+		{
+			pFront = pRear = null;
+		}
 		else 
 		{
 			node pn = pFront;
