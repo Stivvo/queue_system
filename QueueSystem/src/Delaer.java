@@ -7,11 +7,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.SocketException;
 
-public class Client {
+public class Delaer {
 
 	private JFrame frame;
 	
 	int[] cont = {0, 0, 0};
+	char[] car = {'A', 'B', 'C'};
 	Socket s;
 	public PrintWriter pr;
 
@@ -20,8 +21,8 @@ public class Client {
 	 */
 	public void stampa(int i)
 	{
-		pr.println(cont[0]);
-		cont[0]++;
+		pr.println(car[i] + cont[i]);
+		cont[i]++;
 		pr.flush();
 	}
 	
@@ -29,7 +30,7 @@ public class Client {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Client window = new Client();
+					Delaer window = new Delaer();
 					window.frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -42,7 +43,7 @@ public class Client {
 	/**
 	 * Create the application.
 	 */
-	public Client() 
+	public Delaer() 
 	{
 		try {
 			s = new Socket("localhost", 4999);
