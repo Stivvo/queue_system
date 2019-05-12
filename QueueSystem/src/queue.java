@@ -20,7 +20,7 @@ public class queue
 	
 	public Boolean isEmpty() 
 	{
-		if(pFront == null || pRear == null)
+		if(pFront == null && pRear == null)
 			return true;
 		return false;
 	}
@@ -33,7 +33,8 @@ public class queue
 		dim--;
 		int i = pFront.getInfo().getTicket();
 		
-		if(pFront == pRear)  {
+		if(pFront == pRear)
+		{
 			pFront = null;
 			pRear = null;
 		}
@@ -42,6 +43,9 @@ public class queue
 			node pn = pFront;
 			pFront = pFront.getPtrNext();
 			pn = null;
+			
+			if (pn == null)
+				System.out.println("pop");
 		}
 		return i;
 	}

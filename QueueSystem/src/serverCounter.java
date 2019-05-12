@@ -147,6 +147,7 @@ public class serverCounter extends Thread {
 				break;
 			
 			i = operate - 65;
+			System.out.println("i = " + i);
 			
 			if (i == 3 || i == 4)
 			{
@@ -170,7 +171,7 @@ public class serverCounter extends Thread {
 				LW[j].setText("" + q[j].getDim());
 			}
 			s[j].v();
-			System.out.println(operate + "\n");
+			System.out.println("operate: " + operate + "\n");
 		}
 		
 	}
