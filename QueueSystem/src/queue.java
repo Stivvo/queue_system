@@ -33,8 +33,10 @@ public class queue
 		dim--;
 		int i = pFront.getInfo().getTicket();
 		
-		if(pFront == pRear) 
-			return pFront.getInfo().getTicket();
+		if(pFront == pRear)  {
+			pFront = null;
+			pRear = null;
+		}
 		else 
 		{
 			node pn = pFront;

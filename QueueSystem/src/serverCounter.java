@@ -165,7 +165,7 @@ public class serverCounter extends Thread {
 			
 			if (!q[j].isEmpty())
 			{
-				l[j].setText("" + ((char) (j + 65)) + q[j].NEXT());
+				l[j].setText("" + q[j].NEXT());
 				LC[j].setText("" + (i+1));
 				LW[j].setText("" + q[j].getDim());
 			}
