@@ -6,11 +6,14 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class sportelloAvanzato {
 
 	private JFrame frame;
-
+	private Socket s;
+	private PrintWriter p;
 	/**
 	 * Launch the application.
 	 */
@@ -34,6 +37,9 @@ public class sportelloAvanzato {
 	 */
 	public sportelloAvanzato() throws UnknownHostException, IOException {
 		initialize();
+		
+		s = new Socket("localhost", 8045);
+		p = new PrintWriter(s.getOutputStream());
 	}
 
 	/**
@@ -43,17 +49,25 @@ public class sportelloAvanzato {
 	 */
 	private void initialize() throws UnknownHostException, IOException {
 		frame = new JFrame();
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				try {
+					s.close();
+				} catch (IOException e1) {
+					
+					e1.printStackTrace();
+				}
+			}
+		});
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		Socket s = new Socket("192.168.43.132", 4999);
-		PrintWriter p = new PrintWriter(s.getOutputStream());
-		
 		JButton btnA = new JButton("A");
 		btnA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				p.print(0);
+				p.print('A');
 				p.flush();
 			}
 		});
@@ -63,7 +77,7 @@ public class sportelloAvanzato {
 		JButton btnB = new JButton("B");
 		btnB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				p.print(1);
+				p.print('B');
 				p.flush();
 			}
 		});
@@ -73,7 +87,7 @@ public class sportelloAvanzato {
 		JButton btnC = new JButton("C");
 		btnC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				p.print(2);
+				p.print('C');
 				p.flush();
 
 			}

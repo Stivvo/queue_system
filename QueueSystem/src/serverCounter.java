@@ -46,20 +46,24 @@ public class serverCounter extends Thread {
 	
 	public void run()  {
 		int i = 0;
-		String operate = " ";
+		int operate = 0;
 		while (true) {
 			try {
-				operate = reader.readLine();
+				operate = reader.read();
 			} catch (IOException e) {
 			
 				e.printStackTrace();
 			}
 			
-			i = ((int)operate.charAt(0)) - 65;
+			i = operate - 65;
 			
 			s[i].p();
-			l[i].setText(""+q[i].NEXT());
+			if (!q[i].isEmpty()) {
+				l[i].setText(""+q[i].NEXT());
+			}
+			
 			s[i].v();
+			System.out.println(operate + "\n");
 		}
 		
 	}

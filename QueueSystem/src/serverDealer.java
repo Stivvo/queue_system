@@ -23,7 +23,7 @@ public class serverDealer extends Thread{
 			s[i] = s1[i];
 		}
 		
-		ss = new ServerSocket(8000);
+		ss = new ServerSocket(8076);
 		sock = ss.accept();
 		InputStreamReader inp = new InputStreamReader(sock.getInputStream());
 		reader = new BufferedReader(inp);
