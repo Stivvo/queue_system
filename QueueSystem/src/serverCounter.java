@@ -65,14 +65,14 @@ public class serverCounter extends Thread {
 			
 			i = operate - 65;
 			
-			if (i == 4 || i == 5)
+			if (i == 3 || i == 4)
 			{
 				j = 0;
 				
 				while (j < 3 &&
 						q[j].rear().getInfo().getT().getEpochSecond() - 
 						q[j].front().getInfo().getT().getEpochSecond()
-						<= 1200)
+						<= 1)
 					j++;
 				
 				if (j == 3)
@@ -81,6 +81,7 @@ public class serverCounter extends Thread {
 			else 
 				j = i;
 			
+			System.out.println("polifunzionale " + j);
 			s[j].p();
 			
 			if (!q[j].isEmpty())
