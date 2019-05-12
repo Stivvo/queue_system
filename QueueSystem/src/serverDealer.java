@@ -3,10 +3,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-import sun.util.calendar.ZoneInfo;
 
 public class serverDealer extends Thread{
 	
@@ -54,7 +54,7 @@ public class serverDealer extends Thread{
 	public void run() {
 		String operate = "";
 		int i = 0;
-		
+		int flag = 0;
 		while (true) 
 		{
 			try 
@@ -64,13 +64,25 @@ public class serverDealer extends Thread{
 				
 				if (i != -1)
 				{
+					System.out.println("pushhhh");
 					s[i].p();
 					q[i].NEWENTRY( Integer.parseInt(operate.substring(1)), ZonedDateTime.now(ZoneId.of("Europe/Paris")) );
 					s[i].v();
 				}
+			}  catch (SocketException e) {
+				try {
+					sock.close();
+					flag = 1;
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
+			if (flag == 1)
+				break;
 		}
 	}
 }

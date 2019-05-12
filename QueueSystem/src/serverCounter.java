@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 
 import javax.swing.JLabel;
 
@@ -38,13 +39,25 @@ public class serverCounter extends Thread {
 	{
 		int operate = 0;
 		int i = 0, j = 0;
+		int flag = 0;
 		while (true) 
 		{
 			try {
 				operate = reader.read();
+			} catch (SocketException e) {
+				try {
+					sock.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				flag = 1;
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
+				
+			} 
+			
+			if (flag == 1)
+				break;
 			
 			i = operate - 65;
 			

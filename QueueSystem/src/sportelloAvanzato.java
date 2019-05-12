@@ -94,24 +94,32 @@ public class sportelloAvanzato {
 			}
 		});
 		
-		JButton btnD = new JButton("C");
-		btnC.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				p.print('D');
-				p.flush();
-			}
-		});
-		
-		JButton btnE = new JButton("C");
-		btnC.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				p.print('D');
-				p.flush();
-			}
-		});
-		
 		btnC.setBounds(159, 149, 105, 27);
 		frame.getContentPane().add(btnC);
+		
+		JButton btnD = new JButton("D");
+		btnD.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				p.print('D');
+				p.flush();
+			}
+		});
+		
+		btnD.setBounds(159, 149, 105, 27);
+		frame.getContentPane().add(btnD);
+		
+		JButton btnE = new JButton("E");
+		btnE.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				p.print('E');
+				p.flush();
+			}
+		});
+		
+		btnE.setBounds(159, 149, 105, 27);
+		frame.getContentPane().add(btnE);
+		
+		
 	}
 
 }
