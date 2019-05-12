@@ -7,6 +7,8 @@ import java.net.SocketException;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
+import javax.swing.JLabel;
+
 
 public class serverDealer extends Thread{
 	
@@ -16,8 +18,13 @@ public class serverDealer extends Thread{
 	
 	private queue[] q = new queue[3];
 	private Semaforo[] s = new Semaforo[3];
+	private JLabel[] LW = new JLabel[3];
 	
-	public serverDealer(queue[] q1, Semaforo[] s1) throws IOException {
+	public serverDealer(
+			queue[] q1, Semaforo[] s1,
+			JLabel LW1, JLabel LW2, JLabel LW3) 
+			throws IOException 
+	{
 		super();
 		setName("ThreadServerDealer");
 		
@@ -26,6 +33,10 @@ public class serverDealer extends Thread{
 			q[i] = q1[i];
 			s[i] = s1[i];
 		}
+		
+		LW[0] = LW1;
+		LW[1] = LW2;
+		LW[2] = LW3;
 		
 		ss = new ServerSocket(8076);
 		sock = ss.accept();
@@ -67,6 +78,7 @@ public class serverDealer extends Thread{
 					System.out.println("pushhhh");
 					s[i].p();
 					q[i].NEWENTRY( Integer.parseInt(operate.substring(1)), ZonedDateTime.now(ZoneId.of("Europe/Paris")) );
+					LW[i].setText("" + q[i].getDim());
 					s[i].v();
 				}
 			}  catch (SocketException e) {

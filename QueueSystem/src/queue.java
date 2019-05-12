@@ -20,7 +20,7 @@ public class queue
 	
 	public boolean isEmpty() 
 	{
-		if(pFront == null && pRear == null)
+		if(pFront == null || pRear == null)
 			return true;
 		return false;
 	}

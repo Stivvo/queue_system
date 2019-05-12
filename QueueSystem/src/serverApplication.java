@@ -18,9 +18,13 @@ public class serverApplication {
 	private JLabel lblCommunication;
 	private JLabel lblPackage;
 	
-	private JLabel lblCounterNumber1;
-	private JLabel lblCounterNumber2;
-	private JLabel lblCounterNumber3;
+	private JLabel lblCounter1;
+	private JLabel lblCounter2;
+	private JLabel lblCounter3;
+	
+	private JLabel lblWaiting1;
+	private JLabel lblWaiting2;
+	private JLabel lblWaiting3;
 	
 	private serverDealer thDealerCommunicator;
 	private serverCounter thCounterCommunicator;
@@ -56,11 +60,10 @@ public class serverApplication {
 			s[i] = new Semaforo(1);
 		}
 		
-		thDealerCommunicator = new serverDealer(q, s);
+		thDealerCommunicator = new serverDealer(q, s, lblWaiting1, lblWaiting2, lblWaiting3);
 		thCounterCommunicator = new serverCounter(q, s, lblAdministration, lblCommunication, lblPackage,
-												lblCounterNumber1, lblCounterNumber2, lblCounterNumber3);
-		
-		
+												lblCounter1, lblCounter2, lblCounter3,
+												lblWaiting1, lblWaiting2, lblWaiting3);
 		
 		thDealerCommunicator.start();
 		thCounterCommunicator.start();
@@ -118,28 +121,50 @@ public class serverApplication {
 		lblPackage.setBounds(324, 240, 77, 62);
 		frame.getContentPane().add(lblPackage);
 		
-		JLabel lblNSportello = new JLabel("N\u00B0 Sportello");
+		JLabel lblNSportello = new JLabel("assisting  ...  on counter N\\u00B0  ... there are ... people waiting");
 		lblNSportello.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNSportello.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNSportello.setBounds(434, 11, 123, 38);
+		lblNSportello.setBounds(324, 11, 77, 38);
 		frame.getContentPane().add(lblNSportello);
 		
-		lblCounterNumber1 = new JLabel("0");
-		lblCounterNumber1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCounterNumber1.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		lblCounterNumber1.setBounds(465, 58, 77, 62);
-		frame.getContentPane().add(lblCounterNumber1);
+		// --- counter ---
 		
-		lblCounterNumber2 = new JLabel("0");
-		lblCounterNumber2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCounterNumber2.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		lblCounterNumber2.setBounds(465, 145, 77, 62);
-		frame.getContentPane().add(lblCounterNumber2);
+		lblCounter1 = new JLabel("0");
+		lblCounter1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCounter1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblCounter1.setBounds(465, 58, 77, 62);
+		frame.getContentPane().add(lblCounter1);
 		
-		lblCounterNumber3 = new JLabel("0");
-		lblCounterNumber3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCounterNumber3.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		lblCounterNumber3.setBounds(465, 240, 77, 62);
-		frame.getContentPane().add(lblCounterNumber3);
+		lblCounter2 = new JLabel("0");
+		lblCounter2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCounter2.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblCounter2.setBounds(465, 145, 77, 62);
+		frame.getContentPane().add(lblCounter2);
+		
+		lblCounter3 = new JLabel("0");
+		lblCounter3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCounter3.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblCounter3.setBounds(465, 240, 77, 62);
+		frame.getContentPane().add(lblCounter3);
+		
+		// --- waiting --- 
+		
+		lblWaiting1 = new JLabel("0");
+		lblWaiting1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWaiting1.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblWaiting1.setBounds(580, 58, 77, 62);
+		frame.getContentPane().add(lblWaiting1);
+		
+		lblWaiting2 = new JLabel("0");
+		lblWaiting2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWaiting2.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblWaiting2.setBounds(580, 145, 77, 62);
+		frame.getContentPane().add(lblWaiting2);
+		
+		lblWaiting3 = new JLabel("0");
+		lblWaiting3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWaiting3.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblWaiting3.setBounds(580, 240, 77, 62);
+		frame.getContentPane().add(lblWaiting3);
 	}
 }

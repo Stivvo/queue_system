@@ -16,8 +16,15 @@ public class serverCounter extends Thread {
 	private Semaforo[] s = new Semaforo[3];
 	private JLabel l[] = new JLabel[3];
 	private JLabel LC[] = new JLabel[3];
+	private JLabel LW[] = new JLabel[3];
 	
-	public serverCounter(queue[] q1, Semaforo[] s1, JLabel L1, JLabel L2, JLabel L3, JLabel LC1, JLabel LC2, JLabel LC3) throws IOException {
+	public serverCounter(
+			queue[] q1, Semaforo[] s1, 
+			JLabel L1, JLabel L2, JLabel L3, 
+			JLabel LC1, JLabel LC2, JLabel LC3,
+			JLabel LW1, JLabel LW2, JLabel LW3) 
+					throws IOException 
+	{
 		super();
 		
 		for (int i = 0; i < 3; i++)
@@ -30,14 +37,17 @@ public class serverCounter extends Thread {
 			case 0:
 				l[0] = L1;
 				LC[0] = LC1;
+				LW[0] = LW1;
 				break;
 			case 1:
 				l[1] = L2;
 				LC[1] = LC2;
+				LW[1] = LW2;
 				break;
 			case 2:
 				l[2] = L3;
 				LC[2] = LC3;
+				LW[2] = LW3;
 				break;
 			}
 		}
@@ -93,8 +103,9 @@ public class serverCounter extends Thread {
 			
 			if (!q[j].isEmpty())
 			{
-				l[j].setText("" + q[j].NEXT());
-				LC[j].setText(""+ (i+1));				
+				l[j].setText("" + ((char) (j + 65)) + q[j].NEXT());
+				LC[j].setText("" + (i+1));
+				LW[j].setText("" + q[i].getDim());
 			}
 			s[j].v();
 			System.out.println(operate + "\n");

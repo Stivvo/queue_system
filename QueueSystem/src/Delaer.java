@@ -19,11 +19,11 @@ public class Delaer {
 	/**
 	 * Launch the application.
 	 */
-	public void stampa(int i, JLabel l)
+	public void stampa(int i, JButton l)
 	{
-		pr.println("" + car[i] + cont[i]);
-		l.setText("" + car[i] + cont[i]);		
 		cont[i]++;
+		pr.println("" + car[i] + cont[i]);
+		l.setText("" + car[i] + cont[i]);
 		pr.flush();
 	}
 	
@@ -68,7 +68,8 @@ public class Delaer {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize() 
+	{
 		frame = new JFrame();
 		frame.setTitle("Dealer");
 		frame.setBounds(100, 100, 360, 236);
@@ -77,14 +78,10 @@ public class Delaer {
 		
 		// -- A ---
 		
-		JLabel lblA = new JLabel();
-		lblA.setBounds(20, 40, 98, 25);
-		frame.getContentPane().add(lblA);
-		
-		JButton btnA = new JButton("A");
+		JButton btnA = new JButton("A0");
 		btnA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				stampa(0, lblA);
+				stampa(0, btnA);
 			}
 		});
 		btnA.setBounds(12, 97, 98, 25);
@@ -92,14 +89,10 @@ public class Delaer {
 		
 		// -- B ---
 		
-		JLabel lblB = new JLabel();
-		lblB.setBounds(122, 40, 98, 25);
-		frame.getContentPane().add(lblB);
-		
-		JButton btnB = new JButton("B");
+		JButton btnB = new JButton("B0");
 		btnB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				stampa(1, lblB);
+				stampa(1, btnB);
 			}
 		});
 		btnB.setBounds(122, 97, 98, 25);
@@ -107,14 +100,10 @@ public class Delaer {
 		
 		// -- C ---
 		
-		JLabel lblC = new JLabel();
-		lblC.setBounds(232, 40, 98, 25);
-		frame.getContentPane().add(lblC);
-		
-		JButton btnC = new JButton("C");
+		JButton btnC = new JButton("C0");
 		btnC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				stampa(2, lblC);
+				stampa(2, btnC);
 			}
 		});
 		btnC.setBounds(232, 97, 98, 25);
