@@ -52,9 +52,10 @@ public class serverCounter extends Thread {
 			{
 				j = 0;
 				
-				while (j < 3 && 
-						q[j].front().getInfo().getT().getEpochSecond() -
-						q[j].rear().getInfo().getT().getEpochSecond() <= 1200)
+				while (j < 3 &&
+						q[j].rear().getInfo().getT().getEpochSecond() - 
+						q[j].front().getInfo().getT().getEpochSecond()
+						<= 1200)
 					j++;
 				
 				if (j == 3)
