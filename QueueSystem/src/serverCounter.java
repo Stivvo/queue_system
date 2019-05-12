@@ -32,12 +32,12 @@ public class serverCounter extends Thread {
 				LC[0] = LC1;
 				break;
 			case 1:
-				l[1] = L1;
-				LC[1] = LC1;
+				l[1] = L2;
+				LC[1] = LC2;
 				break;
 			case 2:
-				l[2] = L2;
-				LC[2] = LC2;
+				l[2] = L3;
+				LC[2] = LC3;
 				break;
 			}
 		}
@@ -94,8 +94,8 @@ public class serverCounter extends Thread {
 			
 			if (!q[j].isEmpty())
 			{
-				l[i].setText("" + q[j].NEXT());
-				LC[i].setText(""+ (i+1));				
+				l[j].setText("" + q[j].NEXT());
+				LC[j].setText(""+ (i+1));				
 			}
 			s[j].v();
 			System.out.println(operate + "\n");

@@ -64,7 +64,7 @@ public class serverApplication {
 		
 		thDealerCommunicator.start();
 		thCounterCommunicator.start();
-		//sicuri che vadano startati manualmente? o start può essere messo nel costruttore di queste classi?
+		
 	}
 
 	/**
