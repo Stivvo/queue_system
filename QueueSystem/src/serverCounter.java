@@ -14,8 +14,8 @@ public class serverCounter extends Thread {
 	
 	private queue[] q = new queue[3];
 	private Semaforo[] s = new Semaforo[3];
-	private JLabel l1, l2, l3;
-	private JLabel lC1, lC2, lC3;
+	private JLabel l[] = new JLabel[3];
+	private JLabel LC[] = new JLabel[3];
 	
 	public serverCounter(queue[] q1, Semaforo[] s1, JLabel L1, JLabel L2, JLabel L3, JLabel LC1, JLabel LC2, JLabel LC3) throws IOException {
 		super();
@@ -24,15 +24,23 @@ public class serverCounter extends Thread {
 		{
 			q[i] = q1[i];
 			s[i] = s1[i];
+			
+			switch (i)
+			{
+			case 0:
+				l[0] = L1;
+				LC[0] = LC1;
+				break;
+			case 1:
+				l[1] = L1;
+				LC[1] = LC1;
+				break;
+			case 2:
+				l[2] = L2;
+				LC[2] = LC2;
+				break;
+			}
 		}
-		
-		l1 = L1;
-		l2 = L2;
-		l3 = L3;
-		
-		lC1 = LC1;
-		lC2 = LC2;
-		lC3 = LC3;
 		ss = new ServerSocket(8045);
 		sock = ss.accept();
 		InputStreamReader inp = new InputStreamReader(sock.getInputStream());
@@ -84,23 +92,10 @@ public class serverCounter extends Thread {
 			s[j].p();
 			
 			if (!q[j].isEmpty())
-				switch (j)
-				{
-				case 0:
-					l1.setText("" + q[j].NEXT());
-					lC1.setText(""+ (i+1));
-					break;
-				case 1:
-					l2.setText("" + q[j].NEXT());
-					lC2.setText(""+(i +1));
-					break;
-				case 2:
-					l3.setText("" + q[j].NEXT());
-					lC3.setText(""+(i + 1));
-					break;
-				}
-				
-			
+			{
+				l[i].setText("" + q[j].NEXT());
+				LC[i].setText(""+ (i+1));				
+			}
 			s[j].v();
 			System.out.println(operate + "\n");
 		}
