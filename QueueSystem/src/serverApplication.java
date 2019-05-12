@@ -11,13 +11,8 @@ public class serverApplication {
 
 	private JFrame frame;
 	
-	private queue queueAdmistration;
-	private queue queueCommunication;
-	private queue queuePackage;
-	
-	private Semaforo mutexAdministration;
-	private Semaforo mutexCommunication;
-	private Semaforo mutexPackage;
+	private queue[] q;
+	private Semaforo[] s;
 	
 	private JLabel lblAdministration;
 	private JLabel lblCommunication;
@@ -47,19 +42,17 @@ public class serverApplication {
 	 */
 	public serverApplication() throws IOException {
 		initialize();
-		queueAdmistration = new queue();
-		queueCommunication = new queue();
-		queuePackage = new queue();
+		q = new queue[3];
+		s = new Semaforo[3];
 		
-		mutexAdministration = new Semaforo(1);
-		mutexCommunication = new Semaforo(1);
-		mutexPackage = new Semaforo(1);
-		thDealerCommunicator = new serverDealer(queueAdmistration, queueCommunication, queuePackage,
-								 				mutexAdministration, mutexCommunication, mutexPackage);
+		for (int i = 0; i < 3; i++)
+		{
+			q[i] = new queue();
+			s[i] = new Semaforo(1);
+		}
+		thDealerCommunicator = new serverDealer(q, s);
 		
-		thCounterCommunicator = new serverCounter(queueAdmistration, queueCommunication, queuePackage, 
-												mutexAdministration, mutexCommunication, mutexPackage, 
-												lblAdministration, lblCommunication, lblPackage);
+		thCounterCommunicator = new serverCounter(q, s, lblAdministration, lblCommunication, lblPackage);
 		
 		thDealerCommunicator.start();
 		thCounterCommunicator.start();

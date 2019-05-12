@@ -11,34 +11,31 @@ public class serverCounter extends Thread {
 	private Socket sock;
 	private BufferedReader reader;
 	
-	private queue queueAdmistration;
-	private queue queueCommunication;
-	private queue queuePackage;
+	private queue[] q = new queue[3];
+	private Semaforo[] s = new Semaforo[3];
+	private JLabel[] l = new JLabel[3];
+	private String[] n = {"Administration", "Comunication", "Package"};
 	
-	private Semaforo mutexAdministration;
-	private Semaforo mutexCommunication;
-	private Semaforo mutexPackage;
-	
-	private JLabel lAdministration;
-	private JLabel lCommunication;
-	private JLabel lPackage;
-	
-	public serverCounter(queue queueA, queue queueC, queue queueP, 
-						Semaforo mutexA, Semaforo mutexC, Semaforo mutexP,
-						JLabel lAdmin, JLabel lCom, JLabel lPack) throws IOException {
+	public serverCounter(queue[] q1, Semaforo[] s1, JLabel l1, JLabel l2, JLabel l3) throws IOException {
 		super();
 		
-		queueAdmistration = queueA;
-		queueCommunication = queueC;
-		queuePackage = queueP;
-		
-		mutexAdministration = mutexA;
-		mutexCommunication = mutexC;
-		mutexPackage = mutexP;
-		
-		lAdministration = lAdmin;
-		lCommunication = lCom;
-		lPackage = lPack;
+		for (int i = 0; i < 3; i++)
+		{
+			q[i] = q1[i];
+			s[i] = s1[i];
+			switch (i)
+			{
+			case 0:
+				l[i] = l1;
+				break;
+			case 1:
+				l[i] = l2;
+				break;
+			case 2:
+				l[i] = l3;
+				break;
+			}
+		}
 		
 		ss = new ServerSocket(8045);
 		sock = ss.accept();
@@ -48,6 +45,7 @@ public class serverCounter extends Thread {
 	
 	
 	public void run()  {
+		int i = 0;
 		String operate = " ";
 		while (true) {
 			try {
@@ -57,22 +55,11 @@ public class serverCounter extends Thread {
 				e.printStackTrace();
 			}
 			
-			if (operate.equals("next Administration")) {
-				mutexAdministration.p();
-				lAdministration.setText(""+queueAdmistration.NEXT());
-				mutexAdministration.v();
-			}
+			i = ((int)operate.charAt(0)) - 65;
 			
-			if (operate.equals("next Communication")) {
-				mutexCommunication.p();
-				lCommunication.setText(""+queueCommunication.NEXT());
-				mutexCommunication.v();
-			}
-			if (operate.equals("next Package")) {
-				mutexPackage.v();
-				lPackage.setText(""+queuePackage.NEXT());
-				mutexPackage.v();
-			}
+			s[i].p();
+			l[i].setText(""+q[i].NEXT());
+			s[i].v();
 		}
 		
 	}

@@ -8,27 +8,20 @@ public class serverDealer extends Thread{
 	
 	private ServerSocket ss;
 	private Socket sock;
-	private queue queueAdmistration;
-	private queue queueCommunication;
-	private queue queuePackage;
-	
-	private Semaforo mutexAdministration;
-	private Semaforo mutexCommunication;
-	private Semaforo mutexPackage;
-	
 	private BufferedReader reader;
 	
+	private queue[] q = new queue[3];
+	private Semaforo[] s = new Semaforo[3];	
 	
-	public serverDealer(queue queueA, queue queueC, queue queueP, 
-			Semaforo mutexA, Semaforo mutexC, Semaforo mutexP) throws IOException {
+	public serverDealer(queue[] q1, Semaforo[] s1) throws IOException {
 		super();
 		setName("ThreadServerDealer");
-		queueAdmistration = queueA;
-		queueCommunication = queueC;
-		queuePackage = queueP;
-		mutexAdministration = mutexA;
-		mutexCommunication = mutexC;
-		mutexPackage = mutexP;
+		
+		for (int i = 0; i < 3; i++)
+		{
+			q[i] = q1[i];
+			s[i] = s1[i];
+		}
 		
 		ss = new ServerSocket(8000);
 		sock = ss.accept();
@@ -38,6 +31,7 @@ public class serverDealer extends Thread{
 	
 	public void run() {
 		String operate = "";
+		int i = 0;
 		while (true) {
 			try {
 				operate = reader.readLine();
@@ -46,22 +40,22 @@ public class serverDealer extends Thread{
 				e.printStackTrace();
 			}
 			
-			if (operate.equals("newEntry Administration")) {
-				mutexAdministration.p();
-				queueAdmistration.NEWENTRY(1);
-				mutexAdministration.v();
+			switch (operate.charAt(0)) 
+			{
+			case 'A':
+				i = 0;
+				break;
+			case 'B':
+				i = 1;
+				break;
+			case 'C':
+				i = 2;
+				break;
 			}
 			
-			if (operate.equals("newEntry Communication")) {
-				mutexCommunication.p();
-				queueCommunication.NEWENTRY(1);
-				mutexCommunication.v();
-			}
-			if (operate.equals("newEntry Package")) {
-				mutexPackage.v();
-				queuePackage.NEWENTRY(1);
-				mutexPackage.v();
-			}
+			s[i].p();
+			q[i].NEWENTRY(Integer.parseInt(operate.substring(1)));
+			s[i].v();
 		}
 	}
 }
