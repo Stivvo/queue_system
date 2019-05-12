@@ -3,6 +3,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
+import sun.util.calendar.ZoneInfo;
 
 public class serverDealer extends Thread{
 	
@@ -11,7 +15,7 @@ public class serverDealer extends Thread{
 	private BufferedReader reader;
 	
 	private queue[] q = new queue[3];
-	private Semaforo[] s = new Semaforo[3];	
+	private Semaforo[] s = new Semaforo[3];
 	
 	public serverDealer(queue[] q1, Semaforo[] s1) throws IOException {
 		super();
@@ -60,7 +64,7 @@ public class serverDealer extends Thread{
 			}
 			i = this.switchCar(operate);
 			s[i].p();
-			q[i].NEWENTRY(Integer.parseInt(operate.substring(1)));
+			q[i].NEWENTRY( Integer.parseInt(operate.substring(1)), ZonedDateTime.now(ZoneId.of("Europe/Paris")) );
 			s[i].v();
 		}
 	}
