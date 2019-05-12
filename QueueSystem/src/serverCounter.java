@@ -65,7 +65,6 @@ public class serverCounter extends Thread {
 				flag = 1;
 			} catch (IOException e) {
 				e.printStackTrace();
-				
 			} 
 			
 			if (flag == 1)
