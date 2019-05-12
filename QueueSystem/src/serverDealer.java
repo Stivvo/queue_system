@@ -35,7 +35,7 @@ public class serverDealer extends Thread{
 	
 	public int switchCar(String s)
 	{
-		int i = 0;
+		int i = -1;
 		switch (s.charAt(0)) 
 		{
 		case 'A':
@@ -59,13 +59,18 @@ public class serverDealer extends Thread{
 		{
 			try {
 				operate = reader.readLine();
+				
+				i = this.switchCar(operate);
+				
+				if (i != -1)
+				{
+					s[i].p();
+					q[i].NEWENTRY( Integer.parseInt(operate.substring(1)), ZonedDateTime.now(ZoneId.of("Europe/Paris")) );
+					s[i].v();					
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			i = this.switchCar(operate);
-			s[i].p();
-			q[i].NEWENTRY( Integer.parseInt(operate.substring(1)), ZonedDateTime.now(ZoneId.of("Europe/Paris")) );
-			s[i].v();
 		}
 	}
 }
