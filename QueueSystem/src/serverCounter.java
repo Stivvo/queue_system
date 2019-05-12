@@ -4,6 +4,9 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 import javax.swing.JLabel;
 
@@ -12,19 +15,79 @@ public class serverCounter extends Thread {
 	private Socket sock;
 	private BufferedReader reader;
 	
-	private queue[] q = new queue[3];
-	private Semaforo[] s = new Semaforo[3];
+	private queue[] q;
+	private Semaforo[] s;
 	private JLabel l[] = new JLabel[3];
 	private JLabel LC[] = new JLabel[3];
 	
+	
+	public Boolean isSomeoneWaiting() {
+		ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Europe/Paris"));
+		Instant now = zdt.toInstant();
+		Boolean flag = false;
+		
+		s[0].p();
+		if (!q[0].isEmpty()) {
+			if (now.getEpochSecond() - q[0].front().getInfo().getT().getEpochSecond() >= 5) {
+				flag = true;
+			}
+				
+		}
+		s[0].v();
+		
+		s[2].p();
+		if (!q[2].isEmpty()) {
+			if (now.getEpochSecond() - q[2].front().getInfo().getT().getEpochSecond() >= 5) {
+				flag = true;
+			}
+				
+		}
+		s[2].v();
+		
+		
+		return flag;
+	}
+	
+	public int getIndexBlockedQueue() {
+		ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Europe/Paris"));
+		Instant now = zdt.toInstant();
+		long q0 = 0, q1 = 0, q2 = 0;
+		
+		s[0].p();
+		if (!q[0].isEmpty()) {
+			q0 = now.getEpochSecond() - q[0].front().getInfo().getT().getEpochSecond();
+		}
+		s[0].v();
+		
+		s[1].p();
+		if (!q[1].isEmpty()) {
+			q1 = now.getEpochSecond() - q[1].front().getInfo().getT().getEpochSecond();
+		}
+		s[1].v();
+		
+		s[2].p();
+		if (!q[2].isEmpty()) {
+			q2 = now.getEpochSecond() - q[2].front().getInfo().getT().getEpochSecond();
+		}
+		
+		s[2].v();
+		
+
+		if (q0 > q2 && q0 > q1) 
+			return 0;
+		
+		if (q2 > q0 && q2 > q1)
+			return 2;
+		
+		return 1;
+		
+	}
 	public serverCounter(queue[] q1, Semaforo[] s1, JLabel L1, JLabel L2, JLabel L3, JLabel LC1, JLabel LC2, JLabel LC3) throws IOException {
 		super();
-		
+		q = q1;
+		s = s1;
 		for (int i = 0; i < 3; i++)
-		{
-			q[i] = q1[i];
-			s[i] = s1[i];
-			
+		{	
 			switch (i)
 			{
 			case 0:
@@ -75,21 +138,20 @@ public class serverCounter extends Thread {
 			
 			if (i == 3 || i == 4)
 			{
-				j = 0;
-				
-				while (j < 3 &&
-						q[j].rear().getInfo().getT().getEpochSecond() - 
-						q[j].front().getInfo().getT().getEpochSecond()
-						<= 1)
-					j++;
-				
-				if (j == 3)
+			
+				if (!isSomeoneWaiting() && !q[1].isEmpty()) {
+					System.out.println("j = 1");
 					j = 1;
+				} else {
+					j = getIndexBlockedQueue();
+					System.out.println("j2 = "+j );
+				}
+					
+				
 			}
 			else 
 				j = i;
 			
-			System.out.println("polifunzionale " + j);
 			s[j].p();
 			
 			if (!q[j].isEmpty())

@@ -14,18 +14,15 @@ public class serverDealer extends Thread{
 	private Socket sock;
 	private BufferedReader reader;
 	
-	private queue[] q = new queue[3];
-	private Semaforo[] s = new Semaforo[3];
+	private queue[] q;
+	private Semaforo[] s;
 	
 	public serverDealer(queue[] q1, Semaforo[] s1) throws IOException {
 		super();
 		setName("ThreadServerDealer");
 		
-		for (int i = 0; i < 3; i++)
-		{
-			q[i] = q1[i];
-			s[i] = s1[i];
-		}
+		q = q1;
+		s = s1;
 		
 		ss = new ServerSocket(8076);
 		sock = ss.accept();
@@ -66,7 +63,7 @@ public class serverDealer extends Thread{
 				{
 					System.out.println("pushhhh");
 					s[i].p();
-					q[i].NEWENTRY( Integer.parseInt(operate.substring(1)), ZonedDateTime.now(ZoneId.of("Europe/Paris")) );
+					q[i].NEWENTRY( Integer.parseInt(operate.substring(1)), ZonedDateTime.now(ZoneId.of("Europe/Paris")));
 					s[i].v();
 				}
 			}  catch (SocketException e) {

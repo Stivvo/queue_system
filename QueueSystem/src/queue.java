@@ -18,7 +18,7 @@ public class queue
 	
 	public int getDim() {return dim;}
 	
-	public boolean isEmpty() 
+	public Boolean isEmpty() 
 	{
 		if(pFront == null && pRear == null)
 			return true;
