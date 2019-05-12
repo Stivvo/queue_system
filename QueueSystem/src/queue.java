@@ -35,13 +35,17 @@ public class queue
 		
 		if(pFront == pRear)
 		{
-			pFront = pRear = null;
+			pFront = null;
+			pRear = null;
 		}
 		else 
 		{
 			node pn = pFront;
 			pFront = pFront.getPtrNext();
 			pn = null;
+			
+			if (pn == null)
+				System.out.println("pop");
 		}
 		return i;
 	}
