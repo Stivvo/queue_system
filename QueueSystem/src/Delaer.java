@@ -21,7 +21,7 @@ public class Delaer {
 	 */
 	public void stampa(int i)
 	{
-		pr.println(car[i] + cont[i]);
+		pr.println(""+car[i] + cont[i]);
 		cont[i]++;
 		pr.flush();
 	}
@@ -46,7 +46,7 @@ public class Delaer {
 	public Delaer() 
 	{
 		try {
-			s = new Socket("localhost", 4999);
+			s = new Socket("localhost", 8076);
 		} catch (SocketException exception) {
 			System.out.println(exception);
 	    } catch (IOException exception) {
