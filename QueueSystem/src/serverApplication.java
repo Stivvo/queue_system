@@ -71,19 +71,19 @@ public class serverApplication {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblA = new JLabel("A");
+		JLabel lblA = new JLabel("Administration");
 		lblA.setFont(new Font("Tahoma", Font.ITALIC, 26));
 		lblA.setHorizontalAlignment(SwingConstants.CENTER);
 		lblA.setBounds(70, 18, 77, 62);
 		frame.getContentPane().add(lblA);
 		
-		JLabel lblC = new JLabel("C");
+		JLabel lblC = new JLabel("Comunication");
 		lblC.setHorizontalAlignment(SwingConstants.CENTER);
 		lblC.setFont(new Font("Tahoma", Font.ITALIC, 26));
 		lblC.setBounds(70, 87, 77, 62);
 		frame.getContentPane().add(lblC);
 		
-		JLabel lblP = new JLabel("P");
+		JLabel lblP = new JLabel("Packages");
 		lblP.setHorizontalAlignment(SwingConstants.CENTER);
 		lblP.setFont(new Font("Tahoma", Font.ITALIC, 26));
 		lblP.setBounds(70, 167, 77, 62);

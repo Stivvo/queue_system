@@ -13,29 +13,20 @@ public class serverCounter extends Thread {
 	
 	private queue[] q = new queue[3];
 	private Semaforo[] s = new Semaforo[3];
-	private JLabel[] l = new JLabel[3];
-	private String[] n = {"Administration", "Comunication", "Package"};
+	private JLabel l1, l2, l3;
 	
-	public serverCounter(queue[] q1, Semaforo[] s1, JLabel l1, JLabel l2, JLabel l3) throws IOException {
+	public serverCounter(queue[] q1, Semaforo[] s1, JLabel L1, JLabel L2, JLabel L3) throws IOException {
 		super();
 		
 		for (int i = 0; i < 3; i++)
 		{
 			q[i] = q1[i];
 			s[i] = s1[i];
-			switch (i)
-			{
-			case 0:
-				l[i] = l1;
-				break;
-			case 1:
-				l[i] = l2;
-				break;
-			case 2:
-				l[i] = l3;
-				break;
-			}
 		}
+		
+		l1 = L1;
+		l2 = L2;
+		l3 = L3;
 		
 		ss = new ServerSocket(8045);
 		sock = ss.accept();
@@ -65,14 +56,29 @@ public class serverCounter extends Thread {
 						q[j].front().getInfo().getT().getEpochSecond() -
 						q[j].rear().getInfo().getT().getEpochSecond() <= 1200)
 					j++;
+				
+				if (j == 3)
+					j = 1;
 			}
-			else
-				i = j;
+			else 
+				j = i;
 			
 			s[j].p();
 			
 			if (!q[j].isEmpty())
-				l[j].setText("" + q[j].NEXT());
+				switch (j)
+				{
+				case 0:
+					l1.setText("" + q[j].NEXT());
+					break;
+				case 1:
+					l2.setText("" + q[j].NEXT());
+					break;
+				case 2:
+					l3.setText("" + q[j].NEXT());
+					break;
+				}
+				
 			
 			s[j].v();
 			System.out.println(operate + "\n");
