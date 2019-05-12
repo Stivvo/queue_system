@@ -21,6 +21,8 @@ public class serverCounter extends Thread {
 	private JLabel LC[] = new JLabel[3];
 	private JLabel LW[] = new JLabel[3];
 	
+	private int i;
+	
 	public serverCounter(queue[] q1, Semaforo[] s1, 
 			JLabel L1, JLabel L2, JLabel L3, 
 			JLabel LC1, JLabel LC2, JLabel LC3,
@@ -30,7 +32,7 @@ public class serverCounter extends Thread {
 		super();
 		q = q1;
 		s = s1;
-		for (int i = 0; i < 3; i++)
+		for (i = 0; i < 3; i++)
 		{	
 			switch (i)
 			{
@@ -57,62 +59,68 @@ public class serverCounter extends Thread {
 		reader = new BufferedReader(inp);
 	}
 	
-	public Boolean isSomeoneWaiting() {
+	public void lock()
+	{
+		for (i = 0; i < 3; i++)
+			s[i].p();
+	}
+	
+	public void unLock()
+	{
+		for (i = 0; i < 3; i++)
+			s[i].v();
+	}
+	
+	
+	public Boolean isSomeoneWaiting() 
+	{
 		ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Europe/Paris"));
 		Instant now = zdt.toInstant();
 		Boolean flag = false;
 		
-		s[0].p();
-		if (!q[0].isEmpty()) 
-		{
-			if (now.getEpochSecond() - q[0].front().getInfo().getT().getEpochSecond() >= 5)
-				flag = true;			
-		}
-		s[0].v();
+		lock();
 		
-		s[2].p();
-		if (!q[2].isEmpty()) 
+		for (i = 0; i < 3; i++)
 		{
-			if (now.getEpochSecond() - q[2].front().getInfo().getT().getEpochSecond() >= 5)
-				flag = true;
+			if (i != 1)
+			{
+				if (!q[i].isEmpty()) 
+				{
+					if (now.getEpochSecond() - q[i].front().getInfo().getT().getEpochSecond() >= 5)
+						flag = true;
+				}				
+			}
 		}
-		s[2].v();
-		
+		unLock();
 		return flag;
 	}
 	
-	public int getIndexBlockedQueue() {
+	public int getIndexBlockedQueue() 
+	{
 		ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Europe/Paris"));
 		Instant now = zdt.toInstant();
-		long q0 = 0, q1 = 0, q2 = 0;
+		int iMax = 0;
+		long longest = 0;
+		long ltemp = 0;
 		
-		s[0].p();
-		if (!q[0].isEmpty()) {
-			q0 = now.getEpochSecond() - q[0].front().getInfo().getT().getEpochSecond();
+		lock();
+		
+		for (i = 0; i < 3; i++)
+		{
+			if (!q[i].isEmpty())
+			{
+				ltemp = now.getEpochSecond() - q[i].front().getInfo().getT().getEpochSecond();
+				
+				if (ltemp > longest)
+				{
+					longest = ltemp;
+					iMax = i;
+				}
+			}
 		}
-		s[0].v();
 		
-		s[1].p();
-		if (!q[1].isEmpty()) {
-			q1 = now.getEpochSecond() - q[1].front().getInfo().getT().getEpochSecond();
-		}
-		s[1].v();
-		
-		s[2].p();
-		if (!q[2].isEmpty()) {
-			q2 = now.getEpochSecond() - q[2].front().getInfo().getT().getEpochSecond();
-		}
-		
-		s[2].v();
-		
-
-		if (q0 > q2 && q0 > q1) 
-			return 0;
-		
-		if (q2 > q0 && q2 > q1)
-			return 2;
-		
-		return 1;
+		unLock();
+		return iMax;
 	}
 	
 	public void run()  
@@ -159,7 +167,7 @@ public class serverCounter extends Thread {
 			{
 				l[j].setText("" + ((char) (j + 65)) + q[j].NEXT());
 				LC[j].setText("" + (i+1));
-				LW[j].setText("" + q[i].getDim());
+				LW[j].setText("" + q[j].getDim());
 			}
 			s[j].v();
 			System.out.println(operate + "\n");
