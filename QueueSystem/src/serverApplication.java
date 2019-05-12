@@ -18,6 +18,10 @@ public class serverApplication {
 	private JLabel lblCommunication;
 	private JLabel lblPackage;
 	
+	private JLabel lblCounterNumber1;
+	private JLabel lblCounterNumber2;
+	private JLabel lblCounterNumber3;
+	
 	private serverDealer thDealerCommunicator;
 	private serverCounter thCounterCommunicator;
 	/**
@@ -53,7 +57,10 @@ public class serverApplication {
 		}
 		
 		thDealerCommunicator = new serverDealer(q, s);
-		thCounterCommunicator = new serverCounter(q, s, lblAdministration, lblCommunication, lblPackage);
+		thCounterCommunicator = new serverCounter(q, s, lblAdministration, lblCommunication, lblPackage,
+												lblCounterNumber1, lblCounterNumber2, lblCounterNumber3);
+		
+		
 		
 		thDealerCommunicator.start();
 		thCounterCommunicator.start();
@@ -66,48 +73,73 @@ public class serverApplication {
 	private void initialize() 
 	{
 		frame = new JFrame();
+		frame.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 26));
 		frame.setTitle("Server Application");
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 600, 373);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblA = new JLabel("Administration");
 		lblA.setFont(new Font("Tahoma", Font.ITALIC, 26));
-		lblA.setHorizontalAlignment(SwingConstants.CENTER);
-		lblA.setBounds(70, 18, 77, 62);
+		lblA.setHorizontalAlignment(SwingConstants.LEFT);
+		lblA.setBounds(70, 58, 187, 62);
 		frame.getContentPane().add(lblA);
 		
 		JLabel lblC = new JLabel("Comunication");
-		lblC.setHorizontalAlignment(SwingConstants.CENTER);
+		lblC.setHorizontalAlignment(SwingConstants.LEFT);
 		lblC.setFont(new Font("Tahoma", Font.ITALIC, 26));
-		lblC.setBounds(70, 87, 77, 62);
+		lblC.setBounds(70, 145, 187, 62);
 		frame.getContentPane().add(lblC);
 		
 		JLabel lblP = new JLabel("Packages");
-		lblP.setHorizontalAlignment(SwingConstants.CENTER);
+		lblP.setHorizontalAlignment(SwingConstants.LEFT);
 		lblP.setFont(new Font("Tahoma", Font.ITALIC, 26));
-		lblP.setBounds(70, 167, 77, 62);
+		lblP.setBounds(70, 240, 187, 62);
 		frame.getContentPane().add(lblP);
 		
 		lblAdministration = new JLabel("0");
 		lblAdministration.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAdministration.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		lblAdministration.setForeground(Color.BLACK);
-		lblAdministration.setBounds(257, 18, 77, 62);
+		lblAdministration.setBounds(324, 58, 77, 62);
 		frame.getContentPane().add(lblAdministration);
 		
 		lblCommunication = new JLabel("0");
 		lblCommunication.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCommunication.setForeground(Color.BLACK);
 		lblCommunication.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		lblCommunication.setBounds(257, 87, 77, 62);
+		lblCommunication.setBounds(324, 145, 77, 62);
 		frame.getContentPane().add(lblCommunication);
 		
 		lblPackage = new JLabel("0");
 		lblPackage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPackage.setForeground(Color.BLACK);
 		lblPackage.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		lblPackage.setBounds(257, 167, 77, 62);
+		lblPackage.setBounds(324, 240, 77, 62);
 		frame.getContentPane().add(lblPackage);
+		
+		JLabel lblNSportello = new JLabel("N\u00B0 Sportello");
+		lblNSportello.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNSportello.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNSportello.setBounds(434, 11, 123, 38);
+		frame.getContentPane().add(lblNSportello);
+		
+		lblCounterNumber1 = new JLabel("0");
+		lblCounterNumber1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCounterNumber1.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		lblCounterNumber1.setBounds(465, 58, 77, 62);
+		frame.getContentPane().add(lblCounterNumber1);
+		
+		lblCounterNumber2 = new JLabel("0");
+		lblCounterNumber2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCounterNumber2.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		lblCounterNumber2.setBounds(465, 145, 77, 62);
+		frame.getContentPane().add(lblCounterNumber2);
+		
+		lblCounterNumber3 = new JLabel("0");
+		lblCounterNumber3.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCounterNumber3.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		lblCounterNumber3.setBounds(465, 240, 77, 62);
+		frame.getContentPane().add(lblCounterNumber3);
 	}
 }
