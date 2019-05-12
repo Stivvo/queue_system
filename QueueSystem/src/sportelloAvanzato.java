@@ -89,9 +89,25 @@ public class sportelloAvanzato {
 			public void actionPerformed(ActionEvent e) {
 				p.print('C');
 				p.flush();
-
 			}
 		});
+		
+		JButton btnD = new JButton("C");
+		btnC.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				p.print('D');
+				p.flush();
+			}
+		});
+		
+		JButton btnE = new JButton("C");
+		btnC.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				p.print('D');
+				p.flush();
+			}
+		});
+		
 		btnC.setBounds(159, 149, 105, 27);
 		frame.getContentPane().add(btnC);
 	}

@@ -43,10 +43,12 @@ public class serverCounter extends Thread {
 		reader = new BufferedReader(inp);
 	}
 	
-	public void run()  {
+	public void run()  
+	{
 		int operate = 0;
-		int i = 0;
-		while (true) {
+		int i = 0, j = 0;
+		while (true) 
+		{
 			try {
 				operate = reader.read();
 			} catch (IOException e) {
@@ -54,13 +56,25 @@ public class serverCounter extends Thread {
 			}
 			
 			i = operate - 65;
-
-			s[i].p();
 			
-			if (!q[i].isEmpty())
-				l[i].setText(""+q[i].NEXT());
+			if (i == 4 || i == 5)
+			{
+				j = 0;
+				
+				while (j < 3 && 
+						q[j].front().getInfo().getT().getEpochSecond() -
+						q[j].rear().getInfo().getT().getEpochSecond() <= 1200)
+					j++;
+			}
+			else
+				i = j;
 			
-			s[i].v();
+			s[j].p();
+			
+			if (!q[j].isEmpty())
+				l[j].setText("" + q[j].NEXT());
+			
+			s[j].v();
 			System.out.println(operate + "\n");
 		}
 		

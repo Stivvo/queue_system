@@ -12,7 +12,9 @@ public class queue
 		dim = 0;
 	}
 	
-	public node top() {return pFront;}
+	public node front() {return pFront;}
+	
+	public node rear() {return pRear;}
 	
 	public int getDim() {return dim;}
 	

@@ -40,7 +40,8 @@ public class serverApplication {
 	 * Create the application.
 	 * @throws IOException 
 	 */
-	public serverApplication() throws IOException {
+	public serverApplication() throws IOException 
+	{
 		initialize();
 		q = new queue[3];
 		s = new Semaforo[3];
@@ -50,12 +51,13 @@ public class serverApplication {
 			q[i] = new queue();
 			s[i] = new Semaforo(1);
 		}
-		thDealerCommunicator = new serverDealer(q, s);
 		
+		thDealerCommunicator = new serverDealer(q, s);
 		thCounterCommunicator = new serverCounter(q, s, lblAdministration, lblCommunication, lblPackage);
 		
 		thDealerCommunicator.start();
 		thCounterCommunicator.start();
+		//sicuri che vadano startati manualmente? o start può essere messo nel costruttore di queste classi?
 	}
 
 	/**

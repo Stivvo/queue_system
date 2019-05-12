@@ -57,16 +57,16 @@ public class serverDealer extends Thread{
 		
 		while (true) 
 		{
-			try {
+			try 
+			{
 				operate = reader.readLine();
-				
 				i = this.switchCar(operate);
 				
 				if (i != -1)
 				{
 					s[i].p();
 					q[i].NEWENTRY( Integer.parseInt(operate.substring(1)), ZonedDateTime.now(ZoneId.of("Europe/Paris")) );
-					s[i].v();					
+					s[i].v();
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
