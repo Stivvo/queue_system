@@ -69,6 +69,7 @@ public class Delaer {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("Dealer");
 		frame.setBounds(100, 100, 360, 236);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);

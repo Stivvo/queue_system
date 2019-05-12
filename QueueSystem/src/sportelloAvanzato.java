@@ -49,6 +49,8 @@ public class sportelloAvanzato {
 	 */
 	private void initialize() throws UnknownHostException, IOException {
 		frame = new JFrame();
+		frame.setTitle("Counter");
+		
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
