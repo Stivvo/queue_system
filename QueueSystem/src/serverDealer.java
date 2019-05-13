@@ -44,6 +44,10 @@ public class serverDealer extends Thread{
 	public int switchCar(String s)
 	{
 		int i = -1;
+		
+		if (s.length() <= 0)
+			return -1;
+		
 		switch (s.charAt(0)) 
 		{
 		case 'A':
