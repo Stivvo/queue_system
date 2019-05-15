@@ -20,7 +20,7 @@ public class launch
 		sportelloAvanzato.main();
 		System.out.println("sportelloavanzato");
 		
-		sportelloAvanzato.main();
-		System.out.println("sportelloavanzato");
+		/*sportelloAvanzato.main();
+		System.out.println("sportelloavanzato");*/
 	}
 }

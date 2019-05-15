@@ -19,7 +19,8 @@ public class sportelloAvanzato {
 	/**
 	 * Launch the application.
 	 */
-	public static void main() {
+	public static void main() 
+	{
 		System.out.println("MAIN sportelloAvanzato");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
