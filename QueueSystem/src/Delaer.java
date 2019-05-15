@@ -18,9 +18,6 @@ public class Delaer {
 	Socket s;
 	public PrintWriter pr;
 
-	/**
-	 * Launch the application.
-	 */
 	public void stampa(int i, JButton l)
 	{
 		cont[i]++;
@@ -71,6 +68,32 @@ public class Delaer {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	void fKey(KeyEvent e, JButton btnA, JButton btnB, JButton btnC)
+	{
+		char c = e.getKeyChar();
+		
+		if (e.getKeyChar() < 'a' || e.getKeyChar() > 'c')
+			e.consume();
+		else
+		{
+			switch(c) 
+			{
+			case 'a':
+				System.out.println("a");
+				stampa(0, btnA);
+				break;
+			case 'b':
+				System.out.println("b");
+				stampa(1, btnB);
+				break;
+			case 'c':
+				System.out.println("c");
+				stampa(2, btnC);
+				break;
+			}			
+		}
+	}
+	
 	private void initialize() 
 	{
 		frame = new JFrame();
@@ -122,72 +145,21 @@ public class Delaer {
 		btnA.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyChar() < 'a' || e.getKeyChar() > 'c') {
-					e.setKeyChar('\0');
-				}
-				
-				switch(e.getKeyChar()) {
-					case 'a':
-						System.out.println("a");
-						stampa(0, btnA);
-						break;
-					case 'b':
-						System.out.println("b");
-						stampa(1, btnB);
-						break;
-					case 'c':
-						System.out.println("c");
-						stampa(2, btnC);
-						break;
-				}
+				fKey(e, btnA, btnB, btnC);
 			}
 		});
 		
 		btnB.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyChar() < 'a' || e.getKeyChar() > 'c') {
-					e.setKeyChar('\0');
-				}
-				
-				switch(e.getKeyChar()) {
-					case 'a':
-						System.out.println("a");
-						stampa(0, btnA);
-						break;
-					case 'b':
-						System.out.println("b");
-						stampa(1, btnB);
-						break;
-					case 'c':
-						System.out.println("c");
-						stampa(2, btnC);
-						break;
-				}
+				fKey(e, btnA, btnB, btnC);
 			}
 		});
 		
 		btnC.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyChar() < 'a' || e.getKeyChar() > 'c') {
-					e.setKeyChar('\0');
-				}
-				
-				switch(e.getKeyChar()) {
-					case 'a':
-						System.out.println("a");
-						stampa(0, btnA);
-						break;
-					case 'b':
-						System.out.println("b");
-						stampa(1, btnB);
-						break;
-					case 'c':
-						System.out.println("c");
-						stampa(2, btnC);
-						break;
-				}
+				fKey(e, btnA, btnB, btnC);
 			}
 		});
 	}

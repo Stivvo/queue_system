@@ -28,9 +28,7 @@ public class serverApplication {
 	
 	private serverDealer thDealerCommunicator;
 	private serverCounter thCounterCommunicator;
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main() {
 		System.out.println("MAIN serverApplication");
 		EventQueue.invokeLater(new Runnable() {
@@ -45,10 +43,6 @@ public class serverApplication {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 * @throws IOException 
-	 */
 	public serverApplication() throws IOException 
 	{
 		initialize();
@@ -87,9 +81,6 @@ public class serverApplication {
 		
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() 
 	{
 		frame = new JFrame();

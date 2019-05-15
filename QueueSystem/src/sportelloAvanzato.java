@@ -16,9 +16,7 @@ public class sportelloAvanzato {
 	private JFrame frame;
 	private Socket s;
 	private PrintWriter p;
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main() 
 	{
 		System.out.println("MAIN sportelloAvanzato");
@@ -34,11 +32,6 @@ public class sportelloAvanzato {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 * @throws IOException 
-	 * @throws UnknownHostException 
-	 */
 	public sportelloAvanzato() throws UnknownHostException, IOException {
 		initialize();
 		
@@ -46,11 +39,40 @@ public class sportelloAvanzato {
 		p = new PrintWriter(s.getOutputStream());
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 * @throws IOException 
-	 * @throws UnknownHostException 
-	 */
+	void fKey(KeyEvent e)
+	{
+		char c = e.getKeyChar();
+		
+		if (c < '1' || c > '5')
+			e.consume();
+		else
+		{
+			switch (c) 
+			{
+			case '1':
+				p.print('A');
+				p.flush();
+				break;
+			case '2':
+				p.print('B');
+				p.flush();
+				break;
+			case '3':
+				p.print('C');
+				p.flush();
+				break;
+			case '4':
+				p.print('D');
+				p.flush();
+				break;
+			case '5':
+				p.print('E');
+				p.flush();
+				break;
+			}			
+		}
+	}
+	
 	private void initialize() throws UnknownHostException, IOException {
 		frame = new JFrame();
 		frame.setTitle("Counter");
@@ -70,8 +92,7 @@ public class sportelloAvanzato {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnA = new JButton("A");
-		
+		JButton btnA = new JButton("1. Finance");
 		btnA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				p.print('A');
@@ -81,7 +102,7 @@ public class sportelloAvanzato {
 		btnA.setBounds(159, 38, 105, 27);
 		frame.getContentPane().add(btnA);
 		
-		JButton btnB = new JButton("B");
+		JButton btnB = new JButton("2. Comunication");
 		btnB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				p.print('B');
@@ -91,7 +112,7 @@ public class sportelloAvanzato {
 		btnB.setBounds(159, 94, 105, 27);
 		frame.getContentPane().add(btnB);
 		
-		JButton btnC = new JButton("C");
+		JButton btnC = new JButton("3. Packages");
 		btnC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				p.print('C');
@@ -102,7 +123,7 @@ public class sportelloAvanzato {
 		btnC.setBounds(159, 150, 105, 27);
 		frame.getContentPane().add(btnC);
 		
-		JButton btnD = new JButton("D");
+		JButton btnD = new JButton("4. Multipuropse");
 		btnD.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				p.print('D');
@@ -113,7 +134,7 @@ public class sportelloAvanzato {
 		btnD.setBounds(159, 204, 105, 27);
 		frame.getContentPane().add(btnD);
 		
-		JButton btnE = new JButton("E");
+		JButton btnE = new JButton("5. Multipurpose");
 		btnE.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				p.print('E');
@@ -127,180 +148,35 @@ public class sportelloAvanzato {
 		btnA.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (e.getKeyChar() < '1' || e.getKeyChar() > '5') {
-					e.consume();
-				}
 				
-				switch (e.getKeyChar()) {
-					case '1':
-						p.print('A');
-						p.flush();
-						break;
-					
-					case '2':
-						p.print('B');
-						p.flush();
-						break;
-						
-					case '3':
-						p.print('C');
-						p.flush();
-						break;
-						
-					case '4':
-						p.print('D');
-						p.flush();
-						break;
-						
-					case '5':
-						p.print('E');
-						p.flush();
-						break;
-				}
 			}
 		});
 		
 		btnB.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (e.getKeyChar() < '1' || e.getKeyChar() > '5') {
-					e.consume();
-				}
-				
-				switch (e.getKeyChar()) {
-					case '1':
-						p.print('A');
-						p.flush();
-						break;
-					
-					case '2':
-						p.print('B');
-						p.flush();
-						break;
-						
-					case '3':
-						p.print('C');
-						p.flush();
-						break;
-						
-					case '4':
-						p.print('D');
-						p.flush();
-						break;
-						
-					case '5':
-						p.print('E');
-						p.flush();
-						break;
-				}
+				fKey(e);
 			}
 		});
 		
 		btnC.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (e.getKeyChar() < '1' || e.getKeyChar() > '5') {
-					e.consume();
-				}
-				
-				switch (e.getKeyChar()) {
-					case '1':
-						p.print('A');
-						p.flush();
-						break;
-					
-					case '2':
-						p.print('B');
-						p.flush();
-						break;
-						
-					case '3':
-						p.print('C');
-						p.flush();
-						break;
-						
-					case '4':
-						p.print('D');
-						p.flush();
-						break;
-						
-					case '5':
-						p.print('E');
-						p.flush();
-						break;
-				}
+				fKey(e);
 			}
 		});
 		
 		btnD.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (e.getKeyChar() < '1' || e.getKeyChar() > '5') {
-					e.consume();
-				}
-				
-				switch (e.getKeyChar()) {
-					case '1':
-						p.print('A');
-						p.flush();
-						break;
-					
-					case '2':
-						p.print('B');
-						p.flush();
-						break;
-						
-					case '3':
-						p.print('C');
-						p.flush();
-						break;
-						
-					case '4':
-						p.print('D');
-						p.flush();
-						break;
-						
-					case '5':
-						p.print('E');
-						p.flush();
-						break;
-				}
+				fKey(e);
 			}
 		});
 		
 		btnE.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (e.getKeyChar() < '1' || e.getKeyChar() > '5') {
-					e.consume();
-				}
-				
-				switch (e.getKeyChar()) {
-					case '1':
-						p.print('A');
-						p.flush();
-						break;
-					
-					case '2':
-						p.print('B');
-						p.flush();
-						break;
-						
-					case '3':
-						p.print('C');
-						p.flush();
-						break;
-						
-					case '4':
-						p.print('D');
-						p.flush();
-						break;
-						
-					case '5':
-						p.print('E');
-						p.flush();
-						break;
-				}
+				fKey(e);
 			}
 		});
 	}
