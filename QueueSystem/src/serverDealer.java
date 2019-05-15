@@ -46,7 +46,7 @@ public class serverDealer extends Thread{
 		int i = -1;
 		
 		if (s.length() <= 0)
-			return -1;
+			return i;
 		
 		switch (s.charAt(0)) 
 		{

@@ -148,7 +148,7 @@ public class sportelloAvanzato {
 		btnA.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				
+				fKey(e);
 			}
 		});
 		

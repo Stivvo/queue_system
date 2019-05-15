@@ -128,6 +128,7 @@ public class serverCounter extends Thread {
 		int operate = 0;
 		int i = 0, j = 0;
 		int flag = 0;
+		
 		while (true) 
 		{
 			try {
@@ -151,28 +152,30 @@ public class serverCounter extends Thread {
 			
 			if (i == 3 || i == 4)
 			{
-				if (!isSomeoneWaiting() && !q[1].isEmpty()) {
+				if (!q[1].isEmpty() && !isSomeoneWaiting()) {
 					System.out.println("j = 1");
 					j = 1;
 				} else {
 					j = getIndexBlockedQueue();
-					System.out.println("j2 = "+j );
+					System.out.println("j2 = " + j);
 				}	
 			}
-			else 
+			else
 				j = i;
 			
-			s[j].p();
-			
-			if (!q[j].isEmpty())
-			{
-				l[j].setText("" + q[j].NEXT());
-				LC[j].setText("" + (i+1));
-				LW[j].setText("" + q[j].getDim());
+			if (i >= 0 && i < 4)
+			{					
+				s[j].p();
+				
+				if (!q[j].isEmpty())
+				{
+					l[j].setText("" + q[j].NEXT());
+					LC[j].setText("" + (i+1));
+					LW[j].setText("" + q[j].getDim());
+				}
+				s[j].v();
+				System.out.println("operate: " + operate + "\n");
 			}
-			s[j].v();
-			System.out.println("operate: " + operate + "\n");
 		}
-		
 	}
 }
