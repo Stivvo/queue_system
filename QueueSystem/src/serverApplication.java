@@ -29,7 +29,7 @@ public class serverApplication {
 	private serverDealer thDealerCommunicator;
 	private serverCounter thCounterCommunicator;
 
-	public static void main() {
+	public static void main(String[] args) {
 		System.out.println("MAIN serverApplication");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

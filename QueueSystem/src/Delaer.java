@@ -26,7 +26,7 @@ public class Delaer {
 		pr.flush();
 	}
 	
-	public static void main() {
+	public static void main(String[] args) {
 		System.out.println("MAIN Dealer");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

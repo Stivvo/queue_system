@@ -17,7 +17,7 @@ public class sportelloAvanzato {
 	private Socket s;
 	private PrintWriter p;
 
-	public static void main() 
+	public static void main(String[] args) 
 	{
 		System.out.println("MAIN sportelloAvanzato");
 		EventQueue.invokeLater(new Runnable() {
@@ -47,29 +47,9 @@ public class sportelloAvanzato {
 			e.consume();
 		else
 		{
-			switch (c) 
-			{
-			case '1':
-				p.print('A');
-				p.flush();
-				break;
-			case '2':
-				p.print('B');
-				p.flush();
-				break;
-			case '3':
-				p.print('C');
-				p.flush();
-				break;
-			case '4':
-				p.print('D');
-				p.flush();
-				break;
-			case '5':
-				p.print('E');
-				p.flush();
-				break;
-			}			
+			c = (char) ((int)c - 17);
+			p.print(c);
+			p.flush();
 		}
 	}
 	
