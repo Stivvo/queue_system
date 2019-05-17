@@ -1,38 +1,31 @@
 public class node 
 {
-	private int id;
+	private Cliente info;
 	private node ptr;
 	
-	public node() {
-		ptr = null;
-		id = 0;
-	}
-
-	public node(int el) {
-		id = el;
+	public node() 
+	{
+		ptr = null;		
 	}
 	
-	public node(int el, node ptr) {
-		if(el < 0)
-			el = 0;
-		id = el;
-		
+	public node(Cliente info, node ptr) 
+	{
+		this.info = info;
 		this.ptr = ptr;
 	}
 	
-	public void setInfo(int el) {
-		id = el;
-	}
-	
-	public void setPtrNext(node ptr) {
+	public void setPtrNext(node ptr) 
+	{
 		this.ptr = ptr;
 	}
 	
-	public int getId() {
-		return id;
+	public Cliente getInfo() 
+	{
+		return info;
 	}
 	
-	public node getPtrNext() {
+	public node getPtrNext() 
+	{
 		return ptr;
 	}
 }

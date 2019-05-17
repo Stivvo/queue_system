@@ -8,16 +8,18 @@ import java.net.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class sportelloAvanzato {
 
 	private JFrame frame;
 	private Socket s;
 	private PrintWriter p;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
+
+	public static void main(String[] args) 
+	{
+		System.out.println("MAIN sportelloAvanzato");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -30,11 +32,6 @@ public class sportelloAvanzato {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 * @throws IOException 
-	 * @throws UnknownHostException 
-	 */
 	public sportelloAvanzato() throws UnknownHostException, IOException {
 		initialize();
 		
@@ -42,13 +39,24 @@ public class sportelloAvanzato {
 		p = new PrintWriter(s.getOutputStream());
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 * @throws IOException 
-	 * @throws UnknownHostException 
-	 */
+	void fKey(KeyEvent e)
+	{
+		char c = e.getKeyChar();
+		
+		if (c < '1' || c > '5')
+			e.consume();
+		else
+		{
+			c = (char) ((int)c - 17);
+			p.print(c);
+			p.flush();
+		}
+	}
+	
 	private void initialize() throws UnknownHostException, IOException {
 		frame = new JFrame();
+		frame.setTitle("Counter");
+		
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -60,11 +68,11 @@ public class sportelloAvanzato {
 				}
 			}
 		});
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 450, 350);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnA = new JButton("A");
+		JButton btnA = new JButton("1. Finance");
 		btnA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				p.print('A');
@@ -74,7 +82,7 @@ public class sportelloAvanzato {
 		btnA.setBounds(159, 38, 105, 27);
 		frame.getContentPane().add(btnA);
 		
-		JButton btnB = new JButton("B");
+		JButton btnB = new JButton("2. Comunication");
 		btnB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				p.print('B');
@@ -84,16 +92,73 @@ public class sportelloAvanzato {
 		btnB.setBounds(159, 94, 105, 27);
 		frame.getContentPane().add(btnB);
 		
-		JButton btnC = new JButton("C");
+		JButton btnC = new JButton("3. Packages");
 		btnC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				p.print('C');
 				p.flush();
-
 			}
 		});
-		btnC.setBounds(159, 149, 105, 27);
+		
+		btnC.setBounds(159, 150, 105, 27);
 		frame.getContentPane().add(btnC);
+		
+		JButton btnD = new JButton("4. Multipuropse");
+		btnD.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				p.print('D');
+				p.flush();
+			}
+		});
+		
+		btnD.setBounds(159, 204, 105, 27);
+		frame.getContentPane().add(btnD);
+		
+		JButton btnE = new JButton("5. Multipurpose");
+		btnE.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				p.print('E');
+				p.flush();
+			}
+		});
+		
+		btnE.setBounds(159, 258, 105, 27);
+		frame.getContentPane().add(btnE);
+		
+		btnA.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				fKey(e);
+			}
+		});
+		
+		btnB.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				fKey(e);
+			}
+		});
+		
+		btnC.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				fKey(e);
+			}
+		});
+		
+		btnD.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				fKey(e);
+			}
+		});
+		
+		btnE.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				fKey(e);
+			}
+		});
 	}
 
 }

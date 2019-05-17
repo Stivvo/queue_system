@@ -1,3 +1,5 @@
+import java.time.ZonedDateTime;
+
 public class queue 
 {
 	private node pFront;
@@ -10,11 +12,13 @@ public class queue
 		dim = 0;
 	}
 	
-	public node top() {return pFront;}
+	public node front() {return pFront;}
+	
+	public node rear() {return pRear;}
 	
 	public int getDim() {return dim;}
 	
-	public boolean isEmpty() 
+	public Boolean isEmpty() 
 	{
 		if(pFront == null && pRear == null)
 			return true;
@@ -23,27 +27,33 @@ public class queue
 
 	public int NEXT() 
 	{
-		int el = -1;
-		node pn = pFront;
+		if (isEmpty())
+			return -1;
 		
-		if(!isEmpty()) 
+		dim--;
+		int i = pFront.getInfo().getTicket();
+		
+		if(pFront == pRear)
 		{
-			dim--;
-			if(pFront == pRear) {
-				el = pFront.getId();
-				pFront = pRear = null;
-			}else {
-				pFront = pFront.getPtrNext();
-				el = pn.getId();
-				pn = null;
-			}
+			pFront = null;
+			pRear = null;
 		}
-		return el;
+		else 
+		{
+			node pn = pFront;
+			pFront = pFront.getPtrNext();
+			pn = null;
+			
+			if (pn == null)
+				System.out.println("pop");
+		}
+		return i;
 	}
 
-	public void NEWENTRY(int code)
+	public void NEWENTRY(int ticket, ZonedDateTime zdt)
 	{
-		node pn = new node(code);
+		Cliente clientE = new Cliente(ticket, zdt);
+		node pn = new node(clientE, null);
 		dim++;
 		
 		if(isEmpty()) {
@@ -52,15 +62,5 @@ public class queue
 			pRear.setPtrNext(pn);
 			pRear = pn;
 		}
-	}
-	
-	public void scan() 
-	{
-		node pn = pFront;
-		while(pn != null) {
-			System.out.print(pn.getId() + " -> ");
-			pn = pn.getPtrNext();
-		}
-		System.out.println("NULL");
 	}
 }

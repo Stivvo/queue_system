@@ -3,6 +3,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
+import javax.swing.JLabel;
+
 
 public class serverDealer extends Thread{
 	
@@ -11,17 +17,23 @@ public class serverDealer extends Thread{
 	private BufferedReader reader;
 	
 	private queue[] q = new queue[3];
-	private Semaforo[] s = new Semaforo[3];	
+	private Semaforo[] s = new Semaforo[3];
+	private JLabel[] LW = new JLabel[3];
 	
-	public serverDealer(queue[] q1, Semaforo[] s1) throws IOException {
+	public serverDealer(
+			queue[] q1, Semaforo[] s1,
+			JLabel LW1, JLabel LW2, JLabel LW3) 
+			throws IOException 
+	{
 		super();
 		setName("ThreadServerDealer");
 		
-		for (int i = 0; i < 3; i++)
-		{
-			q[i] = q1[i];
-			s[i] = s1[i];
-		}
+		q = q1;
+		s = s1;
+		
+		LW[0] = LW1;
+		LW[1] = LW2;
+		LW[2] = LW3;
 		
 		ss = new ServerSocket(8076);
 		sock = ss.accept();
@@ -31,7 +43,11 @@ public class serverDealer extends Thread{
 	
 	public int switchCar(String s)
 	{
-		int i = 0;
+		int i = -1;
+		
+		if (s.length() <= 0)
+			return i;
+		
 		switch (s.charAt(0)) 
 		{
 		case 'A':
@@ -50,18 +66,36 @@ public class serverDealer extends Thread{
 	public void run() {
 		String operate = "";
 		int i = 0;
-		
+		int flag = 0;
 		while (true) 
 		{
-			try {
+			try 
+			{
 				operate = reader.readLine();
+				i = this.switchCar(operate);
+				
+				if (i != -1)
+				{
+					System.out.println("pushhhh");
+					s[i].p();
+					q[i].NEWENTRY( Integer.parseInt(operate.substring(1)), ZonedDateTime.now(ZoneId.of("Europe/Paris")) );
+					LW[i].setText("" + q[i].getDim());
+					s[i].v();
+				}
+			}  catch (SocketException e) {
+				try {
+					sock.close();
+					flag = 1;
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			i = this.switchCar(operate);
-			s[i].p();
-			q[i].NEWENTRY(Integer.parseInt(operate.substring(1)));
-			s[i].v();
+			
+			if (flag == 1)
+				break;
 		}
 	}
 }

@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.SocketException;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Delaer {
 
@@ -16,17 +18,16 @@ public class Delaer {
 	Socket s;
 	public PrintWriter pr;
 
-	/**
-	 * Launch the application.
-	 */
-	public void stampa(int i)
+	public void stampa(int i, JButton l)
 	{
-		pr.println(""+car[i] + cont[i]);
 		cont[i]++;
+		pr.println("" + car[i] + cont[i]);
+		l.setText("" + car[i] + cont[i]);
 		pr.flush();
 	}
 	
 	public static void main(String[] args) {
+		System.out.println("MAIN Dealer");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -67,41 +68,99 @@ public class Delaer {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	void fKey(KeyEvent e, JButton btnA, JButton btnB, JButton btnC)
+	{
+		char c = e.getKeyChar();
+		
+		if (e.getKeyChar() < 'a' || e.getKeyChar() > 'c')
+			e.consume();
+		else
+		{
+			switch(c) 
+			{
+			case 'a':
+				System.out.println("a");
+				stampa(0, btnA);
+				break;
+			case 'b':
+				System.out.println("b");
+				stampa(1, btnB);
+				break;
+			case 'c':
+				System.out.println("c");
+				stampa(2, btnC);
+				break;
+			}			
+		}
+	}
+	
+	private void initialize() 
+	{
 		frame = new JFrame();
+		frame.setTitle("Dealer");
 		frame.setBounds(100, 100, 360, 236);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnA = new JButton("A");
+		// -- A ---
+		
+		JButton btnA = new JButton("A0");
+		
 		btnA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				stampa(0);
+				stampa(0, btnA);
 			}
 		});
 		btnA.setBounds(12, 97, 98, 25);
 		frame.getContentPane().add(btnA);
 		
-		JButton btnB = new JButton("B");
+		// -- B ---
+		
+		JButton btnB = new JButton("B0");
 		btnB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				stampa(1);
+				stampa(1, btnB);
 			}
 		});
 		btnB.setBounds(122, 97, 98, 25);
 		frame.getContentPane().add(btnB);
 		
-		JButton btnC = new JButton("C");
+		// -- C ---
+		
+		JButton btnC = new JButton("C0");
 		btnC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				stampa(2);
+				stampa(2, btnC);
 			}
 		});
 		btnC.setBounds(232, 97, 98, 25);
 		frame.getContentPane().add(btnC);
 		
+		// -- label scegli sportello
+		
 		JLabel lblScegliereSportelloDa = new JLabel("Scegliere sportello da prenotare: ");
 		lblScegliereSportelloDa.setBounds(12, 12, 326, 37);
 		frame.getContentPane().add(lblScegliereSportelloDa);
+		
+		btnA.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				fKey(e, btnA, btnB, btnC);
+			}
+		});
+		
+		btnB.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				fKey(e, btnA, btnB, btnC);
+			}
+		});
+		
+		btnC.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				fKey(e, btnA, btnB, btnC);
+			}
+		});
 	}
 }
