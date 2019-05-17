@@ -31,9 +31,9 @@ public class launch
 			return;
 		}*/
 		
-		s.p();
+		/*s.p();
 		sportelloAvanzato.main(arg);
-		s.v();
+		s.v();*/
 		//System.out.println("sportelloavanzato");
 	}
 }

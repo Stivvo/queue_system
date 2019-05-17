@@ -11,8 +11,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class sportelloAvanzato {
-
+public class Counter 
+{
 	private JFrame frame;
 	private Socket s;
 	private PrintWriter p;
@@ -23,7 +23,7 @@ public class sportelloAvanzato {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					sportelloAvanzato window = new sportelloAvanzato();
+					Counter window = new Counter();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,7 +32,7 @@ public class sportelloAvanzato {
 		});
 	}
 
-	public sportelloAvanzato() throws UnknownHostException, IOException {
+	public Counter() throws UnknownHostException, IOException {
 		initialize();
 		
 		s = new Socket("localhost", 8045);
@@ -47,7 +47,7 @@ public class sportelloAvanzato {
 			e.consume();
 		else
 		{
-			c = (char) ((int)c - 17);
+			c = (char) ((int)c - 17); //stampa una lettera
 			p.print(c);
 			p.flush();
 		}
