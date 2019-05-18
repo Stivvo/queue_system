@@ -37,11 +37,13 @@ public class NewCounter {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	public void createCounter(JButton b, JSpinner s)
+	public void createCounter(char c, JSpinner s)
 	{
 		//'A', Integer.valueOf(spinner.getValue().toString()).intValue()
-		
 		//should do some socket operations
+		
+		String[] argh = {"" + c, s.getValue().toString()}; 
+		Counter.main(argh);
 	}
 	
 	private void initialize() {
@@ -55,48 +57,47 @@ public class NewCounter {
 		frame.getContentPane().add(spinner);
 		
 		JButton btnFinance = new JButton("Finance");
-		btnFinance.setBounds(276, 130, 127, 27);
+		btnFinance.setBounds(276, 130, 150, 27);
 		frame.getContentPane().add(btnFinance);
 		
 		btnFinance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				createCounter(btnFinance, spinner);
+				createCounter('A', spinner);
 			}
 		});
 		
 		JButton btnComunication = new JButton("Comunication");
-		btnComunication.setBounds(276, 90, 127, 27);
+		btnComunication.setBounds(276, 90, 150, 27);
 		frame.getContentPane().add(btnComunication);
 		
 		btnComunication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				createCounter(btnComunication, spinner);
+				createCounter('B', spinner);
 			}
 		});
-
 		
 		JButton btnPackage = new JButton("Package");
-		btnPackage.setBounds(276, 169, 127, 27);
+		btnPackage.setBounds(276, 169, 150, 27);
 		frame.getContentPane().add(btnPackage);
 		
 		btnPackage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				createCounter(btnPackage, spinner);
+				createCounter('C', spinner);
 			}
 		});
 		
-		JButton btnPolifunzione = new JButton("Polifunzione");
-		btnPolifunzione.setBounds(276, 51, 127, 27);
+		JButton btnPolifunzione = new JButton("Multipurpose");
+		btnPolifunzione.setBounds(276, 51, 150, 27);
 		frame.getContentPane().add(btnPolifunzione);
 		
 		btnPolifunzione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				createCounter(btnPolifunzione, spinner);
+				createCounter('D', spinner);
 			}
 		});
 		
-		JLabel lblNumeroSportello = new JLabel("Numero sportello");
-		lblNumeroSportello.setBounds(41, 56, 105, 17);
+		JLabel lblNumeroSportello = new JLabel("Counter number");
+		lblNumeroSportello.setBounds(41, 56, 150, 17);
 		frame.getContentPane().add(lblNumeroSportello);
 		
 	}

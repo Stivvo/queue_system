@@ -10,6 +10,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.BorderLayout;
 
 public class Counter 
 {
@@ -35,6 +36,8 @@ public class Counter
 		 * in java, every word separated by spaces 
 		 * you give through command line becomes a String element in the String array args
 		 */
+		System.out.println("arg1: " + args[0]);
+		System.out.println("arg2: " + args[1]);
 		
 		System.out.println("MAIN sportelloAvanzato");
 		EventQueue.invokeLater(new Runnable() {
@@ -51,7 +54,6 @@ public class Counter
 	}
 	
 	public Counter(char type, int num) throws UnknownHostException, IOException {
-		initialize();
 		
 		this.num = num;
 		this.type = type;
@@ -59,16 +61,16 @@ public class Counter
 		switch(this.type)
 		{
 		case 'A':
-			this.name = new String("1. Finance");
+			this.name = new String("Finance");
 			break;
 		case 'B':
-			this.name = new String("2. Comunication");
+			this.name = new String("Comunication");
 			break;
 		case 'C':
-			this.name = new String("3. Package");
+			this.name = new String("Package");
 			break;
 		case 'D':
-			this.name = new String("4. Multipurpose");
+			this.name = new String("Multipurpose");
 			break;
 		default: 
 			this.name = new String("0"); //shouldn't be necessary, NewCounter should manage that
@@ -79,8 +81,13 @@ public class Counter
 		 * when the users try to create a new counter
 		 */
 		
-		s = new Socket("localhost", 8045);
-		p = new PrintWriter(s.getOutputStream());
+		/*s = new Socket("localhost", 8045);
+		p = new PrintWriter(s.getOutputStream());*/
+		
+		System.out.println("COUNTER, Type: " + this.getType() + ", Num: " + this.getNum() + ", name: " + this.getName());
+		
+		initialize();
+		//initialize should come after because class attributes to put text in the button 
 	}
 	
 	private void stampa()
@@ -91,30 +98,29 @@ public class Counter
 	
 	private void initialize() throws UnknownHostException, IOException {
 		frame = new JFrame();
-		frame.setTitle("Counter");
+		frame.setTitle("Counter " /*+ this.getNum() + " " + this.getName()*/);
 		
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				try {
 					s.close();
-				} catch (IOException e1) {			
+				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
 		frame.setBounds(100, 100, 450, 350);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
 		
-		JButton btn = new JButton(this.getName());
+		JButton btn = new JButton("New button");
+		frame.getContentPane().add(btn, BorderLayout.CENTER);
+		
 		btn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				stampa();
 			}
 		});
-		btn.setBounds(159, 38, 105, 27);
-		frame.getContentPane().add(btn);
 		
 		btn.addKeyListener(new KeyAdapter() {
 			@Override
@@ -130,3 +136,24 @@ public class Counter
 		});
 	}
 }
+
+/*
+btn.addKeyListener(new KeyAdapter() {
+@Override
+public void keyReleased(KeyEvent e) 
+{
+	char c = e.getKeyChar();
+	
+	if (c != '\n')
+		e.consume();
+	else
+		stampa();
+}
+});
+
+btn.addActionListener(new ActionListener() {
+public void actionPerformed(ActionEvent e) {
+	stampa();
+}
+});
+*/
