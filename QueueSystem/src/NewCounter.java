@@ -2,18 +2,12 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
-import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.net.*;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
-import javax.swing.JSlider;
 
 public class NewCounter {
 
 	private JFrame frame;
-	private 
 
 	/**
 	 * Launch the application.
