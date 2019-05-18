@@ -13,6 +13,7 @@ import javax.swing.JSlider;
 public class NewCounter {
 
 	private JFrame frame;
+	private 
 
 	/**
 	 * Launch the application.
