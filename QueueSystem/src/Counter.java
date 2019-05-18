@@ -27,31 +27,21 @@ public class Counter
 
 	public static void main(String[] args) 
 	{
-		char Type = args[0].charAt(0);
-		int Num = args[1].charAt(0);
-		String[] Name = new String[1];
-		
-		switch(Type)
-		{
-		case 'A':
-			Name[0] = "1. Finance";
-			break;
-		case 'B':
-			Name[0] = "2. Comunication";
-			break;
-		case 'C':
-			Name[0] = "3. Package";
-			break;
-		case 'D':
-			Name[0] = "4. Multipurpose";
-			break;
-		}//end switch Type
+		/*
+		 * main args:
+		 * [0]: char, Type
+		 * [1]: int num
+		 * 
+		 * in java, every word separated by spaces 
+		 * you give through command line becomes a String element in the String array args
+		 */
 		
 		System.out.println("MAIN sportelloAvanzato");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Counter window = new Counter(Type, Num, Name);
+					Counter window = new Counter(
+							args[0].charAt(0), Integer.valueOf(args[1]).intValue());
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,12 +50,34 @@ public class Counter
 		});
 	}
 	
-	public Counter(char type, int num, String[] name) throws UnknownHostException, IOException {
+	public Counter(char type, int num) throws UnknownHostException, IOException {
 		initialize();
 		
 		this.num = num;
 		this.type = type;
-		this.name = name[0];
+		
+		switch(this.type)
+		{
+		case 'A':
+			this.name = new String("1. Finance");
+			break;
+		case 'B':
+			this.name = new String("2. Comunication");
+			break;
+		case 'C':
+			this.name = new String("3. Package");
+			break;
+		case 'D':
+			this.name = new String("4. Multipurpose");
+			break;
+		default: 
+			this.name = new String("0"); //shouldn't be necessary, NewCounter should manage that
+		}//end switch Type
+		
+		/*NewCounter should comunicate with the server 
+		 * to establish if parameters are valid
+		 * when the users try to create a new counter
+		 */
 		
 		s = new Socket("localhost", 8045);
 		p = new PrintWriter(s.getOutputStream());
