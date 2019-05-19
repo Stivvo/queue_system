@@ -46,7 +46,6 @@ public class Test
 	{
 		list l = new list();
 
-		
 		for (i = 0; i < a.length; i++)
 		{
 			System.out.println(a[i] + " inserted");
@@ -83,8 +82,6 @@ public class Test
 			System.out.println("list is not empty");
 			return false;
 		}
-		
 		return true;
 	}
-
 }

@@ -22,7 +22,7 @@ public class infoCounter
 	public Boolean cmp(infoCounter x)
 	{
 		if (this.type == x.type && 
-				this.num == x.getNum())
+				this.num == x.num)
 			return true;
 		
 		return false;

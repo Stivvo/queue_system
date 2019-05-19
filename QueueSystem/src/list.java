@@ -23,7 +23,7 @@ public class list
 	
 	public Boolean rm(infoCounter n)
 	{
-		if (p.getInfo() == n)
+		if (p.getInfo().cmp(n))
 		{
 			p = p.getPtrNext();
 			return true;
@@ -40,12 +40,14 @@ public class list
 			}
 			pa = pa.getPtrNext();
 		}
+		
 		return false;
 	}
 	
 	public Boolean search(infoCounter n)
 	{
 		node<infoCounter> pa = p;
+		System.out.println("to search: " + n.print());
 		
 		while (pa != null)
 		{
