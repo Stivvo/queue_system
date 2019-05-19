@@ -70,6 +70,7 @@ public class NewCounter extends Thread
 			{
 				sleeping.in(t);
 				nUsed.rm(t);
+				p.print("del" + t.getNum());
 			}
 		}
 	}

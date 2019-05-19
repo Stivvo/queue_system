@@ -11,7 +11,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.BorderLayout;
 
-public class Counter 
+public class Counter extends Thread
 {
 	private JFrame frame;
 	private Socket s;
@@ -20,6 +20,7 @@ public class Counter
 	private char type;
 	private int num;
 	private String name;
+	private Boolean active;
 	
 	public int getNum() {return num;}
 	public char getType() {return type;}
@@ -55,11 +56,26 @@ public class Counter
 		});
 	}
 	
+	public void run()
+	{
+		String message = "";
+		while (true)
+		{
+			//message = ...
+			if (message.indexOf("del", 0) == 0)
+			{
+				active = false;
+				frame.setTitle(frame.getTitle() + " (UNACTIVE)");
+			}
+		}
+	}
+	
 	public Counter(char type, int num, Socket sock) throws UnknownHostException, IOException {
 		
 		this.num = num;
 		this.type = type;
 		this.s = sock;
+		this.active = true;
 		
 		switch(this.type)
 		{
@@ -98,8 +114,11 @@ public class Counter
 	
 	private void stampa()
 	{
-		p.print(this.getType());
-		p.flush();
+		if (active)
+		{
+			p.print(this.getType());
+			p.flush();
+		}
 	}
 	
 	private void initialize() throws UnknownHostException, IOException {
