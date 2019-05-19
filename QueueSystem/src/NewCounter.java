@@ -48,7 +48,8 @@ public class NewCounter extends Thread
 				(c, 
 				Integer.valueOf(s.getValue().toString().toString()).intValue()
 				);
-		int i = Integer.valueOf(temp.getType() + "").intValue() - 35;
+		int i = Integer.valueOf(temp.getType() + "") - 65;
+		System.out.println("createCounter i: " + i);
 		
 		if (nCounter[i] > 1 && working.search(temp, false).getNum() == -1)
 			System.out.println(temp.print() + " already used");
@@ -59,7 +60,6 @@ public class NewCounter extends Thread
 			try {
 				temp.setSock(ss.accept());
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			working.in(temp);
@@ -85,7 +85,7 @@ public class NewCounter extends Thread
 					working.rm(t);
 					p.print("d" + t.getNum());
 					p.flush();
-					nCounter[Integer.valueOf(t.getType() + "").intValue() - 35]--;
+					nCounter[Integer.valueOf(t.getType() + "") - 65]--;
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -106,7 +106,7 @@ public class NewCounter extends Thread
 						working.in(t);
 						p.print("i" + t.getNum());
 						p.flush();
-						nCounter[Integer.valueOf(t.getType() + "").intValue() - 35]++;						
+						nCounter[Integer.valueOf(t.getType() + "") - 65]++;						
 					}catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

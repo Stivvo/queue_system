@@ -53,6 +53,8 @@ public class serverDealer extends Thread{
 		case 'C':
 			i = 2;
 			break;
+		default:
+			i = -1;
 		}
 		return i;
 	}
