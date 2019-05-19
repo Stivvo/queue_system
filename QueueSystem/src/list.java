@@ -37,7 +37,7 @@ public class list
 			node<infoCounter> pa = p;
 			
 			while (pa.getPtrNext() != null && 
-					pa.getPtrNext().getInfo().cmp(n))
+					!pa.getPtrNext().getInfo().cmp(n))
 					pa = pa.getPtrNext();
 			
 			if (pa.getPtrNext() != null)
@@ -49,21 +49,32 @@ public class list
 		return t;
 	}
 	
-	public infoCounter search(infoCounter n, Boolean update, Boolean onlyUnactive)
+	public infoCounter search()
+	{
+		node<infoCounter> pa = p;
+		infoCounter t = new infoCounter('0', -1);
+		//scegliere differenza appropriata
+		//continua a scorrere mentre adesso - ultimaAttività < tot
+				
+		while (pa != null &&
+				ZonedDateTime.now(ZoneId.of("Europe/Paris")).toInstant().getEpochSecond()
+				- pa.getInfo().getT().getEpochSecond() < 5)
+				pa = pa.getPtrNext();
+		
+		if (pa != null)
+			t = pa.getInfo();
+			
+		return t;
+	}
+	
+	public infoCounter search(infoCounter n, Boolean update)
 	{
 		node<infoCounter> pa = p;
 		infoCounter t = new infoCounter('0', -1);
 		//aggiustare il valore < con una differenza
 				
-		while (pa != null && pa.getInfo().cmp(n))
-		{
-			if (!(
-				onlyUnactive &&
-				pa.getInfo().getT().getEpochSecond() <
-				ZonedDateTime.now(ZoneId.of("Europe/Paris")).toInstant().getEpochSecond()
-			)) 
+		while (pa != null && (!pa.getInfo().cmp(n)))
 				pa = pa.getPtrNext();
-		}
 		
 		if (pa != null)
 		{
