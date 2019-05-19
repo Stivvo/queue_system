@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.ServerSocket;
+
 import java.net.Socket;
 import java.net.SocketException;
 import java.time.ZoneId;
@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 
 public class serverDealer extends Thread{
 	
-	private ServerSocket ss;
 	private Socket sock;
 	private BufferedReader reader;
 	
@@ -20,9 +19,7 @@ public class serverDealer extends Thread{
 	private Semaforo[] s = new Semaforo[3];
 	private JLabel[] LW = new JLabel[3];
 	
-	public serverDealer(
-			queue[] q1, Semaforo[] s1,
-			JLabel LW1, JLabel LW2, JLabel LW3) 
+	public serverDealer(queue[] q1, Semaforo[] s1,JLabel[] LW, Socket socket) 
 			throws IOException 
 	{
 		super();
@@ -31,12 +28,9 @@ public class serverDealer extends Thread{
 		q = q1;
 		s = s1;
 		
-		LW[0] = LW1;
-		LW[1] = LW2;
-		LW[2] = LW3;
+		this.LW = LW;
 		
-		ss = new ServerSocket(8076);
-		sock = ss.accept();
+		sock = socket;
 		InputStreamReader inp = new InputStreamReader(sock.getInputStream());
 		reader = new BufferedReader(inp);
 	}
