@@ -24,6 +24,11 @@ public class launch
 			s.p();
 			Delaer.main(arg);
 			s.v();
+			
+			s.p();
+			NewCounter.main(arg);
+			s.v();
+			
 			/*System.out.println("dealer");
 			
 			Thread.sleep(1000);
