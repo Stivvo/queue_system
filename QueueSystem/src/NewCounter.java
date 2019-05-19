@@ -19,7 +19,7 @@ public class NewCounter extends Thread
 	private list working;
 	private list sleeping;
 	
-	private int[] number = {0, 0, 0, 0};
+	private int[] nCounter = {0, 0, 0, 0};
 	//a position for the number of each type of sounter
 	
 	private Socket sock;
@@ -53,20 +53,21 @@ public class NewCounter extends Thread
 				);
 		int i = Integer.valueOf(temp.getType() + "").intValue() - 35;
 		
-		if (number[i] > 1 && working.search(temp, false).getNum() == -1)
+		if (nCounter[i] > 1 && working.search(temp, false).getNum() == -1)
 			System.out.println(temp.print() + " already used");
 		else
 		{
 			String[] argh = { "" + temp.getType() + temp.getNum() };
 			working.in(temp);
 			Counter.main(argh, sock);
-			number[i]++;
+			nCounter[i]++;
 		}
 	}
 	
 	public void run () 
 	{
 		infoCounter t;
+		int i = 0;
 		
 		while (true)
 		{ //Searches for inactive queue and eventually removes them
@@ -77,8 +78,26 @@ public class NewCounter extends Thread
 				sleeping.in(t);
 				working.rm(t);
 				p.print("d" + t.getNum());
-				number[Integer.valueOf(t.getType() + "").intValue() - 35]--;
+				nCounter[Integer.valueOf(t.getType() + "").intValue() - 35]--;
 			}
+			
+			if (nCounter[i] >= 20) // nCounter[i] >= 20 is placeholder
+			{
+				t = sleeping.search(
+					String.valueOf("" + (i + 35)).charAt(0)
+				);
+				
+				if (t.getNum() != -1)
+				{
+					sleeping.rm(t);
+					working.in(t);
+					p.print("i" + t.getNum());
+					nCounter[Integer.valueOf(t.getType() + "").intValue() - 35]++;
+				}
+				
+			}
+				
+			i = (i + 1) % 4;
 		}
 	}
 	

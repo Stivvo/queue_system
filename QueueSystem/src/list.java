@@ -88,6 +88,20 @@ public class list
 			t = pa.getInfo();
 		}
 		return t;
-	}	
+	}
+	
+	public infoCounter search(char types)
+	{
+		node<infoCounter> pa = p;
+		infoCounter t = new infoCounter('0', -1);
+				
+		while (pa != null && (pa.getInfo().getType() != types))
+				pa = pa.getPtrNext();
+		
+		if (pa != null)
+			t = pa.getInfo();
+		
+		return t;
+	}
 	
 }
