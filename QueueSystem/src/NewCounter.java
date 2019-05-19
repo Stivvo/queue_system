@@ -48,14 +48,13 @@ public class NewCounter extends Thread
 				(c, 
 				Integer.valueOf(s.getValue().toString().toString()).intValue()
 				);
-		int i = Integer.valueOf(temp.getType() + "") - 65;
-		System.out.println("createCounter i: " + i);
+		int i = temp.getType() - 65;
 		
 		if (nCounter[i] > 1 && working.search(temp, false).getNum() == -1)
 			System.out.println(temp.print() + " already used");
 		else
 		{
-			String[] argh = { "" + temp.getType() + temp.getNum() };
+			String[] argh = { "" + temp.getType(), "" +temp.getNum() };
 			Counter.main(argh);
 			try {
 				temp.setSock(ss.accept());
