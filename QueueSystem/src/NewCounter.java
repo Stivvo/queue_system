@@ -60,9 +60,17 @@ public class NewCounter extends Thread
 	
 	public void run () 
 	{
+		infoCounter t;
+		
 		while (true)
-		{
+		{ //Searches for inactive queue and eventually removes them
+			t = nUsed.search();
 			
+			if (t.getNum() != -1)
+			{
+				sleeping.in(t);
+				nUsed.rm(t);
+			}
 		}
 	}
 	
