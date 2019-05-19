@@ -94,7 +94,7 @@ public class list
 	{
 		node<infoCounter> pa = p;
 		infoCounter t = new infoCounter('0', -1);
-				
+	
 		while (pa != null && (pa.getInfo().getType() != types))
 				pa = pa.getPtrNext();
 		
