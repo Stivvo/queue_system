@@ -1,10 +1,10 @@
-import java.time.ZoneId;
+/*import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 /**
  * this class veryfies if queue, list and node are working
  */
-public class Test 
+/*public class Test 
 {
 	private int i = 0;
 	private int[] a = {7, 3, 9, 1};
@@ -81,4 +81,4 @@ public class Test
 		return true;
 	}
 
-}
+}*/
