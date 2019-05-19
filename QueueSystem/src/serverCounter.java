@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.time.Instant;
@@ -11,50 +10,27 @@ import java.time.ZonedDateTime;
 import javax.swing.JLabel;
 
 public class serverCounter extends Thread {
-	private ServerSocket ss;
 	private Socket sock;
 	private BufferedReader reader;
 	
 	private queue[] q;
 	private Semaforo[] s;
-	private JLabel l[] = new JLabel[3];
+	private JLabel LS[] = new JLabel[3];
 	private JLabel LC[] = new JLabel[3];
 	private JLabel LW[] = new JLabel[3];
 	
 	private int i;
 	
-	public serverCounter(queue[] q1, Semaforo[] s1, 
-			JLabel L1, JLabel L2, JLabel L3, 
-			JLabel LC1, JLabel LC2, JLabel LC3,
-			JLabel LW1, JLabel LW2, JLabel LW3) 
-			throws IOException 
+	public serverCounter(queue[] q1, Semaforo[] s1, JLabel[] LS,
+						JLabel[] LC,JLabel[] LW, Socket socket) throws IOException 
 	{
 		super();
 		q = q1;
 		s = s1;
-		for (i = 0; i < 3; i++)
-		{	
-			switch (i)
-			{
-			case 0:
-				l[i] = L1;
-				LC[i] = LC1;
-				LW[i] = LW1;
-				break;
-			case 1:
-				l[i] = L2;
-				LC[i] = LC2;
-				LW[i] = LW2;
-				break;
-			case 2:
-				l[i] = L3;
-				LC[i] = LC3;
-				LW[i] = LW3;
-				break;
-			}
-		}
-		ss = new ServerSocket(8045);
-		sock = ss.accept();
+		this.LS = LS;
+		this.LC = LC;
+		this.LW = LW;
+		sock = socket;
 		InputStreamReader inp = new InputStreamReader(sock.getInputStream());
 		reader = new BufferedReader(inp);
 	}
@@ -169,7 +145,7 @@ public class serverCounter extends Thread {
 				
 				if (!q[j].isEmpty())
 				{
-					l[j].setText("" + q[j].NEXT());
+					LS[j].setText("" + q[j].NEXT());
 					LC[j].setText("" + (i+1));
 					LW[j].setText("" + q[j].getDim());
 				}

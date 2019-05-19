@@ -13,24 +13,15 @@ public class serverApplication {
 	
 	private queue[] q;
 	private Semaforo[] s;
+	private JLabel[] lblService;
+	private JLabel[] lblCounter;	
+	private JLabel[] lblWaiting;
+
 	
-	private JLabel lblAdministration;
-	private JLabel lblCommunication;
-	private JLabel lblPackage;
-	
-	private JLabel lblCounter1;
-	private JLabel lblCounter2;
-	private JLabel lblCounter3;
-	
-	private JLabel lblWaiting1;
-	private JLabel lblWaiting2;
-	private JLabel lblWaiting3;
-	
-	private serverDealer thDealerCommunicator;
-	private serverCounter thCounterCommunicator;
+	private dealerConnector thDealerConnect;
+	private counterConnector thCounterConnect;
 
 	public static void main(String[] args) {
-		System.out.println("MAIN serverApplication");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -45,6 +36,9 @@ public class serverApplication {
 
 	public serverApplication() throws IOException 
 	{
+		lblService = new JLabel[3];
+		lblCounter = new JLabel[3];
+		lblWaiting = new JLabel[3];
 		initialize();
 		q = new queue[3];
 		s = new Semaforo[3];
@@ -55,10 +49,8 @@ public class serverApplication {
 			s[i] = new Semaforo(1);
 		}
 		
-		thDealerCommunicator = new serverDealer(q, s, lblWaiting1, lblWaiting2, lblWaiting3);
-		thCounterCommunicator = new serverCounter(q, s, lblAdministration, lblCommunication, lblPackage,
-												lblCounter1, lblCounter2, lblCounter3,
-												lblWaiting1, lblWaiting2, lblWaiting3);
+		thDealerConnect = new dealerConnector(q, s, lblWaiting);
+		thCounterConnect = new counterConnector(q, s, lblService, lblCounter, lblWaiting);
 		
 		JLabel lblAssisting = new JLabel("Assisting");
 		lblAssisting.setHorizontalAlignment(SwingConstants.CENTER);
@@ -76,8 +68,8 @@ public class serverApplication {
 		lblPeopleInThe.setBounds(580, 26, 198, 38);
 		frame.getContentPane().add(lblPeopleInThe);
 		
-		thDealerCommunicator.start();
-		thCounterCommunicator.start();
+		thDealerConnect.start();
+		thCounterConnect.start();
 		
 	}
 
@@ -108,65 +100,65 @@ public class serverApplication {
 		lblP.setBounds(70, 240, 187, 62);
 		frame.getContentPane().add(lblP);
 		
-		lblAdministration = new JLabel("0");
-		lblAdministration.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAdministration.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		lblAdministration.setForeground(Color.BLACK);
-		lblAdministration.setBounds(303, 58, 77, 62);
-		frame.getContentPane().add(lblAdministration);
+		lblService[0] = new JLabel("0");
+		lblService[0].setHorizontalAlignment(SwingConstants.CENTER);
+		lblService[0].setFont(new Font("Tahoma", Font.PLAIN, 26));
+		lblService[0].setForeground(Color.BLACK);
+		lblService[0].setBounds(303, 58, 77, 62);
+		frame.getContentPane().add(lblService[0]);
 		
-		lblCommunication = new JLabel("0");
-		lblCommunication.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCommunication.setForeground(Color.BLACK);
-		lblCommunication.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		lblCommunication.setBounds(303, 145, 77, 62);
-		frame.getContentPane().add(lblCommunication);
+		lblService[1] = new JLabel("0");
+		lblService[1].setHorizontalAlignment(SwingConstants.CENTER);
+		lblService[1].setForeground(Color.BLACK);
+		lblService[1].setFont(new Font("Tahoma", Font.PLAIN, 26));
+		lblService[1].setBounds(303, 145, 77, 62);
+		frame.getContentPane().add(lblService[1]);
 		
-		lblPackage = new JLabel("0");
-		lblPackage.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPackage.setForeground(Color.BLACK);
-		lblPackage.setFont(new Font("Tahoma", Font.PLAIN, 26));
-		lblPackage.setBounds(303, 240, 77, 62);
-		frame.getContentPane().add(lblPackage);
+		lblService[2] = new JLabel("0");
+		lblService[2].setHorizontalAlignment(SwingConstants.CENTER);
+		lblService[2].setForeground(Color.BLACK);
+		lblService[2].setFont(new Font("Tahoma", Font.PLAIN, 26));
+		lblService[2].setBounds(303, 240, 77, 62);
+		frame.getContentPane().add(lblService[2]);
 		
 		// --- counter ---
 		
-		lblCounter1 = new JLabel("0");
-		lblCounter1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCounter1.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblCounter1.setBounds(447, 58, 77, 62);
-		frame.getContentPane().add(lblCounter1);
+		lblCounter[0] = new JLabel("0");
+		lblCounter[0].setHorizontalAlignment(SwingConstants.CENTER);
+		lblCounter[0].setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblCounter[0].setBounds(447, 58, 77, 62);
+		frame.getContentPane().add(lblCounter[0]);
 		
-		lblCounter2 = new JLabel("0");
-		lblCounter2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCounter2.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblCounter2.setBounds(447, 145, 77, 62);
-		frame.getContentPane().add(lblCounter2);
+		lblCounter[1] = new JLabel("0");
+		lblCounter[1].setHorizontalAlignment(SwingConstants.CENTER);
+		lblCounter[1].setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblCounter[1].setBounds(447, 145, 77, 62);
+		frame.getContentPane().add(lblCounter[1]);
 		
-		lblCounter3 = new JLabel("0");
-		lblCounter3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCounter3.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblCounter3.setBounds(447, 240, 77, 62);
-		frame.getContentPane().add(lblCounter3);
+		lblCounter[2] = new JLabel("0");
+		lblCounter[2].setHorizontalAlignment(SwingConstants.CENTER);
+		lblCounter[2].setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblCounter[2].setBounds(447, 240, 77, 62);
+		frame.getContentPane().add(lblCounter[2]);
 		
 		// --- waiting --- 
 		
-		lblWaiting1 = new JLabel("0");
-		lblWaiting1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWaiting1.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblWaiting1.setBounds(646, 58, 77, 62);
-		frame.getContentPane().add(lblWaiting1);
+		lblWaiting[0] = new JLabel("0");
+		lblWaiting[0].setHorizontalAlignment(SwingConstants.CENTER);
+		lblWaiting[0].setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblWaiting[0].setBounds(646, 58, 77, 62);
+		frame.getContentPane().add(lblWaiting[0]);
 		
-		lblWaiting2 = new JLabel("0");
-		lblWaiting2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWaiting2.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblWaiting2.setBounds(646, 145, 77, 62);
-		frame.getContentPane().add(lblWaiting2);
+		lblWaiting[1] = new JLabel("0");
+		lblWaiting[1].setHorizontalAlignment(SwingConstants.CENTER);
+		lblWaiting[1].setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblWaiting[1].setBounds(646, 145, 77, 62);
+		frame.getContentPane().add(lblWaiting[1]);
 		
-		lblWaiting3 = new JLabel("0");
-		lblWaiting3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWaiting3.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblWaiting3.setBounds(646, 228, 77, 62);
-		frame.getContentPane().add(lblWaiting3);
+		lblWaiting[2] = new JLabel("0");
+		lblWaiting[2].setHorizontalAlignment(SwingConstants.CENTER);
+		lblWaiting[2].setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblWaiting[2].setBounds(646, 228, 77, 62);
+		frame.getContentPane().add(lblWaiting[2]);
 	}
 }
