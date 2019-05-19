@@ -16,8 +16,11 @@ import javax.swing.JSpinner;
 public class NewCounter extends Thread
 {
 	private JFrame frame;
-	private list nUsed;
+	private list working;
 	private list sleeping;
+	
+	private int[] number = {0, 0, 0, 0};
+	//a position for the number of each type of sounter
 	
 	private Socket sock;
 	private ServerSocket ss;
@@ -37,7 +40,7 @@ public class NewCounter extends Thread
 
 	public NewCounter() {
 		initialize();
-		nUsed = new list();
+		working = new list();
 		sleeping = new list();
 		connect();
 	}
@@ -48,13 +51,16 @@ public class NewCounter extends Thread
 				(c, 
 				Integer.valueOf(s.getValue().toString().toString()).intValue()
 				);
-		if (nUsed.search(temp, false).getNum() == -1)
+		int i = Integer.valueOf(temp.getType() + "").intValue() - 35;
+		
+		if (number[i] > 1 && working.search(temp, false).getNum() == -1)
 			System.out.println(temp.print() + " already used");
 		else
 		{
 			String[] argh = { "" + temp.getType() + temp.getNum() };
-			nUsed.in(temp);
+			working.in(temp);
 			Counter.main(argh, sock);
+			number[i]++;
 		}
 	}
 	
@@ -64,13 +70,14 @@ public class NewCounter extends Thread
 		
 		while (true)
 		{ //Searches for inactive queue and eventually removes them
-			t = nUsed.search();
+			t = working.search();
 			
 			if (t.getNum() != -1)
 			{
 				sleeping.in(t);
-				nUsed.rm(t);
+				working.rm(t);
 				p.print("d" + t.getNum());
+				number[Integer.valueOf(t.getType() + "").intValue() - 35]--;
 			}
 		}
 	}
