@@ -1,9 +1,9 @@
 import java.time.ZonedDateTime;
 
-public class queue 
+public class queue
 {
-	private node pFront;
-	private node pRear;
+	private node<Cliente> pFront;
+	private node<Cliente> pRear;
 	private int dim;
 
 	public queue() 
@@ -12,9 +12,9 @@ public class queue
 		dim = 0;
 	}
 	
-	public node front() {return pFront;}
+	public node<Cliente> front() {return pFront;}
 	
-	public node rear() {return pRear;}
+	public node<Cliente> rear() {return pRear;}
 	
 	public int getDim() {return dim;}
 	
@@ -40,7 +40,7 @@ public class queue
 		}
 		else 
 		{
-			node pn = pFront;
+			node<Cliente> pn = pFront;
 			pFront = pFront.getPtrNext();
 			pn = null;
 			
@@ -53,7 +53,7 @@ public class queue
 	public void NEWENTRY(int ticket, ZonedDateTime zdt)
 	{
 		Cliente clientE = new Cliente(ticket, zdt);
-		node pn = new node(clientE, null);
+		node<Cliente> pn = new node<Cliente>(clientE, null);
 		dim++;
 		
 		if(isEmpty()) {

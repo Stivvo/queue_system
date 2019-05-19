@@ -80,8 +80,10 @@ public class Counter
 		 * when the users try to create a new counter
 		 */
 		
-		/*s = new Socket("localhost", 8045);
+		/*following two lines should be UNCOMMENTED when properly using the application
+		s = new Socket("localhost", 8045);
 		p = new PrintWriter(s.getOutputStream());*/
+		
 		
 		System.out.println("COUNTER, Type: " + this.getType() + ", Num: " + this.getNum() + ", name: " + this.getName());
 		
@@ -135,24 +137,3 @@ public class Counter
 		});
 	}
 }
-
-/*
-btn.addKeyListener(new KeyAdapter() {
-@Override
-public void keyReleased(KeyEvent e) 
-{
-	char c = e.getKeyChar();
-	
-	if (c != '\n')
-		e.consume();
-	else
-		stampa();
-}
-});
-
-btn.addActionListener(new ActionListener() {
-public void actionPerformed(ActionEvent e) {
-	stampa();
-}
-});
-*/

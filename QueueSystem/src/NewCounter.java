@@ -1,6 +1,7 @@
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -9,10 +10,8 @@ import javax.swing.JSpinner;
 public class NewCounter {
 
 	private JFrame frame;
+	private list nUsed;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -26,23 +25,31 @@ public class NewCounter {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public NewCounter() {
 		initialize();
+		nUsed = new list();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	public void createCounter(char c, JSpinner s)
 	{
 		//'A', Integer.valueOf(spinner.getValue().toString()).intValue()
 		//should do some socket operations
+		Integer number = Integer.valueOf(s.getValue().toString().toString()).intValue();
 		
-		String[] argh = {"" + c, s.getValue().toString()}; 
-		Counter.main(argh);
+		if (nUsed.search(number))
+			System.out.println(number + " already used");
+		else
+		{
+			String[] argh = { "" + c, s.getValue().toString() };
+			nUsed.in(number);
+			Counter.main(argh);
+		}
+		
+		/*
+		 * adesso resta da vedere come 
+		 * eliminare dalla lista uno 
+		 * sportello che viene chiuso
+		 */
 	}
 	
 	private void initialize() {

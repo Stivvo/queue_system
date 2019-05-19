@@ -1,30 +1,30 @@
-public class node 
+public class node <T>
 {
-	private Cliente info;
-	private node ptr;
+	private T info;
+	private node<T> ptr;
 	
 	public node() 
 	{
-		ptr = null;		
+		ptr = null;
 	}
 	
-	public node(Cliente info, node ptr) 
+	public node(T info, node<T> ptr) 
 	{
 		this.info = info;
 		this.ptr = ptr;
 	}
 	
-	public void setPtrNext(node ptr) 
+	public void setPtrNext(node<T> ptr) 
 	{
 		this.ptr = ptr;
 	}
 	
-	public Cliente getInfo() 
+	public T getInfo() 
 	{
 		return info;
 	}
 	
-	public node getPtrNext() 
+	public node<T> getPtrNext() 
 	{
 		return ptr;
 	}
