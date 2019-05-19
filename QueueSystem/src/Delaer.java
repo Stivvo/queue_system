@@ -26,26 +26,8 @@ public class Delaer {
 		pr.flush();
 	}
 	
-	public static void main(String[] args) {
-		System.out.println("MAIN Dealer");
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Delaer window = new Delaer();
-					window.frame.setVisible(true);
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public Delaer() 
-	{
+	public void connect() {
+		
 		try {
 			s = new Socket("localhost", 8076);
 		} catch (SocketException exception) {
@@ -62,6 +44,28 @@ public class Delaer {
 			System.out.println(exception);
 		}
 		
+	}
+	public static void main(String[] args) {
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Delaer window = new Delaer();
+					window.frame.setVisible(true);
+					window.connect();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public Delaer() 
+	{
 		initialize();
 	}
 

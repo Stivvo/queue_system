@@ -45,6 +45,7 @@ public class Counter
 					Counter window = new Counter(
 							args[0].charAt(0), Integer.valueOf(args[1]).intValue());
 					window.frame.setVisible(true);
+					window.connect();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -80,17 +81,20 @@ public class Counter
 		 * when the users try to create a new counter
 		 */
 		
-		/*following two lines should be UNCOMMENTED when properly using the application
-		s = new Socket("localhost", 8045);
-		p = new PrintWriter(s.getOutputStream());*/
+		//following two lines should be UNCOMMENTED when properly using the application
+		
 		
 		
 		System.out.println("COUNTER, Type: " + this.getType() + ", Num: " + this.getNum() + ", name: " + this.getName());
 		
 		initialize();
-		//initialize should come after because class attributes to put text in the button 
 	}
 	
+	public void connect() throws UnknownHostException, IOException {
+		s = new Socket("localhost", 8045);
+		p = new PrintWriter(s.getOutputStream());
+		
+	}
 	private void stampa()
 	{
 		p.print(this.getType());
