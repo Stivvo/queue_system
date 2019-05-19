@@ -10,7 +10,8 @@ public class dealerConnector extends Thread{
 	private Semaforo[] s;
 	private JLabel[] LW;
 	
-	public dealerConnector(queue[] q1, Semaforo[] s1, JLabel[] LW) throws IOException {
+	public dealerConnector(queue[] q1, Semaforo[] s1, JLabel[] LW) 
+			throws IOException {
 		super();
 		setName("counterConnector");
 		q = q1;

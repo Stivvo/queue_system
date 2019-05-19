@@ -2,24 +2,16 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 /**
- * 
- */
-
-/**
- * @author stefano
- *
+ * this class veryfies if queue, list and node are working
  */
 public class Test 
 {
-	/**
-	 * @param args
-	 */
 	private int i = 0;
+	private int[] a = {7, 3, 9, 1};
 	
 	public boolean tQueue()
 	{
 		queue q = new queue();
-		int[] a = {7, 3, 9, 1};
 		
 		for (i = 0; i < a.length; i++)
 		{
@@ -49,10 +41,44 @@ public class Test
 			
 	}
 	
-	/*public boolean tDealer() 
+	public boolean tList()
 	{
-		Delaer d = new Delaer();
-		d.main();
-	}*/
+		list l = new list();
+
+		
+		for (i = 0; i < a.length; i++)
+		{
+			System.out.println(a[i] + " inserted");
+			l.in(a[i]);
+		}
+		
+		for (i = 0; i < a.length; i++)
+		{
+			if (!l.search(a[i]))
+			{
+				System.out.println(
+						"search: " + a[i] + " not found");
+				return false;
+			}
+		}
+		
+		for (i = 0; i < a.length; i++)
+		{
+			if (!l.rm(a[i]))
+			{
+				System.out.println(
+						"rm: " + a[i] + " not found");
+				return false;
+			}
+		}
+		
+		if (!l.isEmpty())
+		{
+			System.out.println("list is not empty");
+			return false;
+		}
+		
+		return true;
+	}
 
 }

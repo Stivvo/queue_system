@@ -12,7 +12,8 @@ public class counterConnector extends Thread{
 	private JLabel[] LC;
 	private JLabel[] LW;
 	
-	public counterConnector(queue[] q1, Semaforo[] s1, JLabel[] LS, JLabel[] LC, JLabel[] LW) throws IOException {
+	public counterConnector(queue[] q1, Semaforo[] s1, JLabel[] LS, JLabel[] LC, JLabel[] LW) 
+			throws IOException {
 		super();
 		setName("counterConnector");
 		q = q1;
