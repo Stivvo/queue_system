@@ -8,6 +8,7 @@ public class Test
 {
 	private int i = 0;
 	private int[] a = {7, 3, 9, 1};
+	private infoCounter temp;
 	
 	public boolean tQueue()
 	{
@@ -49,12 +50,15 @@ public class Test
 		for (i = 0; i < a.length; i++)
 		{
 			System.out.println(a[i] + " inserted");
-			l.in(a[i]);
+			temp = new infoCounter('A', a[i]); 
+			l.in(temp);
 		}
 		
 		for (i = 0; i < a.length; i++)
 		{
-			if (!l.search(a[i]))
+			temp = new infoCounter('A', a[i]);
+			
+			if (!l.search(temp))
 			{
 				System.out.println(
 						"search: " + a[i] + " not found");
@@ -64,7 +68,9 @@ public class Test
 		
 		for (i = 0; i < a.length; i++)
 		{
-			if (!l.rm(a[i]))
+			temp = new infoCounter('A', a[i]);
+			
+			if (!l.rm(temp))
 			{
 				System.out.println(
 						"rm: " + a[i] + " not found");

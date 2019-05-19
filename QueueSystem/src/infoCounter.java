@@ -16,6 +16,17 @@ public class infoCounter
 	
 	public String print()
 	{
-		return ("" + type + " " + num);
+		return (type + " " + num);
 	}
+	
+	public Boolean cmp(infoCounter x)
+	{
+		if (this.type == x.type && 
+				this.num == x.getNum())
+			return true;
+		
+		return false;
+	}
+	
+	
 }

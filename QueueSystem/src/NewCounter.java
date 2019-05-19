@@ -32,16 +32,16 @@ public class NewCounter {
 
 	public void createCounter(char c, JSpinner s)
 	{
-		//'A', Integer.valueOf(spinner.getValue().toString()).intValue()
-		//should do some socket operations
-		Integer number = Integer.valueOf(s.getValue().toString().toString()).intValue();
-		
-		if (nUsed.search(number))
-			System.out.println(number + " already used");
+		infoCounter temp = new infoCounter
+				(c, 
+				Integer.valueOf(s.getValue().toString().toString()).intValue()
+				);		
+		if (nUsed.search(temp))
+			System.out.println(temp.print() + " already used");
 		else
 		{
-			String[] argh = { "" + c, s.getValue().toString() };
-			nUsed.in(number);
+			String[] argh = { "" + temp.getType() + temp.getNum() };
+			nUsed.in(temp);
 			Counter.main(argh);
 		}
 		

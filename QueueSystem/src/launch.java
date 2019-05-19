@@ -2,7 +2,6 @@ public class launch
 {
 	public static void main(String[] args) 
 	{
-		
 		runTests(); //uncomment if you don't want running tests
 		
 		String[] arg = {"a", "b"};

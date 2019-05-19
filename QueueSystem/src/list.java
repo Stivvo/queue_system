@@ -1,7 +1,7 @@
 
 public class list 
 {
-	private node<Integer> p;
+	private node<infoCounter> p;
 	
 	public list()
 	{
@@ -15,13 +15,13 @@ public class list
 		return false;
 	}
 	
-	public void in (int x)
+	public void in (infoCounter x)
 	{
-		node<Integer> n = new node<Integer>(x, p);
+		node<infoCounter> n = new node<infoCounter>(x, p);
 		p = n;
 	}
 	
-	public Boolean rm(int n)
+	public Boolean rm(infoCounter n)
 	{
 		if (p.getInfo() == n)
 		{
@@ -29,11 +29,11 @@ public class list
 			return true;
 		}
 		
-		node<Integer> pa = p;
+		node<infoCounter> pa = p;
 		
 		while (pa.getPtrNext() != null)
 		{
-			if (pa.getPtrNext().getInfo() == n)
+			if (pa.getPtrNext().getInfo().cmp(n))
 			{
 				pa.setPtrNext(pa.getPtrNext().getPtrNext());
 				return true;
@@ -43,13 +43,13 @@ public class list
 		return false;
 	}
 	
-	public Boolean search(Integer n)
+	public Boolean search(infoCounter n)
 	{
-		node<Integer> pa = p;
+		node<infoCounter> pa = p;
 		
 		while (pa != null)
 		{
-			if (pa.getInfo() == n)
+			if (pa.getInfo().cmp(n))
 				return true;
 			
 			pa = pa.getPtrNext();
