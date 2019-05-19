@@ -3,10 +3,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.ConnectException;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.UnknownHostException;
+
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -22,9 +20,8 @@ public class NewCounter extends Thread
 	private int[] nCounter = {0, 0, 0, 0};
 	//a position for the number of each type of sounter
 	
-	private Socket sock;
+	
 	private ServerSocket ss;
-	private PrintWriter p;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {public void run() {
@@ -58,8 +55,14 @@ public class NewCounter extends Thread
 		else
 		{
 			String[] argh = { "" + temp.getType() + temp.getNum() };
+			Counter.main(argh);
+			try {
+				temp.setSock(ss.accept());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			working.in(temp);
-			Counter.main(argh, sock);
 			nCounter[i]++;
 		}
 	}
@@ -72,15 +75,23 @@ public class NewCounter extends Thread
 		while (true)
 		{ //Searches for inactive queue and eventually removes them
 			t = working.search();
+			PrintWriter p;
 			
 			if (t.getNum() != -1)
 			{
-				sleeping.in(t);
-				working.rm(t);
-				p.print("d" + t.getNum());
-				nCounter[Integer.valueOf(t.getType() + "").intValue() - 35]--;
+				try {
+					p = new PrintWriter(t.getSocket().getOutputStream());
+					sleeping.in(t);
+					working.rm(t);
+					p.print("d" + t.getNum());
+					p.flush();
+					nCounter[Integer.valueOf(t.getType() + "").intValue() - 35]--;
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-			
+
 			if (nCounter[i] >= 20) // nCounter[i] >= 20 is placeholder
 			{
 				t = sleeping.search(
@@ -89,10 +100,17 @@ public class NewCounter extends Thread
 				
 				if (t.getNum() != -1)
 				{
-					sleeping.rm(t);
-					working.in(t);
-					p.print("i" + t.getNum());
-					nCounter[Integer.valueOf(t.getType() + "").intValue() - 35]++;
+					try {
+						p = new PrintWriter(t.getSocket().getOutputStream());
+						sleeping.rm(t);
+						working.in(t);
+						p.print("i" + t.getNum());
+						p.flush();
+						nCounter[Integer.valueOf(t.getType() + "").intValue() - 35]++;						
+					}catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}  
 				}
 				
 			}
@@ -104,8 +122,7 @@ public class NewCounter extends Thread
 	public void connect() 
 	{
 		try {
-			ss = new ServerSocket(8045);
-			 sock = ss.accept();
+			ss = new ServerSocket(8055);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
