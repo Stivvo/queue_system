@@ -56,5 +56,3 @@ public class launch
 }
 /*80 45?
 8076?*/
-
-//quando si avviano singolarmente, poi la console di eclipse si spegne e si riaccende due volte

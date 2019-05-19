@@ -29,6 +29,7 @@ public class counterConnector extends Thread{
 		Socket sock;
 		for(;;) {
 			serverCounter thSCounter;
+			NewCounter nw;
 			try {
 				 sock = ss.accept();
 				 thSCounter = new serverCounter(q, s, LS, LC, LW, sock);

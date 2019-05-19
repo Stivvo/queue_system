@@ -47,7 +47,6 @@ public class serverCounter extends Thread {
 			s[i].v();
 	}
 	
-	
 	public Boolean isSomeoneWaiting() 
 	{
 		ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Europe/Paris"));
@@ -62,7 +61,9 @@ public class serverCounter extends Thread {
 			{
 				if (!q[i].isEmpty()) 
 				{
-					if (now.getEpochSecond() - q[i].front().getInfo().getT().getEpochSecond() >= 5)
+					if (now.getEpochSecond() - 
+							q[i].front().getInfo().getT().getEpochSecond() 
+							>= 5)
 						flag = true;
 				}				
 			}
@@ -85,7 +86,8 @@ public class serverCounter extends Thread {
 		{
 			if (!q[i].isEmpty())
 			{
-				ltemp = now.getEpochSecond() - q[i].front().getInfo().getT().getEpochSecond();
+				ltemp = now.getEpochSecond() - 
+						q[i].front().getInfo().getT().getEpochSecond();
 				
 				if (ltemp > longest)
 				{
@@ -94,7 +96,6 @@ public class serverCounter extends Thread {
 				}
 			}
 		}
-		
 		unLock();
 		return iMax;
 	}

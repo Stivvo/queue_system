@@ -25,7 +25,7 @@ public class Counter
 	public char getType() {return type;}
 	public String getName() {return name;}
 
-	public static void main(String[] args) 
+	public static void main(String[] args, Socket s) 
 	{
 		/*
 		 * main args:
@@ -43,7 +43,9 @@ public class Counter
 			public void run() {
 				try {
 					Counter window = new Counter(
-							args[0].charAt(0), Integer.valueOf(args[1]).intValue());
+							args[0].charAt(0), 
+							Integer.valueOf(args[1]).intValue(),
+							s);
 					window.frame.setVisible(true);
 					window.connect();
 				} catch (Exception e) {
@@ -53,10 +55,11 @@ public class Counter
 		});
 	}
 	
-	public Counter(char type, int num) throws UnknownHostException, IOException {
+	public Counter(char type, int num, Socket sock) throws UnknownHostException, IOException {
 		
 		this.num = num;
 		this.type = type;
+		this.s = sock;
 		
 		switch(this.type)
 		{
@@ -73,28 +76,26 @@ public class Counter
 			this.name = new String("Multipurpose");
 			break;
 		default: 
-			this.name = new String("0"); //shouldn't be necessary, NewCounter should manage that
+			this.name = new String("0");
+			break;
 		}//end switch Type
 		
-		/*NewCounter should comunicate with the server 
+		/*
+		 * NewCounter should comunicate with the server 
 		 * to establish if parameters are valid
 		 * when the users try to create a new counter
 		 */
-		
 		//following two lines should be UNCOMMENTED when properly using the application
 		
-		
-		
 		System.out.println("COUNTER, Type: " + this.getType() + ", Num: " + this.getNum() + ", name: " + this.getName());
-		
 		initialize();
 	}
 	
 	public void connect() throws UnknownHostException, IOException {
 		s = new Socket("localhost", 8045);
 		p = new PrintWriter(s.getOutputStream());
-		
 	}
+	
 	private void stampa()
 	{
 		p.print(this.getType());

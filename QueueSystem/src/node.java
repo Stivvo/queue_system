@@ -24,6 +24,11 @@ public class node <T>
 		return info;
 	}
 	
+	public void setInfo(T info)
+	{
+		this.info = info;
+	}
+	
 	public node<T> getPtrNext() 
 	{
 		return ptr;

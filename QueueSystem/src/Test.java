@@ -57,7 +57,7 @@ public class Test
 		{
 			temp = new infoCounter('A', a[i]);
 			
-			if (!l.search(temp))
+			if (!l.search(temp, true))
 			{
 				System.out.println(
 						"search: " + a[i] + " not found");
@@ -69,7 +69,7 @@ public class Test
 		{
 			temp = new infoCounter('A', a[i]);
 			
-			if (!l.rm(temp))
+			if (l.rm(temp).getNum() == -1)
 			{
 				System.out.println(
 						"rm: " + a[i] + " not found");

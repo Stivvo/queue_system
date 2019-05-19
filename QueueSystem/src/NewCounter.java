@@ -1,20 +1,30 @@
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.ConnectException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 
-public class NewCounter {
-
+public class NewCounter extends Thread
+{
 	private JFrame frame;
 	private list nUsed;
+	private list sleeping;
+	
+	private Socket sock;
+	private ServerSocket ss;
+	private PrintWriter p;
 
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+		EventQueue.invokeLater(new Runnable() {public void run() {
 				try {
 					NewCounter window = new NewCounter();
 					window.frame.setVisible(true);
@@ -28,6 +38,8 @@ public class NewCounter {
 	public NewCounter() {
 		initialize();
 		nUsed = new list();
+		sleeping = new list();
+		connect();
 	}
 
 	public void createCounter(char c, JSpinner s)
@@ -35,21 +47,31 @@ public class NewCounter {
 		infoCounter temp = new infoCounter
 				(c, 
 				Integer.valueOf(s.getValue().toString().toString()).intValue()
-				);		
-		if (nUsed.search(temp))
+				);
+		if (nUsed.search(temp, true))
 			System.out.println(temp.print() + " already used");
 		else
 		{
 			String[] argh = { "" + temp.getType() + temp.getNum() };
 			nUsed.in(temp);
-			Counter.main(argh);
+			Counter.main(argh, sock);
 		}
+	}
+	
+	public void run () 
+	{
 		
-		/*
-		 * adesso resta da vedere come 
-		 * eliminare dalla lista uno 
-		 * sportello che viene chiuso
-		 */
+	}
+	
+	public void connect() 
+	{
+		try {
+			ss = new ServerSocket(8045);
+			 sock = ss.accept();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void initialize() {

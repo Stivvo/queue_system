@@ -1,3 +1,5 @@
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 public class list 
 {
@@ -21,41 +23,53 @@ public class list
 		p = n;
 	}
 	
-	public Boolean rm(infoCounter n)
+	public infoCounter rm(infoCounter n)
 	{
+		infoCounter t = new infoCounter('0', -1);
+		
 		if (p.getInfo().cmp(n))
 		{
+			t = p.getInfo();
 			p = p.getPtrNext();
-			return true;
 		}
-		
-		node<infoCounter> pa = p;
-		
-		while (pa.getPtrNext() != null)
+		else
 		{
-			if (pa.getPtrNext().getInfo().cmp(n))
-			{
-				pa.setPtrNext(pa.getPtrNext().getPtrNext());
-				return true;
-			}
-			pa = pa.getPtrNext();
+			node<infoCounter> pa = p;
+			
+			while (pa.getPtrNext() != null && 
+					pa.getPtrNext().getInfo().cmp(n))
+					pa = pa.getPtrNext();
+			
+			t = pa.getPtrNext().getInfo();
+			pa.setPtrNext(pa.getPtrNext().getPtrNext());
 		}
-		
-		return false;
+		return t;
 	}
 	
-	public Boolean search(infoCounter n)
+	public Boolean search(infoCounter n, Boolean update, Boolean onlyUnactive)
 	{
 		node<infoCounter> pa = p;
-		System.out.println("to search: " + n.print());
 		
 		while (pa != null)
 		{
 			if (pa.getInfo().cmp(n))
+			{
+				//aggiustare il valore < con una differenza
+				if (onlyUnactive && pa.getInfo().getT().getEpochSecond() <
+						ZonedDateTime.now(ZoneId.of("Europe/Paris")).toInstant().getEpochSecond())
+				{
+					if (update)
+					{
+						n.setT(ZonedDateTime.now(ZoneId.of("Europe/Paris")));
+						pa.setInfo(n);
+					}					
+				}
 				return true;
+			}
 			
 			pa = pa.getPtrNext();
 		}
 		return false;
-	}
+	}	
+	
 }
