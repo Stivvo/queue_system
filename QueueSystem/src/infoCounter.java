@@ -1,3 +1,4 @@
+import java.net.Socket;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 
@@ -6,6 +7,7 @@ public class infoCounter
 	private char type;
 	private int num;
 	private Instant t;
+	private Socket s;
 	
 	public infoCounter(char type, int num)
 	{
@@ -13,17 +15,22 @@ public class infoCounter
 		this.num = num;
 	}
 	
-	public infoCounter(char type, int num, ZonedDateTime zdt)
+	public infoCounter(char type, int num, ZonedDateTime zdt, Socket sock)
 	{
 		this.type = type;
 		this.num = num;
 		this.setT(zdt);
+		s = sock;
 	}
 	
 	public char getType() {return type;}
 	
 	public int getNum() {return num;}
 	
+	
+	public void setSock(Socket sock) {
+		s = sock;
+	}
 	public String print()
 	{
 		return (type + " " + num);
@@ -48,5 +55,8 @@ public class infoCounter
 		return t;
 	}
 	
+	public Socket getSocket() {
+		return s;
+	}
 	
 }
