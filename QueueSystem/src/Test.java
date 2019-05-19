@@ -57,7 +57,7 @@ public class Test
 		{
 			temp = new infoCounter('A', a[i]);
 			
-			if (!l.search(temp, true))
+			if (l.search(temp, false, false).getNum() == -1)
 			{
 				System.out.println(
 						"search: " + a[i] + " not found");

@@ -40,36 +40,41 @@ public class list
 					pa.getPtrNext().getInfo().cmp(n))
 					pa = pa.getPtrNext();
 			
-			t = pa.getPtrNext().getInfo();
-			pa.setPtrNext(pa.getPtrNext().getPtrNext());
+			if (pa.getPtrNext() != null)
+			{
+				t = pa.getPtrNext().getInfo();
+				pa.setPtrNext(pa.getPtrNext().getPtrNext());				
+			}
 		}
 		return t;
 	}
 	
-	public Boolean search(infoCounter n, Boolean update, Boolean onlyUnactive)
+	public infoCounter search(infoCounter n, Boolean update, Boolean onlyUnactive)
 	{
 		node<infoCounter> pa = p;
-		
-		while (pa != null)
+		infoCounter t = new infoCounter('0', -1);
+		//aggiustare il valore < con una differenza
+				
+		while (pa != null && pa.getInfo().cmp(n))
 		{
-			if (pa.getInfo().cmp(n))
-			{
-				//aggiustare il valore < con una differenza
-				if (onlyUnactive && pa.getInfo().getT().getEpochSecond() <
-						ZonedDateTime.now(ZoneId.of("Europe/Paris")).toInstant().getEpochSecond())
-				{
-					if (update)
-					{
-						n.setT(ZonedDateTime.now(ZoneId.of("Europe/Paris")));
-						pa.setInfo(n);
-					}					
-				}
-				return true;
-			}
-			
-			pa = pa.getPtrNext();
+			if (!(
+				onlyUnactive &&
+				pa.getInfo().getT().getEpochSecond() <
+				ZonedDateTime.now(ZoneId.of("Europe/Paris")).toInstant().getEpochSecond()
+			)) 
+				pa = pa.getPtrNext();
 		}
-		return false;
+		
+		if (pa != null)
+		{
+			if (update)
+			{
+				n.setT(ZonedDateTime.now(ZoneId.of("Europe/Paris")));
+				pa.setInfo(n);
+			}
+			t = pa.getInfo();
+		}
+		return t;
 	}	
 	
 }

@@ -48,7 +48,7 @@ public class NewCounter extends Thread
 				(c, 
 				Integer.valueOf(s.getValue().toString().toString()).intValue()
 				);
-		if (nUsed.search(temp, true))
+		if (nUsed.search(temp, false, false).getNum() == -1)
 			System.out.println(temp.print() + " already used");
 		else
 		{
