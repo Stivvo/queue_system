@@ -15,7 +15,9 @@ public class Counter extends Thread
 {
 	private JFrame frame;
 	private Socket s;
+	private Socket s1;
 	private PrintWriter p;
+	private BufferedReader reader;
 	
 	private char type;
 	private int num;
@@ -26,7 +28,7 @@ public class Counter extends Thread
 	public char getType() {return type;}
 	public String getNAme() {return name;}
 
-	public static void main(String[] args, Socket s) 
+	public static void main(String[] args, Socket s1) 
 	{
 		/*
 		 * main args:
@@ -46,7 +48,7 @@ public class Counter extends Thread
 					Counter window = new Counter(
 							args[0].charAt(0), 
 							Integer.valueOf(args[1]).intValue(),
-							s);
+							s1);
 					window.frame.setVisible(true);
 					window.connect();
 				} catch (Exception e) {
@@ -59,10 +61,20 @@ public class Counter extends Thread
 	public void run()
 	{
 		String message = "";
+		try
+		{
+			message = reader.readLine();			
+		}
+		catch (IOException e) {
+			System.out.println("error reading message through BufferedReader");
+		}
 		while (true)
 		{
-			//message = ...
-			if (message.indexOf("del", 0) == 0)
+			if (message.charAt(0) == 'd' && 
+					Integer.valueOf(
+							message.substring(1, message.length())
+					).intValue() == this.getNum()
+				)
 			{
 				active = false;
 				frame.setTitle(frame.getTitle() + " (UNACTIVE)");
@@ -70,12 +82,15 @@ public class Counter extends Thread
 		}
 	}
 	
-	public Counter(char type, int num, Socket sock) throws UnknownHostException, IOException {
+	public Counter(char type, int num, Socket s1) throws UnknownHostException, IOException {
 		
 		this.num = num;
 		this.type = type;
-		this.s = sock;
 		this.active = true;
+		this.s1 = s1;
+		
+		InputStreamReader inp = new InputStreamReader(s1.getInputStream());
+		reader = new BufferedReader(inp);
 		
 		switch(this.type)
 		{
