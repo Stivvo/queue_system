@@ -7,41 +7,17 @@ public class launch
 		String[] arg = {"a", "b"};
 		Semaforo s = new Semaforo(1);
 		
-		//try {
 		s.p();
 		serverApplication.main(arg);
 		s.v();
-		/*System.out.println("serverapplication");
+
+		s.p();
+		Delaer.main(arg);
+		s.v();
 			
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			System.out.println("serverapplication BLOCK");
-			Thread.currentThread().interrupt();
-			return;
-		}*/
-		
-		//try {
-			s.p();
-			Delaer.main(arg);
-			s.v();
-			
-			s.p();
-			NewCounter.main(arg);
-			s.v();
-			
-			/*System.out.println("dealer");
-			
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			System.out.println("dealer BLOCK");
-			Thread.currentThread().interrupt();
-			return;
-		}*/
-		
-		/*s.p();
-		sportelloAvanzato.main(arg);
-		s.v();*/
-		//System.out.println("sportelloavanzato");
+		s.p();
+		NewCounter.main(arg);
+		s.v();
 	}
 	
 	public static void runTests()
@@ -59,5 +35,3 @@ public class launch
 			System.out.println("list NOT working\n");
 	}
 }
-/*80 45?
-8076?*/

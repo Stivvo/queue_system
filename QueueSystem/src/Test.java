@@ -49,13 +49,13 @@ public class Test
 		for (i = 0; i < a.length; i++)
 		{
 			System.out.println(a[i] + " inserted");
-			temp = new infoCounter('A', a[i]); 
+			temp = new infoCounter(String.valueOf("" + (65 + i)).charAt(0), a[i]);
 			l.in(temp);
 		}
 		
 		for (i = 0; i < a.length; i++)
 		{
-			temp = new infoCounter('A', a[i]);
+			temp = new infoCounter(String.valueOf("" + (65 + i)).charAt(0), a[i]);
 			
 			if (l.search(temp, false).getNum() == -1)
 			{
@@ -67,7 +67,20 @@ public class Test
 		
 		for (i = 0; i < a.length; i++)
 		{
-			temp = new infoCounter('A', a[i]);
+			if (l.search(
+					String.valueOf("" + (65 + i)).charAt(0)
+					).getNum() 
+				== -1)
+			{
+				System.out.println(
+						"search: " + String.valueOf("" + (65 + i)).charAt(0) + " not found");
+				return false;
+			}
+		}
+		
+		for (i = 0; i < a.length; i++)
+		{
+			temp = new infoCounter(String.valueOf("" + (65 + i)).charAt(0), a[i]);
 			
 			if (l.rm(temp).getNum() == -1)
 			{
