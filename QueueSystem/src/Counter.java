@@ -24,7 +24,7 @@ public class Counter extends Thread
 	
 	public int getNum() {return num;}
 	public char getType() {return type;}
-	public String getName() {return name;}
+	public String getNAme() {return name;}
 
 	public static void main(String[] args, Socket s) 
 	{
