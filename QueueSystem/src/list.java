@@ -63,6 +63,8 @@ public class list
 		
 		if (pa != null)
 			t = pa.getInfo();
+		
+		//ritorno appena trovo una coda inattiva
 			
 		return t;
 	}
