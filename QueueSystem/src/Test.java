@@ -7,23 +7,23 @@ import java.time.ZonedDateTime;
 public class Test 
 {
 	private int i = 0;
-	private int[] a = {7, 3, 9, 1};
 	private infoCounter temp;
+	int len = 4;
+	int[] a = {4, 8, 9, 10};
 	
-	public boolean tQueue()
+	public void tQueue()
 	{
-		queue q = new queue();
+		queue q = new queue('A');
 		
-		for (i = 0; i < a.length; i++)
+		for (i = 0; i < len; i++)
 		{
-			q.NEWENTRY(a[i], ZonedDateTime.now(ZoneId.of("Europe/Paris")));
+			q.NEWENTRY(ZonedDateTime.now(ZoneId.of("Europe/Paris")));
 			
 			try {
 			    Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				System.out.println("Exception in sleep");
 			    Thread.currentThread().interrupt();
-			    return false;
 			}
 		}
 		i = 0;
@@ -32,13 +32,7 @@ public class Test
 		{
 			System.out.println(q.front().getInfo().getTicket() + 
 					", " + q.front().getInfo().getT().getEpochSecond());
-			
-			if (q.NEXT() != a[i])
-				return false;
-				
-			i++;
 		}
-		return true;
 			
 	}
 	
@@ -68,9 +62,8 @@ public class Test
 		for (i = 0; i < a.length; i++)
 		{
 			if (l.search(
-					String.valueOf("" + (65 + i)).charAt(0)
-					).getNum() 
-				== -1)
+					new infoCounter('A', i), false, true
+				).getNum() == -1)
 			{
 				System.out.println(
 						"search: " + String.valueOf("" + (65 + i)).charAt(0) + " not found");

@@ -5,10 +5,10 @@ import java.time.ZonedDateTime;
 
 public class Cliente 
 {
-	private int ticket;
+	private String ticket;
 	Instant t;
 	
-	public Cliente(int ticket, ZonedDateTime zdt)
+	public Cliente(String ticket, ZonedDateTime zdt)
 	{
 		this.ticket = ticket;
 		this.t = zdt.toInstant();
@@ -24,7 +24,7 @@ public class Cliente
 		 */
 	}
 	
-	public int getTicket()
+	public String getTicket()
 	{
 		return ticket;
 	}

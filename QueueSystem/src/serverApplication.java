@@ -52,9 +52,13 @@ public class serverApplication {
 		q = new queue[3];
 		s = new Semaforo[3];
 		
+		q[0] = new queue('A');
+		q[1] = new queue('C');
+		q[2] = new queue('P');
+		
 		for (int i = 0; i < 3; i++)
 		{
-			q[i] = new queue();
+			
 			s[i] = new Semaforo(1);
 		}
 		

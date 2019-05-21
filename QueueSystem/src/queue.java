@@ -5,11 +5,15 @@ public class queue
 	private node<Cliente> pFront;
 	private node<Cliente> pRear;
 	private int dim;
-
-	public queue() 
+	private char service;
+	private int counter;
+	
+	public queue(char service) 
 	{
 		pFront = pRear = null;
 		dim = 0;
+		counter = 0;
+		this.service = service;
 	}
 	
 	public node<Cliente> front() {return pFront;}
@@ -18,6 +22,8 @@ public class queue
 	
 	public int getDim() {return dim;}
 	
+	public char getService() {return service;}
+	
 	public Boolean isEmpty() 
 	{
 		if(pFront == null && pRear == null)
@@ -25,13 +31,20 @@ public class queue
 		return false;
 	}
 
-	public int NEXT() 
+		
+	public Cliente Rear() {
+		if (!isEmpty())
+			return pRear.getInfo();
+		
+		return null;
+	}
+	public String NEXT() 
 	{
 		if (isEmpty())
-			return -1;
+			return "---";
 		
 		dim--;
-		int i = pFront.getInfo().getTicket();
+		String i = pFront.getInfo().getTicket();
 		
 		if(pFront == pRear)
 		{
@@ -50,9 +63,13 @@ public class queue
 		return i;
 	}
 
-	public void NEWENTRY(int ticket, ZonedDateTime zdt)
+	public void NEWENTRY(ZonedDateTime zdt)
 	{
-		Cliente clientE = new Cliente(ticket, zdt);
+		counter++;
+		if (counter > 99) {
+			counter = 0;
+		}
+		Cliente clientE = new Cliente(String.valueOf(service) + counter, zdt);
 		node<Cliente> pn = new node<Cliente>(clientE, null);
 		dim++;
 		

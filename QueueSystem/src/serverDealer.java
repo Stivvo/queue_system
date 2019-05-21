@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
 import java.time.ZoneId;
@@ -14,6 +14,7 @@ public class serverDealer extends Thread{
 	
 	private Socket sock;
 	private BufferedReader reader;
+	private PrintWriter pr;
 	
 	private queue[] q = new queue[3];
 	private Semaforo[] s = new Semaforo[3];
@@ -33,6 +34,7 @@ public class serverDealer extends Thread{
 		sock = socket;
 		InputStreamReader inp = new InputStreamReader(sock.getInputStream());
 		reader = new BufferedReader(inp);
+		pr = new PrintWriter(sock.getOutputStream());
 	}
 	
 	public int switchCar(String s)
@@ -74,8 +76,16 @@ public class serverDealer extends Thread{
 				{
 					System.out.println("pushhhh");
 					s[i].p();
-					q[i].NEWENTRY( Integer.parseInt(operate.substring(1)), ZonedDateTime.now(ZoneId.of("Europe/Paris")) );
+					q[i].NEWENTRY(ZonedDateTime.now(ZoneId.of("Europe/Paris")) );
 					LW[i].setText("" + q[i].getDim());
+					Cliente client = q[i].Rear();
+					
+					if (client != null) {
+						pr.println(client.getTicket());
+					} else {
+						pr.println("---");
+					}
+					pr.flush();
 					s[i].v();
 				}
 			}  catch (SocketException e) {
