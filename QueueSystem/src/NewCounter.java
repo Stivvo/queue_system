@@ -20,7 +20,6 @@ public class NewCounter extends Thread
 	private int[] nCounter = {0, 0, 0, 0};
 	//a position for the number of each type of sounter
 	
-	
 	private ServerSocket ss;
 
 	public static void main(String[] args) {
@@ -55,13 +54,8 @@ public class NewCounter extends Thread
 		else
 		{
 			String[] argh = { "" + temp.getType(), "" +temp.getNum() };
-			Counter.main(argh);
-			try {
-				temp.setSock(ss.accept());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			working.in(temp);
+			System.out.println("here");
+			Counter.main(argh, ss, temp, working);
 			nCounter[i]++;
 		}
 	}
@@ -94,8 +88,9 @@ public class NewCounter extends Thread
 			if (nCounter[i] >= 20) // nCounter[i] >= 20 is placeholder
 			{
 				t = sleeping.search(
-					String.valueOf("" + (i + 35)).charAt(0)
-				);
+						new infoCounter(
+							String.valueOf("" + (i + 35)).charAt(0), -1
+						), true, false);
 				
 				if (t.getNum() != -1)
 				{

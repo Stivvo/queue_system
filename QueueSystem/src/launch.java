@@ -2,7 +2,7 @@ public class launch
 {
 	public static void main(String[] args) 
 	{
-		runTests(); //uncomment if you don't want running tests
+		//runTests(); //uncomment if you don't want running tests
 		
 		String[] arg = {"a", "b"};
 		Semaforo s = new Semaforo(1);

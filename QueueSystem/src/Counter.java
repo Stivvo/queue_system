@@ -28,7 +28,7 @@ public class Counter extends Thread
 	public char getType() {return type;}
 	public String getNAme() {return name;}
 
-	public static void main(String[] args) 
+	public static void main(String[] args, ServerSocket ss, infoCounter temp, list l) 
 	{
 		/*
 		 * main args:
@@ -47,10 +47,21 @@ public class Counter extends Thread
 				try {
 					Counter window = new Counter(
 							args[0].charAt(0), 
-							Integer.valueOf(args[1]).intValue());
+							Integer.valueOf(args[1]).intValue()
+							);
+					System.out.println("hey");
+					try {
+						temp.setSock(ss.accept());
+						System.out.println("hoy");
+						l.in(temp);
+						System.out.println("huy");
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					
+					System.out.println("hee");
 					window.connectNewCounter();
 					window.frame.setVisible(true);
-					
 					window.connect();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,12 +70,41 @@ public class Counter extends Thread
 		});
 	}
 	
+	public Counter(char type, int num) 
+	throws UnknownHostException, IOException {
+		this.num = num;
+		this.type = type;
+		this.active = true;
+		
+		switch(this.type)
+		{
+		case 'A':
+			this.name = new String("Finance");
+			break;
+		case 'B':
+			this.name = new String("Comunication");
+			break;
+		case 'C':
+			this.name = new String("Package");
+			break;
+		case 'D':
+			this.name = new String("Multipurpose");
+			break;
+		default: 
+			this.name = new String("0");
+			break;
+		}//end switch Type
+		
+		System.out.println("COUNTER, Type: " + this.getType() + ", Num: " + this.getNum() + ", name: " + this.getNAme());
+		initialize();
+	}
+	
 	public void run()
 	{
 		String message = "";
 		
 		try {
-			message = reader.readLine();			
+			message = reader.readLine();
 		}
 		catch (IOException e) {
 			System.out.println("error reading message through BufferedReader");
@@ -91,55 +131,17 @@ public class Counter extends Thread
 		}
 	}
 	
-	public Counter(char type, int num) throws UnknownHostException, IOException {
-		
-		this.num = num;
-		this.type = type;
-		this.active = true;
-		
-		InputStreamReader inp = new InputStreamReader(s1.getInputStream());
-		reader = new BufferedReader(inp);
-		
-		switch(this.type)
-		{
-		case 'A':
-			this.name = new String("Finance");
-			break;
-		case 'B':
-			this.name = new String("Comunication");
-			break;
-		case 'C':
-			this.name = new String("Package");
-			break;
-		case 'D':
-			this.name = new String("Multipurpose");
-			break;
-		default: 
-			this.name = new String("0");
-			break;
-		}//end switch Type
-		
-		/*
-		 * NewCounter should comunicate with the server 
-		 * to establish if parameters are valid
-		 * when the users try to create a new counter
-		 */
-		//following two lines should be UNCOMMENTED when properly using the application
-		
-		System.out.println("COUNTER, Type: " + this.getType() + ", Num: " + this.getNum() + ", name: " + this.getName());
-		initialize();
-	}
-	
 	public void connect() throws UnknownHostException, IOException {
 		s = new Socket("localhost", 8045);
 		p = new PrintWriter(s.getOutputStream());
 	}
 	
-	
 	public void connectNewCounter() throws UnknownHostException, IOException {
 		s1 = new Socket("localhost", 8055);
-		
+		InputStreamReader inp = new InputStreamReader(s1.getInputStream());
+		reader = new BufferedReader(inp);
 	}
+	
 	private void stampa()
 	{
 		if (active)

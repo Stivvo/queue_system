@@ -73,7 +73,6 @@ public class list
 	{
 		node<infoCounter> pa = p;
 		infoCounter t = new infoCounter('0', -1);
-		//aggiustare il valore < con una differenza
 				
 		while (pa != null && (!pa.getInfo().cmp(n)))
 				pa = pa.getPtrNext();
@@ -90,13 +89,18 @@ public class list
 		return t;
 	}
 	
-	public infoCounter search(char types)
+	public infoCounter search(infoCounter n, Boolean types, Boolean numbers)
 	{
 		node<infoCounter> pa = p;
 		infoCounter t = new infoCounter('0', -1);
 	
-		while (pa != null && (pa.getInfo().getType() != types))
-				pa = pa.getPtrNext();
+		while (pa != null 
+				&& 
+				!(types && pa.getInfo().getType() == n.getType())
+				&&
+				!(numbers && pa.getInfo().getNum() == n.getNum())
+			)
+			pa = pa.getPtrNext();
 		
 		if (pa != null)
 			t = pa.getInfo();
