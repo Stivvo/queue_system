@@ -1,3 +1,4 @@
+import java.net.Socket;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
@@ -21,6 +22,21 @@ public class list
 	{
 		node<infoCounter> n = new node<infoCounter>(x, p);
 		p = n;
+	}
+	
+	public void setlast(Socket s) {
+		
+		if (!isEmpty()) {
+			node<infoCounter> top = p;
+			
+			while (top.getPtrNext() != null) {
+				top = top.getPtrNext();
+			}
+			
+			top.getInfo().setSock(s);
+			
+		}
+System.out.println("setted");		
 	}
 	
 	public infoCounter rm(infoCounter n)
@@ -47,6 +63,19 @@ public class list
 			}
 		}
 		return t;
+	}
+	
+	public Boolean search(int v) {
+		node <infoCounter> pa = p;
+		
+		while (pa != null && pa.getInfo().getNum() != v) {
+			pa = pa.getPtrNext();
+		}
+		
+		if (pa != null) 
+			return true;
+		
+		return false;
 	}
 	
 	public infoCounter search()
