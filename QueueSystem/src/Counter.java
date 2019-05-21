@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.net.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
@@ -11,13 +12,13 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.BorderLayout;
 
-public class Counter extends Thread
+public class Counter
 {
 	private JFrame frame;
 	private Socket s;
-	private Socket s1;
+	//private Socket s1;
 	private PrintWriter p;
-	private BufferedReader reader;
+	//private BufferedReader reader;
 	
 	private char type;
 	private int num;
@@ -28,7 +29,7 @@ public class Counter extends Thread
 	public char getType() {return type;}
 	public String getNAme() {return name;}
 
-	public static void main(String[] args) 
+	public static void main(String[] args) throws InvocationTargetException, InterruptedException 
 	{
 		/*
 		 * main args:
@@ -48,18 +49,20 @@ public class Counter extends Thread
 					Counter window = new Counter(
 							args[0].charAt(0), 
 							Integer.valueOf(args[1]).intValue());
-					window.connectNewCounter();
-					window.frame.setVisible(true);
 					
+					window.frame.setVisible(true);
 					window.connect();
+					System.out.println("MAIN sportelloAvanzato");
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+	
 	}
 	
-	public void run()
+	/*public void run()
 	{
 		String message = "";
 		
@@ -89,16 +92,13 @@ public class Counter extends Thread
 				}
 			}
 		}
-	}
+	}*/
 	
-	public Counter(char type, int num) throws UnknownHostException, IOException {
+	public Counter(char type, int num) {
 		
 		this.num = num;
 		this.type = type;
 		this.active = true;
-		
-		InputStreamReader inp = new InputStreamReader(s1.getInputStream());
-		reader = new BufferedReader(inp);
 		
 		switch(this.type)
 		{
@@ -126,18 +126,35 @@ public class Counter extends Thread
 		 */
 		//following two lines should be UNCOMMENTED when properly using the application
 		
-		System.out.println("COUNTER, Type: " + this.getType() + ", Num: " + this.getNum() + ", name: " + this.getName());
-		initialize();
+		System.out.println("COUNTER, Type: " + this.getType() + ", Num: " + this.getNum() );
+		try {
+			initialize();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		frame.setVisible(true);
+		
+		
 	}
 	
 	public void connect() throws UnknownHostException, IOException {
 		s = new Socket("localhost", 8045);
 		p = new PrintWriter(s.getOutputStream());
+		
 	}
 	
 	
 	public void connectNewCounter() throws UnknownHostException, IOException {
-		s1 = new Socket("localhost", 8055);
+		/*s1 = new Socket("localhost", 8055);
+
+		
+		InputStreamReader inp = new InputStreamReader(s1.getInputStream());
+		reader = new BufferedReader(inp);*/
 		
 	}
 	private void stampa()
@@ -151,7 +168,7 @@ public class Counter extends Thread
 	
 	private void initialize() throws UnknownHostException, IOException {
 		frame = new JFrame();
-		frame.setTitle("Counter " + this.getNum() + " " + this.getName());
+		frame.setTitle("Counter " + this.getNum() + " " );
 		
 		frame.addWindowListener(new WindowAdapter() {
 			@Override

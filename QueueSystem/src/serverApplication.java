@@ -17,9 +17,15 @@ public class serverApplication {
 	private JLabel[] lblCounter;	
 	private JLabel[] lblWaiting;
 
+	private list working;
+	private list sleeping;
+	private Semaforo mutexList;
+	private int[] nCounter = {0, 0, 0, 0};
+	//a position for the number of each type of sounter
 	
 	private dealerConnector thDealerConnect;
 	private counterConnector thCounterConnect;
+	private counterCreatorConnector thCounterCreatorConnect;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -36,6 +42,9 @@ public class serverApplication {
 
 	public serverApplication() throws IOException 
 	{
+		working = new list();
+		sleeping = new list();
+		mutexList = new Semaforo(1);
 		lblService = new JLabel[3];
 		lblCounter = new JLabel[3];
 		lblWaiting = new JLabel[3];
@@ -51,6 +60,7 @@ public class serverApplication {
 		
 		thDealerConnect = new dealerConnector(q, s, lblWaiting);
 		thCounterConnect = new counterConnector(q, s, lblService, lblCounter, lblWaiting);
+		thCounterCreatorConnect = new counterCreatorConnector(working, sleeping, mutexList);
 		
 		JLabel lblAssisting = new JLabel("Assisting");
 		lblAssisting.setHorizontalAlignment(SwingConstants.CENTER);
@@ -70,7 +80,7 @@ public class serverApplication {
 		
 		thDealerConnect.start();
 		thCounterConnect.start();
-		
+		thCounterCreatorConnect.start();
 	}
 
 	private void initialize() 

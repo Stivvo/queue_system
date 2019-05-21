@@ -1,33 +1,36 @@
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ServerSocket;
-
+import java.lang.reflect.InvocationTargetException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 
+
 public class NewCounter extends Thread
 {
 	private JFrame frame;
-	private list working;
-	private list sleeping;
-	
-	private int[] nCounter = {0, 0, 0, 0};
-	//a position for the number of each type of sounter
+	private Socket sock;
+	private PrintWriter writer;
+	private BufferedReader read;
 	
 	
-	private ServerSocket ss;
+	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {public void run() {
 				try {
 					NewCounter window = new NewCounter();
 					window.frame.setVisible(true);
+					window.connect();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -37,8 +40,6 @@ public class NewCounter extends Thread
 
 	public NewCounter() {
 		initialize();
-		working = new list();
-		sleeping = new list();
 		connect();
 	}
 
@@ -48,25 +49,41 @@ public class NewCounter extends Thread
 				(c, 
 				Integer.valueOf(s.getValue().toString().toString()).intValue()
 				);
-		int i = temp.getType() - 65;
 		
-		if (nCounter[i] > 1 && working.search(temp, false).getNum() == -1)
-			System.out.println(temp.print() + " already used");
-		else
-		{
+		
+
+		
+		writer.println(c+  "" +temp.getNum() );
+		writer.flush();
+		System.out.println(c+  "" +temp.getNum() );
+		
+		String readed = "";
+		try {
+			readed = read.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (readed.compareTo("ok") == 0) {
+			System.out.println("I enter");
 			String[] argh = { "" + temp.getType(), "" +temp.getNum() };
-			Counter.main(argh);
 			try {
-				temp.setSock(ss.accept());
-			} catch (IOException e) {
+				Counter.main(argh);
+			} catch (InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			working.in(temp);
-			nCounter[i]++;
-		}
+			
+		} 
+			System.out.println(readed);
+		
 	}
 	
-	public void run () 
+	/*public void run () 
 	{
 		infoCounter t;
 		int i = 0;
@@ -116,12 +133,17 @@ public class NewCounter extends Thread
 				
 			i = (i + 1) % 4;
 		}
-	}
+	}*/
 	
 	public void connect() 
 	{
 		try {
-			ss = new ServerSocket(8055);
+			sock = new Socket("localhost", 8055);
+			writer = new PrintWriter(sock.getOutputStream());
+			read = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -139,14 +161,20 @@ public class NewCounter extends Thread
 		frame.getContentPane().add(spinner);
 		
 		JButton btnFinance = new JButton("Finance");
+		
 		btnFinance.setBounds(276, 130, 150, 27);
 		frame.getContentPane().add(btnFinance);
 		
 		btnFinance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				createCounter('A', spinner);
+				
 			}
+			
+			
 		});
+		
+		
 		
 		JButton btnComunication = new JButton("Comunication");
 		btnComunication.setBounds(276, 90, 150, 27);
@@ -155,6 +183,7 @@ public class NewCounter extends Thread
 		btnComunication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				createCounter('B', spinner);
+				
 			}
 		});
 		
@@ -165,6 +194,7 @@ public class NewCounter extends Thread
 		btnPackage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				createCounter('C', spinner);
+				
 			}
 		});
 		
@@ -175,6 +205,7 @@ public class NewCounter extends Thread
 		btnPolifunzione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				createCounter('D', spinner);
+
 			}
 		});
 		
