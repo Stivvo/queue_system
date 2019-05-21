@@ -22,8 +22,6 @@ public class NewCounter extends Thread
 	private PrintWriter writer;
 	private BufferedReader read;
 	
-	
-	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {public void run() {
@@ -68,6 +66,7 @@ public class NewCounter extends Thread
 		if (readed.compareTo("ok") == 0) {
 			System.out.println("I enter");
 			String[] argh = { "" + temp.getType(), "" +temp.getNum() };
+
 			try {
 				Counter.main(argh);
 			} catch (InvocationTargetException e) {
@@ -111,8 +110,9 @@ public class NewCounter extends Thread
 			if (nCounter[i] >= 20) // nCounter[i] >= 20 is placeholder
 			{
 				t = sleeping.search(
-					String.valueOf("" + (i + 35)).charAt(0)
-				);
+						new infoCounter(
+							String.valueOf("" + (i + 35)).charAt(0), -1
+						), true, false);
 				
 				if (t.getNum() != -1)
 				{

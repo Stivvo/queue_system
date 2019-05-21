@@ -67,7 +67,7 @@ public class Counter
 		String message = "";
 		
 		try {
-			message = reader.readLine();			
+			message = reader.readLine();
 		}
 		catch (IOException e) {
 			System.out.println("error reading message through BufferedReader");
@@ -94,6 +94,7 @@ public class Counter
 		}
 	}*/
 	
+
 	public Counter(char type, int num) {
 		
 		this.num = num;
@@ -141,15 +142,15 @@ public class Counter
 		
 		
 	}
-	
+
 	public void connect() throws UnknownHostException, IOException {
 		s = new Socket("localhost", 8045);
 		p = new PrintWriter(s.getOutputStream());
 		
 	}
 	
-	
 	public void connectNewCounter() throws UnknownHostException, IOException {
+
 		/*s1 = new Socket("localhost", 8055);
 
 		
@@ -157,6 +158,7 @@ public class Counter
 		reader = new BufferedReader(inp);*/
 		
 	}
+	
 	private void stampa()
 	{
 		if (active)
