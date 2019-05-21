@@ -146,6 +146,8 @@ public class Counter
 	public void connect() throws UnknownHostException, IOException {
 		s = new Socket("localhost", 8045);
 		p = new PrintWriter(s.getOutputStream());
+		p.println(type+""+num);
+		p.flush();
 		
 	}
 	
