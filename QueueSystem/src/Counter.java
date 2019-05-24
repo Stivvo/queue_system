@@ -16,9 +16,7 @@ public class Counter
 {
 	private JFrame frame;
 	private Socket s;
-	//private Socket s1;
 	private PrintWriter p;
-	//private BufferedReader reader;
 	
 	private char type;
 	private int num;
@@ -62,39 +60,6 @@ public class Counter
 	
 	}
 	
-	/*public void run()
-	{
-		String message = "";
-		
-		try {
-			message = reader.readLine();
-		}
-		catch (IOException e) {
-			System.out.println("error reading message through BufferedReader");
-		}
-		while (true)
-		{
-			if (
-				Integer.valueOf(
-					message.substring(1, message.length())
-				).intValue() == this.getNum()
-			)
-			{
-				if (message.charAt(0) == 'd')
-				{
-					active = false;
-					frame.setTitle(frame.getTitle() + " (UNACTIVE)");
-				}
-				else if (message.charAt(0) == 'i')
-				{
-					active = true;
-					frame.setTitle("Counter " + this.getNum() + " " + this.getName());
-				}
-			}
-		}
-	}*/
-	
-
 	public Counter(char type, int num) {
 		
 		this.num = num;
@@ -127,7 +92,8 @@ public class Counter
 		 */
 		//following two lines should be UNCOMMENTED when properly using the application
 		
-		System.out.println("COUNTER, Type: " + this.getType() + ", Num: " + this.getNum() );
+		System.out.println("COUNTER, Type: " + 
+				this.getType() + ", Num: " + this.getNum());
 		try {
 			initialize();
 		} catch (UnknownHostException e) {
@@ -137,10 +103,7 @@ public class Counter
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		frame.setVisible(true);
-		
-		
 	}
 
 	public void connect() throws UnknownHostException, IOException {
@@ -148,17 +111,6 @@ public class Counter
 		p = new PrintWriter(s.getOutputStream());
 		p.println(type+""+num);
 		p.flush();
-		
-	}
-	
-	public void connectNewCounter() throws UnknownHostException, IOException {
-
-		/*s1 = new Socket("localhost", 8055);
-
-		
-		InputStreamReader inp = new InputStreamReader(s1.getInputStream());
-		reader = new BufferedReader(inp);*/
-		
 	}
 	
 	private void stampa()
@@ -172,7 +124,7 @@ public class Counter
 	
 	private void initialize() throws UnknownHostException, IOException {
 		frame = new JFrame();
-		frame.setTitle("Counter " + this.getNum() + " " );
+		frame.setTitle("Counter " + this.getNAme() + " " + this.getNum());
 		
 		frame.addWindowListener(new WindowAdapter() {
 			@Override

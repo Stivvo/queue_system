@@ -8,12 +8,10 @@ import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
-
 
 public class NewCounter extends Thread
 {
@@ -21,7 +19,6 @@ public class NewCounter extends Thread
 	private Socket sock;
 	private PrintWriter writer;
 	private BufferedReader read;
-	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {public void run() {
@@ -43,13 +40,8 @@ public class NewCounter extends Thread
 
 	public void createCounter(char c, JSpinner s)
 	{
-		infoCounter temp = new infoCounter
-				(c, 
-				Integer.valueOf(s.getValue().toString().toString()).intValue()
-				);
-		
-		
-
+		infoCounter temp = new infoCounter(c, 
+			Integer.valueOf(s.getValue().toString().toString()).intValue());
 		
 		writer.println(c+  "" +temp.getNum() );
 		writer.flush();
@@ -76,64 +68,9 @@ public class NewCounter extends Thread
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-		} 
-			System.out.println(readed);
-		
-	}
-	
-	/*public void run () 
-	{
-		infoCounter t;
-		int i = 0;
-		
-		while (true)
-		{ //Searches for inactive queue and eventually removes them
-			t = working.search();
-			PrintWriter p;
-			
-			if (t.getNum() != -1)
-			{
-				try {
-					p = new PrintWriter(t.getSocket().getOutputStream());
-					sleeping.in(t);
-					working.rm(t);
-					p.print("d" + t.getNum());
-					p.flush();
-					nCounter[Integer.valueOf(t.getType() + "") - 65]--;
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-
-			if (nCounter[i] >= 20) // nCounter[i] >= 20 is placeholder
-			{
-				t = sleeping.search(
-						new infoCounter(
-							String.valueOf("" + (i + 35)).charAt(0), -1
-						), true, false);
-				
-				if (t.getNum() != -1)
-				{
-					try {
-						p = new PrintWriter(t.getSocket().getOutputStream());
-						sleeping.rm(t);
-						working.in(t);
-						p.print("i" + t.getNum());
-						p.flush();
-						nCounter[Integer.valueOf(t.getType() + "") - 65]++;						
-					}catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}  
-				}
-				
-			}
-				
-			i = (i + 1) % 4;
 		}
-	}*/
+		System.out.println(readed);
+	}
 	
 	public void connect() 
 	{
@@ -168,13 +105,8 @@ public class NewCounter extends Thread
 		btnFinance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				createCounter('A', spinner);
-				
 			}
-			
-			
 		});
-		
-		
 		
 		JButton btnComunication = new JButton("Comunication");
 		btnComunication.setBounds(276, 90, 150, 27);
@@ -193,8 +125,7 @@ public class NewCounter extends Thread
 		
 		btnPackage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				createCounter('C', spinner);
-				
+				createCounter('C', spinner);	
 			}
 		});
 		
@@ -205,7 +136,6 @@ public class NewCounter extends Thread
 		btnPolifunzione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				createCounter('D', spinner);
-
 			}
 		});
 		

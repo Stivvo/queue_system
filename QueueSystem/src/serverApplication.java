@@ -26,7 +26,8 @@ public class serverApplication {
 	private dealerConnector thDealerConnect;
 	private counterConnector thCounterConnect;
 	private counterCreatorConnector thCounterCreatorConnect;
-
+	private counterSleeper sleeper;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -42,12 +43,14 @@ public class serverApplication {
 
 	public serverApplication() throws IOException 
 	{
+		
 		working = new list();
 		sleeping = new list();
 		mutexList = new Semaforo(1);
 		lblService = new JLabel[3];
 		lblCounter = new JLabel[3];
 		lblWaiting = new JLabel[3];
+		sleeper = new counterSleeper(working, sleeping, nCounter, mutexList);
 		initialize();
 		q = new queue[3];
 		s = new Semaforo[3];

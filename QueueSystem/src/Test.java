@@ -61,8 +61,7 @@ public class Test
 		
 		for (i = 0; i < a.length; i++)
 		{
-			if (l.search(
-					new infoCounter('A', i), false, true
+			if (l.search(i
 				).getNum() == -1)
 			{
 				System.out.println(

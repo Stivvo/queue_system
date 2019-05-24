@@ -36,7 +36,7 @@ public class list
 			top.getInfo().setSock(s);
 			
 		}
-System.out.println("setted");		
+		System.out.println("setted");
 	}
 	
 	public infoCounter rm(infoCounter n)
@@ -65,20 +65,7 @@ System.out.println("setted");
 		return t;
 	}
 	
-	public Boolean search(int v) {
-		node <infoCounter> pa = p;
-		
-		while (pa != null && pa.getInfo().getNum() != v) {
-			pa = pa.getPtrNext();
-		}
-		
-		if (pa != null) 
-			return true;
-		
-		return false;
-	}
-	
-	public infoCounter search()
+	public infoCounter search() //searches for unactive counters
 	{
 		node<infoCounter> pa = p;
 		infoCounter t = new infoCounter('0', -1);
@@ -98,7 +85,7 @@ System.out.println("setted");
 		return t;
 	}
 	
-	public infoCounter search(infoCounter n, Boolean update)
+	public infoCounter search(infoCounter n, Boolean update) //searchs for both numbers and types
 	{
 		node<infoCounter> pa = p;
 		infoCounter t = new infoCounter('0', -1);
@@ -118,17 +105,28 @@ System.out.println("setted");
 		return t;
 	}
 	
-	public infoCounter search(infoCounter n, Boolean types, Boolean numbers)
+	public infoCounter search(int n) //searchs for numbers
 	{
 		node<infoCounter> pa = p;
 		infoCounter t = new infoCounter('0', -1);
 	
-		while (pa != null 
-				&& 
-				!(types && pa.getInfo().getType() == n.getType())
-				&&
-				!(numbers && pa.getInfo().getNum() == n.getNum())
-			)
+		while (pa != null &&
+				pa.getInfo().getNum() != n)
+			pa = pa.getPtrNext();
+		
+		if (pa != null)
+			t = pa.getInfo();
+		
+		return t;
+	}
+	
+	public infoCounter search(char c) //searchs for types
+	{
+		node<infoCounter> pa = p;
+		infoCounter t = new infoCounter('0', -1);
+	
+		while (pa != null &&
+				pa.getInfo().getType() != c)
 			pa = pa.getPtrNext();
 		
 		if (pa != null)

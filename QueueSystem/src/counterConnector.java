@@ -5,7 +5,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.ZonedDateTime;
 import java.util.TimeZone;
-
 import javax.swing.JLabel;
 
 public class counterConnector extends Thread{
@@ -50,13 +49,9 @@ public class counterConnector extends Thread{
 				 
 				 nCounter[t]++;
 				 
-				 System.out.println("readed.charAt: " + readed.charAt(0));
-				 System.out.println("readed.charAt: " + readed.charAt(0));
-				 
-				 ZonedDateTime.now(TimeZone.getTimeZone("Europe/Paris"));
-				 a.toInstant();
-				 
-				 System.out.println( + " " + Integer.parseInt(readed.substring(0)));
+				 System.out.println(
+					"readed.charAt: " + readed.charAt(0) + 
+				 	"readed.substring(0): " + readed.substring(0));
 				 infoCounter counter = new infoCounter(readed.charAt(0), Integer.parseInt(readed.substring(0)), ZonedDateTime.now(), sock);
 				
 				 mutexL.p();
