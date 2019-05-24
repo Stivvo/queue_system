@@ -58,7 +58,6 @@ public class serverApplication {
 		
 		for (int i = 0; i < 3; i++)
 		{
-			
 			s[i] = new Semaforo(1);
 		}
 		
