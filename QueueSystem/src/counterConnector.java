@@ -17,7 +17,6 @@ public class counterConnector extends Thread{
 	private list working;
 	private Semaforo mutexL;
 	private int[] nCounter;
-	private Semaforo mutexC;
 	
 	public counterConnector(
 			queue[] q1, Semaforo[] s1, JLabel[] LS, JLabel[] LC, JLabel[] LW,
@@ -32,7 +31,6 @@ public class counterConnector extends Thread{
 		this.LW = LW;
 		this.working = working;
 		this.nCounter = nCounter;
-		this.mutexC = mutexC;
 		ss = new ServerSocket(8045);
 	}
 	
@@ -49,9 +47,7 @@ public class counterConnector extends Thread{
 				 
 				 int t =  readed.charAt(0) - 65;
 				 
-				 mutexC.p();
 				 nCounter[t]++;
-				 mutexC.v();
 				 
 				 infoCounter counter = new infoCounter(readed.charAt(0), Integer.parseInt(readed.substring(0)), ZonedDateTime.now(), sock);
 				
