@@ -49,7 +49,7 @@ public class counterConnector extends Thread{
 				 
 				 nCounter[t]++;
 				 
-				 infoCounter counter = new infoCounter(readed.charAt(0), Integer.parseInt(readed.substring(0)), ZonedDateTime.now(), sock);
+				 infoCounter counter = new infoCounter(readed.charAt(0), Integer.parseInt(readed.substring(1)), ZonedDateTime.now(), sock);
 				
 				 mutexL.p();
 				 working.in(counter);
