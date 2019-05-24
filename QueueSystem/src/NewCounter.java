@@ -48,9 +48,6 @@ public class NewCounter extends Thread
 				Integer.valueOf(s.getValue().toString().toString()).intValue()
 				);
 		
-		
-
-		
 		writer.println(c+  "" +temp.getNum() );
 		writer.flush();
 		System.out.println(c+  "" +temp.getNum() );
@@ -81,8 +78,6 @@ public class NewCounter extends Thread
 			System.out.println(readed);
 		
 	}
-	
-	
 	
 	public void connect() 
 	{
