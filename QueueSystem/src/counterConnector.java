@@ -18,8 +18,10 @@ public class counterConnector extends Thread{
 	private Semaforo mutexL;
 	private int[] nCounter;
 	private Semaforo mutexC;
-	public counterConnector(queue[] q1, Semaforo[] s1, JLabel[] LS, JLabel[] LC, JLabel[] LW,
-							list working, Semaforo mutexL, int[] nCounter, Semaforo mutexC) 
+	
+	public counterConnector(
+			queue[] q1, Semaforo[] s1, JLabel[] LS, JLabel[] LC, JLabel[] LW,
+			list working, Semaforo mutexL, int[] nCounter)
 			throws IOException {
 		super();
 		setName("counterConnector");

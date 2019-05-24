@@ -63,7 +63,7 @@ public class serverApplication {
 		}
 		
 		thDealerConnect = new dealerConnector(q, s, lblWaiting);
-		thCounterConnect = new counterConnector(q, s, lblService, lblCounter, lblWaiting);
+		thCounterConnect = new counterConnector(q, s, lblService, lblCounter, lblWaiting, working, mutexList, nCounter);
 		thCounterCreatorConnect = new counterCreatorConnector(working, sleeping, mutexList);
 		
 		JLabel lblAssisting = new JLabel("Assisting");
