@@ -51,7 +51,6 @@ public class NewCounter extends Thread
 		try {
 			readed = read.readLine();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -62,10 +61,8 @@ public class NewCounter extends Thread
 			try {
 				Counter.main(argh);
 			} catch (InvocationTargetException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -79,10 +76,8 @@ public class NewCounter extends Thread
 			writer = new PrintWriter(sock.getOutputStream());
 			read = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -105,8 +100,7 @@ public class NewCounter extends Thread
 		btnFinance.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				createCounter('A', spinner);
-			}
-		});
+			}});
 		
 		JButton btnComunication = new JButton("Comunication");
 		btnComunication.setBounds(276, 90, 150, 27);
@@ -115,9 +109,7 @@ public class NewCounter extends Thread
 		btnComunication.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				createCounter('B', spinner);
-				
-			}
-		});
+			}});
 		
 		JButton btnPackage = new JButton("Package");
 		btnPackage.setBounds(276, 169, 150, 27);
@@ -126,8 +118,7 @@ public class NewCounter extends Thread
 		btnPackage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				createCounter('C', spinner);	
-			}
-		});
+			}});
 		
 		JButton btnPolifunzione = new JButton("Multipurpose");
 		btnPolifunzione.setBounds(276, 51, 150, 27);
@@ -136,12 +127,10 @@ public class NewCounter extends Thread
 		btnPolifunzione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				createCounter('D', spinner);
-			}
-		});
+			}});
 		
 		JLabel lblNumeroSportello = new JLabel("Counter number");
 		lblNumeroSportello.setBounds(41, 56, 150, 17);
 		frame.getContentPane().add(lblNumeroSportello);
-		
 	}
 }
