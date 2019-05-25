@@ -87,6 +87,7 @@ public class serverApplication {
 		thDealerConnect.start();
 		thCounterConnect.start();
 		thCounterCreatorConnect.start();
+		sleeper.start();
 	}
 
 	private void initialize() 

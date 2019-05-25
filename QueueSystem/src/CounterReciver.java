@@ -53,6 +53,10 @@ public class CounterReciver extends Thread{
 					active = true;
 					F.setTitle(F.getTitle().substring(0, F.getTitle().indexOf(off)));
 				}
+				if (active)
+					System.out.println("ATTIVA");
+				else
+					System.out.println("DISATTIVA");
 			}
 		}
 	}

@@ -4,7 +4,6 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.ZonedDateTime;
-import java.util.TimeZone;
 import javax.swing.JLabel;
 
 public class counterConnector extends Thread{
@@ -29,6 +28,7 @@ public class counterConnector extends Thread{
 		this.LS = LS;
 		this.LC = LC;
 		this.LW = LW;
+		this.mutexL = mutexL;
 		this.working = working;
 		this.nCounter = nCounter;
 		ss = new ServerSocket(8045);
@@ -52,7 +52,7 @@ public class counterConnector extends Thread{
 				 System.out.println(
 					"readed.charAt: " + readed.charAt(0) + 
 				 	"readed.substring(0): " + readed.substring(0));
-				 infoCounter counter = new infoCounter(readed.charAt(0), Integer.parseInt(readed.substring(0)), ZonedDateTime.now(), sock);
+				 infoCounter counter = new infoCounter(readed.charAt(0), Integer.parseInt(readed.substring(1)), ZonedDateTime.now(), sock);
 				
 				 mutexL.p();
 				 working.in(counter);
