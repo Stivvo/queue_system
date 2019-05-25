@@ -15,7 +15,6 @@ public class counterCreatorConnector extends Thread{
 		ss = new ServerSocket(8055);
 	}
 	
-	
 	public void run() {
 		for(;;) {
 			serverCounterOpener thSOpener;
@@ -25,7 +24,6 @@ public class counterCreatorConnector extends Thread{
 				 thSOpener = new serverCounterOpener(sock, working, sleeping, mutexList);
 				 thSOpener.start();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

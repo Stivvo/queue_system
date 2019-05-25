@@ -26,7 +26,6 @@ public class serverCounterOpener extends Thread
 			write = new PrintWriter(s.getOutputStream());
 			read = new BufferedReader(new InputStreamReader(s.getInputStream()));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 	}
@@ -38,7 +37,6 @@ public class serverCounterOpener extends Thread
 			try {
 				 toRead = read.readLine();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}		
 			infoCounter inf = new infoCounter(toRead.charAt(0),  Integer.parseInt(toRead.substring(1)));

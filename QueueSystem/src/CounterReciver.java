@@ -13,7 +13,6 @@ public class CounterReciver extends Thread{
 	private Socket s1;
 	private int id;
 	
-	
 	public CounterReciver(Boolean a, Frame f, int n) {
 		this.active = a;
 		this.F = f;

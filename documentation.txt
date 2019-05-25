@@ -1,0 +1,49 @@
+--- classi base ---
+
+Cliente: numero del ticket + data ritirato dal cliente
+
+infoCounter: informazioni di uno sportello (tipo, numero, data ultimo servizio, socket)
+
+node: classe nodo utilizzata come nodo di infoCounter o Cliente
+
+queue: coda di nodi Cliente
+
+list: lista di nodi infoCounter
+
+Test: contiene metodi per il test automatico delle strutture dati
+
+Semaforo: classe semaforo custom
+
+launch: lancia nell'ordine corretto tutte le finestre per il funzionamento del programma
+
+--- grafiche ---
+
+Counter: sportello, contiene un bottone per mandare avanti una coda
+
+Dealer: distributore di ticket
+
+serverApplication: tabellone con le informazioni delle code che avanzano
+
+NewCounter: serve per creare nuovi sportelli
+
+--- thread ---
+
+counterReciver: legge i messaggi di counterSleeper e attiva o disattiva uno sportello
+
+countreSleeper: controlla per sportelli inattivi da sospendere o, eventualmente, li riattiva
+
+serverCounter: manda avanti le code su segnale di un Counter e gestisce cosa devono fare i polifunzionali
+
+serverCounterOpener: controlla se lo sportello che NewCounter vuole aprire ha un numero già utilizzato, quindi dà via libera o no
+
+serverDealer: su richiesta di Dealer, aggiunge clienti in una determinata coda
+
+--- connettori ---
+
+counterConnector: ???
+
+counterCreatorConnector: connette un serverCounterOpener
+
+dealerConnector: connette un serverDealer
+
+

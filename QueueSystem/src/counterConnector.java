@@ -60,7 +60,6 @@ public class counterConnector extends Thread{
 				 
 				 thSCounter.start();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
