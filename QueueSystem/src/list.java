@@ -43,7 +43,7 @@ public class list
 	{
 		infoCounter t = new infoCounter('0', -1);
 		
-		if (p.getInfo().cmp(n))
+		if (p.getInfo().eq(n))
 		{
 			t = p.getInfo();
 			p = p.getPtrNext();
@@ -53,7 +53,7 @@ public class list
 			node<infoCounter> pa = p;
 			
 			while (pa.getPtrNext() != null && 
-					!pa.getPtrNext().getInfo().cmp(n))
+					!pa.getPtrNext().getInfo().eq(n))
 					pa = pa.getPtrNext();
 			
 			if (pa.getPtrNext() != null)
@@ -90,7 +90,7 @@ public class list
 		node<infoCounter> pa = p;
 		infoCounter t = new infoCounter('0', -1);
 				
-		while (pa != null && (!pa.getInfo().cmp(n)))
+		while (pa != null && (!pa.getInfo().eq(n)))
 				pa = pa.getPtrNext();
 		
 		if (pa != null)
@@ -133,6 +133,16 @@ public class list
 			t = pa.getInfo();
 		
 		return t;
+	}
+	
+	public void stampa()
+	{
+		node<infoCounter> pa = p;
+		while (pa != null)
+		{
+			System.out.println(pa.getInfo().getType() + ", " + pa.getInfo().getNum());
+			pa = pa.getPtrNext();
+		}
 	}
 	
 }

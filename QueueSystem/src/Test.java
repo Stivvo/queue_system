@@ -9,11 +9,10 @@ public class Test
 	private int i = 0;
 	private infoCounter temp;
 	int len = 4;
-	int[] a = {4, 8, 9, 10};
 	
 	public void tQueue()
 	{
-		queue q = new queue('A');
+		/*queue q = new queue('A');
 		
 		for (i = 0; i < len; i++)
 		{
@@ -32,61 +31,48 @@ public class Test
 		{
 			System.out.println(q.front().getInfo().getTicket() + 
 					", " + q.front().getInfo().getT().getEpochSecond());
-		}
+		}*/
 			
 	}
 	
 	public boolean tList()
 	{
 		list l = new list();
+		int[] a = {4, 8, 9, 10};
+		infoCounter temp;
 
 		for (i = 0; i < a.length; i++)
 		{
 			System.out.println(a[i] + " inserted");
-			temp = new infoCounter(String.valueOf("" + (65 + i)).charAt(0), a[i]);
+			temp = new infoCounter((char)(65 + i), a[i]);
 			l.in(temp);
 		}
 		
-		for (i = 0; i < a.length; i++)
-		{
-			temp = new infoCounter(String.valueOf("" + (65 + i)).charAt(0), a[i]);
-			
-			if (l.search(temp, false).getNum() == -1)
-			{
-				System.out.println(
-						"search: " + a[i] + " not found");
+		System.out.println("stampa...");
+		l.stampa();
+		
+		for (i = 0; i < a.length; i++) {
+			if (l.search(a[i]).getNum() == -1) {
+				System.out.println("number " + a[i] + " not found");
 				return false;
 			}
 		}
 		
-		for (i = 0; i < a.length; i++)
-		{
-			if (l.search(i
-				).getNum() == -1)
-			{
-				System.out.println(
-						"search: " + String.valueOf("" + (65 + i)).charAt(0) + " not found");
+		for (i = 0; i < a.length; i++) {
+			if (l.search((char)(65 + i)).getNum() == -1) {
+				System.out.println("letter " + i + " not found");
 				return false;
 			}
 		}
 		
-		for (i = 0; i < a.length; i++)
-		{
-			temp = new infoCounter(String.valueOf("" + (65 + i)).charAt(0), a[i]);
-			
-			if (l.rm(temp).getNum() == -1)
-			{
-				System.out.println(
-						"rm: " + a[i] + " not found");
+		for (i = 0; i < a.length; i++) {
+			temp = new infoCounter((char)(65 + i), a[i]);
+			if (l.search(temp, false).getNum() == -1) {
+				System.out.println(temp.getType() + ", " + temp.getNum() + " not found");
 				return false;
 			}
 		}
 		
-		if (!l.isEmpty())
-		{
-			System.out.println("list is not empty");
-			return false;
-		}
 		return true;
 	}
 }

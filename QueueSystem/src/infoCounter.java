@@ -36,7 +36,7 @@ public class infoCounter
 		return (type + " " + num);
 	}
 	
-	public Boolean cmp(infoCounter x)
+	public Boolean eq(infoCounter x)
 	{
 		if (this.type == x.type && 
 				this.num == x.num)
