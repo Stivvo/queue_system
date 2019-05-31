@@ -39,7 +39,9 @@ public class serverCounterOpener extends Thread
 			} catch (IOException e) {
 				e.printStackTrace();
 			}		
-			infoCounter inf = new infoCounter(toRead.charAt(0),  Integer.parseInt(toRead.substring(1)));
+			infoCounter inf = new infoCounter(
+				toRead.charAt(0),
+				Integer.valueOf(toRead.substring(1)).intValue());
 		
 			mutexL.p();
 			
