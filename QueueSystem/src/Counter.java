@@ -57,7 +57,6 @@ public class Counter
 				}
 			}
 		});
-	
 	}
 	
 	public Counter(char type, int num) {
@@ -97,10 +96,8 @@ public class Counter
 		try {
 			initialize();
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		frame.setVisible(true);
@@ -136,7 +133,7 @@ public class Counter
 				}
 			}
 		});
-		frame.setBounds(100, 100, 450, 350);
+		frame.setBounds(100, 100, 280, 190);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton btn = new JButton("New button");
