@@ -114,7 +114,8 @@ public class Counter
 	{
 		if (active)
 		{
-			p.print(this.getType());
+			p.println("" + this.getType() + "" + this.getNum());
+			System.out.println("printing: " + this.getType() + "" + this.getNum());
 			p.flush();
 		}
 	}

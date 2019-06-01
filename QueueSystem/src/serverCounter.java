@@ -18,11 +18,12 @@ public class serverCounter extends Thread {
 	private JLabel LS[] = new JLabel[3];
 	private JLabel LC[] = new JLabel[3];
 	private JLabel LW[] = new JLabel[3];
+	private list working = new list();
 	
 	private int i;
 	
 	public serverCounter(queue[] q1, Semaforo[] s1, JLabel[] LS,
-						JLabel[] LC,JLabel[] LW, Socket socket) throws IOException 
+						JLabel[] LC,JLabel[] LW, Socket socket, list working) throws IOException 
 	{
 		super();
 		q = q1;
@@ -30,6 +31,7 @@ public class serverCounter extends Thread {
 		this.LS = LS;
 		this.LC = LC;
 		this.LW = LW;
+		this.working = working;
 		sock = socket;
 		InputStreamReader inp = new InputStreamReader(sock.getInputStream());
 		reader = new BufferedReader(inp);
@@ -102,14 +104,16 @@ public class serverCounter extends Thread {
 	
 	public void run()  
 	{
-		int operate = 0;
-		int i = 0, j = 0;
+		String operate = "";
+		int i = 0, /*i diventa il tipo di sportello*/j = 0;
 		int flag = 0;
+		int sub = 0; //numero di sportello
 		
 		while (true) 
 		{
 			try {
-				operate = reader.read();
+				operate = reader.readLine();
+				System.out.println("operate: " + operate);
 			} catch (SocketException e) {
 				try {
 					sock.close();
@@ -124,8 +128,10 @@ public class serverCounter extends Thread {
 			if (flag == 1)
 				break;
 			
-			i = operate - 65;
-			System.out.println("i = " + i);
+			i = ((int)operate.charAt(0)) - 65;
+			sub = Integer.valueOf(operate.substring(1)).intValue();
+			
+			System.out.println("i = " + i + " sub: " + sub);
 			
 			if (i == 3 || i == 4)
 			{
@@ -140,15 +146,24 @@ public class serverCounter extends Thread {
 			else
 				j = i;
 			
-			if (i >= 0 && i < 4)
+			if (i >= 0 && i <= 4)
 			{					
 				s[j].p();
 				
 				if (!q[j].isEmpty())
 				{
+					System.out.println("ready to NEXT");
+					
 					LS[j].setText("" + q[j].NEXT());
 					LC[j].setText("" + (i+1));
 					LW[j].setText("" + q[j].getDim());
+					
+					infoCounter temp = new infoCounter(operate.charAt(0), sub);
+					
+					if (working.search(temp, true).getNum() == -1)
+						System.out.println("Error while updating time");
+					else
+						System.out.println("updating " + temp.print());
 				}
 				s[j].v();
 				System.out.println("operate: " + operate + "\n");

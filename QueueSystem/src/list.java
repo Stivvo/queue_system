@@ -67,21 +67,28 @@ public class list
 	
 	public infoCounter search() //searches for unactive counters
 	{
-		node<infoCounter> pa = p;
+		node<infoCounter>pa = p;
 		infoCounter t = new infoCounter('0', -1);
-		//scegliere differenza appropriata
-		//continua a scorrere mentre adesso - ultimaAttività < tot
+		
+		if (!this.isEmpty()) {
+		
+		long diff = ZonedDateTime.now(ZoneId.of("Europe/Paris")).toInstant().getEpochSecond() 
+			- pa.getInfo().getT().getEpochSecond();
 				
-		while (pa != null &&
-				ZonedDateTime.now(ZoneId.of("Europe/Paris")).toInstant().getEpochSecond()
-				- pa.getInfo().getT().getEpochSecond() < 5)
-				pa = pa.getPtrNext();
+		while (pa != null && diff < 5) {
+			System.out.println("second difference: " + diff);
+			pa = pa.getPtrNext();
+			
+			if (pa != null)
+				diff = ZonedDateTime.now(ZoneId.of("Europe/Paris")).toInstant().getEpochSecond()
+					- pa.getInfo().getT().getEpochSecond();
+		}
 		
 		if (pa != null)
 			t = pa.getInfo();
 		
-		//ritorno appena trovo una coda inattiva
-			
+		} else
+			System.out.println("empty");
 		return t;
 	}
 	
@@ -89,14 +96,12 @@ public class list
 	{
 		node<infoCounter> pa = p;
 		infoCounter t = new infoCounter('0', -1);
-				
+		
 		while (pa != null && (!pa.getInfo().eq(n)))
 				pa = pa.getPtrNext();
 		
-		if (pa != null)
-		{
-			if (update)
-			{
+		if (pa != null) {
+			if (update) {
 				n.setT(ZonedDateTime.now(ZoneId.of("Europe/Paris")));
 				pa.setInfo(n);
 			}
@@ -105,7 +110,7 @@ public class list
 		return t;
 	}
 	
-	public infoCounter search(int n) //searchs for numbers
+	public infoCounter search(int n) //searches for numbers
 	{
 		node<infoCounter> pa = p;
 		infoCounter t = new infoCounter('0', -1);
@@ -120,7 +125,7 @@ public class list
 		return t;
 	}
 	
-	public infoCounter search(char c) //searchs for types
+	public infoCounter search(char c) //searches for types
 	{
 		node<infoCounter> pa = p;
 		infoCounter t = new infoCounter('0', -1);

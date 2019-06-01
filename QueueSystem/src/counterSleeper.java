@@ -21,21 +21,23 @@ public class counterSleeper extends Thread {
 		int i = 0;
 		
 		while (true)
-		{ //Searches for inactive queue and eventually removes them
+		{ //Searches for inactive counters and closes them
 			t = working.search();
 			PrintWriter p;
 			
 			if (t.getNum() != -1)
 			{
+				System.out.println("entro in t.getNum() != -1");
 				try {
 					p = new PrintWriter(t.getSocket().getOutputStream());
 					sleeping.in(t);
 					working.rm(t);
 					p.print("d" + t.getNum());
 					p.flush();
+					
+					System.out.println("suspend " + t.getNum());
 					nCounter[Integer.valueOf(t.getType() + "") - 65]--;
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -53,9 +55,9 @@ public class counterSleeper extends Thread {
 						working.in(t);
 						p.print("i" + t.getNum());
 						p.flush();
+						System.out.println("wake up " + t.getNum());
 						nCounter[Integer.valueOf(t.getType() + "") - 65]++;						
 					}catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}  
 				}

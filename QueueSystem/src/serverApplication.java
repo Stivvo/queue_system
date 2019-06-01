@@ -43,7 +43,6 @@ public class serverApplication {
 
 	public serverApplication() throws IOException 
 	{
-		
 		working = new list();
 		sleeping = new list();
 		mutexList = new Semaforo(1);
@@ -60,9 +59,7 @@ public class serverApplication {
 		q[2] = new queue('P');
 		
 		for (int i = 0; i < 3; i++)
-		{
 			s[i] = new Semaforo(1);
-		}
 		
 		thDealerConnect = new dealerConnector(q, s, lblWaiting);
 		thCounterConnect = new counterConnector(q, s, lblService, lblCounter, lblWaiting, working, mutexList, nCounter);

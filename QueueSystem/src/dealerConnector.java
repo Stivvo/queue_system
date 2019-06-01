@@ -30,7 +30,6 @@ public class dealerConnector extends Thread{
 				 thSCounter = new serverDealer(q, s, LW, sock);
 				 thSCounter.start();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

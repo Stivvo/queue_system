@@ -10,7 +10,7 @@ public class infoCounter
 	private Socket s;
 	
 	public infoCounter(char type, int num)
-	{
+	{ //mustn't be used to store infoCounter in a list
 		this.type = type;
 		this.num = num;
 	}
