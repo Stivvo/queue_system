@@ -31,17 +31,20 @@ public class CounterReciver extends Thread{
 	{
 		String message = "";
 		String off = " (UNACTIVE)";
+		System.out.println("CounterReciver exists");
 		
 		while (true)
 		{
+			System.out.println("CounterReciver is working");
 			try {
 				message = reader.readLine();
-			}
-			catch (IOException e) {
+				System.out.println("CounterReciver message: " + message);
+			} catch (IOException e) {
 				System.out.println("error reading message through BufferedReader");
 			}
 			if (Integer.valueOf(message.substring(1)).intValue() == this.id)
 			{
+				System.out.println("CounterReciver recived "+message);
 				if (message.charAt(0) == 'd')
 				{
 					active = false;

@@ -44,7 +44,7 @@ public class counterSleeper extends Thread {
 				} //end if (nCounter[j] > 1)
 			} else {
 				try {
-					Thread.sleep(1000);					
+					Thread.sleep(1000); //reduce CPU usage	
 				} catch (InterruptedException e) {
 					System.out.println("ERROR in counterSleeper sleep after search");
 					throw new RuntimeException();
