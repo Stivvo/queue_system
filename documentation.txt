@@ -40,7 +40,7 @@ serverDealer: su richiesta di Dealer, aggiunge clienti in una determinata coda
 
 --- connettori ---
 
-counterConnector: ???
+counterConnector: thread per connettere n serverCounter
 
 counterCreatorConnector: connette un serverCounterOpener
 
