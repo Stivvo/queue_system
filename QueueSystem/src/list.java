@@ -65,7 +65,7 @@ public class list
 		return t;
 	}
 	
-	public infoCounter search() //searches for unactive counters
+	public infoCounter search() //searches for inactive counters
 	{
 		node<infoCounter>pa = p;
 		infoCounter t = new infoCounter('0', -1);
