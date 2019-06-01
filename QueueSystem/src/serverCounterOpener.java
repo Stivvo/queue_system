@@ -45,8 +45,8 @@ public class serverCounterOpener extends Thread
 		
 			mutexL.p();
 			
-			if (working.search(inf.getNum()).getNum() != -1 
-				&& sleeping.search(inf.getNum()).getNum() != -1)
+			if (working.search(inf.getNum()).getNum() != -1 ||
+				sleeping.search(inf.getNum()).getNum() != -1)
 				write.println("already exists");
 			else
 				write.println("ok"); 

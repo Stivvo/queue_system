@@ -7,12 +7,12 @@ import java.time.ZonedDateTime;
 public class Test 
 {
 	private int i = 0;
-	private infoCounter temp;
+	private infoCounter temp = new infoCounter('0', -1);
 	int len = 4;
 	
 	public void tQueue()
 	{
-		/*queue q = new queue('A');
+		queue q = new queue('A');
 		
 		for (i = 0; i < len; i++)
 		{
@@ -31,15 +31,13 @@ public class Test
 		{
 			System.out.println(q.front().getInfo().getTicket() + 
 					", " + q.front().getInfo().getT().getEpochSecond());
-		}*/
-			
+		}
 	}
 	
 	public boolean tList()
 	{
 		list l = new list();
 		int[] a = {4, 8, 9, 10};
-		infoCounter temp;
 
 		for (i = 0; i < a.length; i++)
 		{
@@ -67,6 +65,7 @@ public class Test
 		
 		for (i = 0; i < a.length; i++) {
 			temp = new infoCounter((char)(65 + i), a[i]);
+			System.out.println("temp: " + temp.print());
 			if (l.search(temp, false).getNum() == -1) {
 				System.out.println(temp.getType() + ", " + temp.getNum() + " not found");
 				return false;

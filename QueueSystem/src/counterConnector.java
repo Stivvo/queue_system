@@ -52,9 +52,11 @@ public class counterConnector extends Thread{
 				 System.out.println(
 					"readed.charAt: " + readed.charAt(0) + 
 				 	"readed.substring(0): " + readed.substring(0));
-				 infoCounter counter = new infoCounter(readed.charAt(0), Integer.parseInt(readed.substring(1)), ZonedDateTime.now(), sock);
+				 infoCounter counter = new infoCounter(
+					readed.charAt(0), Integer.parseInt(readed.substring(1)), ZonedDateTime.now(), sock);
 				
 				 mutexL.p();
+				 System.out.println("counter.print: " + counter.print());
 				 working.in(counter);
 				 mutexL.v();
 				 
