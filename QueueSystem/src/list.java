@@ -69,24 +69,39 @@ public class list
 	{
 		node<infoCounter>pa = p;
 		infoCounter t = new infoCounter('0', -1);
+		Boolean[] nCount = {false, false, false, false};
+		int i = 0;
 		
 		if (!this.isEmpty()) {
 		
-		long diff = ZonedDateTime.now(ZoneId.of("Europe/Paris")).toInstant().getEpochSecond() 
-			- pa.getInfo().getT().getEpochSecond();
+			long diff = ZonedDateTime.now(ZoneId.of("Europe/Paris")).toInstant().getEpochSecond() 
+				- pa.getInfo().getT().getEpochSecond();
+					
+			while (pa != null) {
+				System.out.println("second difference: " + diff);
 				
-		while (pa != null && diff < 5) {
-			System.out.println("second difference: " + diff);
-			pa = pa.getPtrNext();
-			
-			if (pa != null)
-				diff = ZonedDateTime.now(ZoneId.of("Europe/Paris")).toInstant().getEpochSecond()
-					- pa.getInfo().getT().getEpochSecond();
-		}
-		
-		if (pa != null)
-			t = pa.getInfo();
-		
+				if (diff > 5) {
+					i = ((int)pa.getInfo().getType()) - 65;
+					
+					if (nCount[i]) {
+						System.out.println("return " + pa.getInfo().print() + "\n\n\n\n\n\n\n");
+						return pa.getInfo();
+					} else {
+						System.out.println("set " + pa.getInfo().print() + " to true");
+						nCount[i] = true;
+					}
+				}
+				else if (diff > 9999) {//se l'attesa la differenza di tempo esce dallo spazio long
+					infoCounter temp = pa.getInfo();
+					temp.setT(ZonedDateTime.now(ZoneId.of("Europe/Paris")));
+					pa.setInfo(temp);
+				}
+				pa = pa.getPtrNext();
+				
+				if (pa != null)
+					diff = ZonedDateTime.now(ZoneId.of("Europe/Paris")).toInstant().getEpochSecond()
+						- pa.getInfo().getT().getEpochSecond();
+			}
 		} else
 			System.out.println("empty");
 		return t;

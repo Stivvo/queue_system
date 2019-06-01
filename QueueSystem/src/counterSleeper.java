@@ -42,6 +42,13 @@ public class counterSleeper extends Thread {
 						e.printStackTrace();
 					}
 				} //end if (nCounter[j] > 1)
+			} else {
+				try {
+					Thread.sleep(1000);					
+				} catch (InterruptedException e) {
+					System.out.println("ERROR in counterSleeper sleep after search");
+					throw new RuntimeException();
+				}
 			}
 
 			if (nCounter[i] >= 20) // nCounter[i] >= 20 is placeholder
