@@ -20,7 +20,7 @@ public class serverCounter extends Thread {
 	private JLabel LW[] = new JLabel[3];
 	private list working = new list();
 	
-	private int i;
+	
 	
 	public serverCounter(queue[] q1, Semaforo[] s1, JLabel[] LS,
 						JLabel[] LC,JLabel[] LW, Socket socket, list working) throws IOException 
@@ -39,13 +39,13 @@ public class serverCounter extends Thread {
 	
 	public void lock()
 	{
-		for (i = 0; i < 3; i++)
+		for (int i = 0; i < 3; i++)
 			s[i].p();
 	}
 	
 	public void unLock()
 	{
-		for (i = 0; i < 3; i++)
+		for (int i = 0; i < 3; i++)
 			s[i].v();
 	}
 	
@@ -57,7 +57,7 @@ public class serverCounter extends Thread {
 		
 		lock();
 		
-		for (i = 0; i < 3; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			if (i != 1)
 			{
@@ -84,7 +84,7 @@ public class serverCounter extends Thread {
 		
 		lock();
 		
-		for (i = 0; i < 3; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			if (!q[i].isEmpty())
 			{

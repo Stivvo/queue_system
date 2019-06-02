@@ -1,5 +1,8 @@
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 public class counterSleeper extends Thread {
 	
@@ -7,12 +10,81 @@ public class counterSleeper extends Thread {
 	public list sleeping;
 	public int[] nCounter;
 	public Semaforo mutexList;
+	public queue[] q;
+	public Semaforo[] s;
 	
-	public counterSleeper(list working, list sleeping, int[] nCounter, Semaforo mutexList) {
+	public counterSleeper(list working, list sleeping, int[] nCounter, Semaforo mutexList, Semaforo[] s, queue[] q) {
 		this.working = working;
 		this.sleeping = sleeping;
 		this.nCounter = nCounter;
 		this.mutexList = mutexList;
+		this.s = s;
+		this.q = q;
+	}
+	
+	public void lock()
+	{
+		for (int i = 0; i < 3; i++)
+			s[i].p();
+	}
+	
+	public void unLock()
+	{
+		for (int i = 0; i < 3; i++)
+			s[i].v();
+	}
+	
+	public int isSomeoneWaiting() 
+	{
+		ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Europe/Paris"));
+		Instant now = zdt.toInstant();
+		int flag = 0;
+		
+		lock();
+		
+		for (int i = 0; i < 3; i++)
+		{
+			if (i != 1)
+			{
+				if (!q[i].isEmpty()) 
+				{
+					if (now.getEpochSecond() - 
+							q[i].front().getInfo().getT().getEpochSecond() 
+							>= 5)
+						flag++;
+				}				
+			}
+		}
+		unLock();
+		return flag;
+	}
+	
+	public int getIndexBlockedQueue() 
+	{
+		ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Europe/Paris"));
+		Instant now = zdt.toInstant();
+		int iMax = 0;
+		long longest = 0;
+		long ltemp = 0;
+		
+		lock();
+		
+		for (int i = 0; i < 3; i++)
+		{
+			if (!q[i].isEmpty())
+			{
+				ltemp = now.getEpochSecond() - 
+						q[i].front().getInfo().getT().getEpochSecond();
+				
+				if (ltemp > longest)
+				{
+					longest = ltemp;
+					iMax = i;
+				}
+			}
+		}
+		unLock();
+		return iMax;
 	}
 	
 	public void run () 
@@ -51,11 +123,16 @@ public class counterSleeper extends Thread {
 					throw new RuntimeException();
 				}
 			}
-
-			if (nCounter[i] >= 20) // nCounter[i] >= 20 is placeholder
+			
+			int flag = isSomeoneWaiting();
+			if (flag > 0)
 			{
-				t = sleeping.search(
-							String.valueOf("" + (i + 35)).charAt(0));
+				if (flag == 1) {
+					t = sleeping.search(65+getIndexBlockedQueue());
+				} else {
+					t = sleeping.search('D');
+				}
+				
 				
 				if (t.getNum() != -1)
 				{
@@ -72,6 +149,7 @@ public class counterSleeper extends Thread {
 					}  
 				}
 			}
+			
 				
 			i = (i + 1) % 4;
 		}
