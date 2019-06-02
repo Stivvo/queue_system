@@ -21,7 +21,7 @@ public class Counter
 	private char type;
 	private int num;
 	private String name;
-	private Boolean active;
+	private CounterState active;
 	
 	public int getNum() {return num;}
 	public char getType() {return type;}
@@ -63,7 +63,7 @@ public class Counter
 		
 		this.num = num;
 		this.type = type;
-		this.active = true;
+		this.active = new CounterState();
 		
 		switch(this.type)
 		{
@@ -115,7 +115,7 @@ public class Counter
 	
 	private void stampa()
 	{
-		if (active)
+		if (active.isActive())
 		{
 			p.println("" + this.getType() + "" + this.getNum());
 			System.out.println("printing: " + this.getType() + "" + this.getNum());

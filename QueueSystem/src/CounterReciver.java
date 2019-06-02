@@ -6,13 +6,13 @@ import java.awt.*;
 
 public class CounterReciver extends Thread{
 
-	private Boolean active;
+	private CounterState active;
 	private Frame F;
 	private BufferedReader reader;
 	private Socket s1;
 	private int id;
 	
-	public CounterReciver(Boolean a, Frame f, int n, Socket S) {
+	public CounterReciver(CounterState a, Frame f, int n, Socket S) {
 		this.active = a;
 		this.F = f;
 		id = n;
@@ -51,16 +51,16 @@ public class CounterReciver extends Thread{
 				System.out.println("CounterReciver recived "+message);
 				if (message.charAt(0) == 'd')
 				{
-					active = false;
+					active.setState(false);
 					F.setTitle(F.getTitle() + off);
 					
 				}
 				else if (message.charAt(0) == 'i')
 				{
-					active = true;
+					active.setState(true);
 					F.setTitle(F.getTitle().substring(0, F.getTitle().indexOf(off)));
 				}
-				if (active)
+				if (active.isActive())
 					System.out.println("ATTIVA");
 				else
 					System.out.println("DISATTIVA");

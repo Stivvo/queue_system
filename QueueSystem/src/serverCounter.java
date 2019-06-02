@@ -129,7 +129,7 @@ public class serverCounter extends Thread {
 				break;
 			
 			i = ((int)operate.charAt(0)) - 65;
-			sub = Integer.valueOf(operate.substring(1)).intValue();
+			sub = Integer.valueOf(operate.substring(1));
 			
 			System.out.println("i = " + i + " sub: " + sub);
 			
@@ -155,7 +155,7 @@ public class serverCounter extends Thread {
 					System.out.println("ready to NEXT");
 					
 					LS[j].setText("" + q[j].NEXT());
-					LC[j].setText("" + (i+1));
+					LC[j].setText("" + sub);
 					LW[j].setText("" + q[j].getDim());
 					
 					infoCounter temp = new infoCounter(operate.charAt(0), sub);
