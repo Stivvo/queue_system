@@ -109,7 +109,7 @@ public class Counter
 		p.println(type+""+num);
 		p.flush();
 		
-		receiver = new CounterReciver(true, frame, num, s);
+		receiver = new CounterReciver(active, frame, num, s);
 		receiver.start();
 	}
 	

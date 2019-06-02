@@ -21,6 +21,7 @@ public class CounterReciver extends Thread{
 		try {
 			inp = new InputStreamReader(s1.getInputStream());
 			reader = new BufferedReader(inp);
+			System.out.println("Counter reader creato");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -32,7 +33,7 @@ public class CounterReciver extends Thread{
 	public void run()
 	{
 		String message = "";
-		String off = " (UNACTIVE)";
+		String off = "(UNACTIVE)";
 		System.out.println("CounterReciver exists");
 		
 		while (true)
@@ -40,17 +41,19 @@ public class CounterReciver extends Thread{
 			System.out.println("CounterReciver is working");
 			try {
 				message = reader.readLine();
+				System.out.println("received");
 				System.out.println("CounterReciver message: " + message);
 			} catch (IOException e) {
 				System.out.println("error reading message through BufferedReader");
 			}
-			if (Integer.valueOf(message.substring(1)).intValue() == this.id)
+			if (Integer.parseInt(message.substring(1)) == this.id)
 			{
 				System.out.println("CounterReciver recived "+message);
 				if (message.charAt(0) == 'd')
 				{
 					active = false;
 					F.setTitle(F.getTitle() + off);
+					
 				}
 				else if (message.charAt(0) == 'i')
 				{

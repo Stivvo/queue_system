@@ -33,10 +33,11 @@ public class counterSleeper extends Thread {
 						p = new PrintWriter(t.getSocket().getOutputStream());
 						sleeping.in(t);
 						working.rm(t);
-						p.print("d" + t.getNum());
-						p.flush();
-						
 						System.out.println("suspend " + t.getNum());
+						p.println("d" + t.getNum());
+						p.flush();
+						System.out.println("sent");
+						
 						nCounter[j]--;
 					} catch (IOException e) {
 						e.printStackTrace();
