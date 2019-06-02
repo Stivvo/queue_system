@@ -7,13 +7,17 @@ public class counterSleeper extends Thread {
 	public list sleeping;
 	public int[] nCounter;
 	public Semaforo mutexList;
+
 	
 	public counterSleeper(list working, list sleeping, int[] nCounter, Semaforo mutexList) {
 		this.working = working;
 		this.sleeping = sleeping;
 		this.nCounter = nCounter;
 		this.mutexList = mutexList;
+	
 	}
+	
+	
 	
 	public void run () 
 	{
