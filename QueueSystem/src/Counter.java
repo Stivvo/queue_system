@@ -17,7 +17,7 @@ public class Counter
 	private JFrame frame;
 	private Socket s;
 	private PrintWriter p;
-	
+	private CounterReciver receiver;
 	private char type;
 	private int num;
 	private String name;
@@ -108,6 +108,9 @@ public class Counter
 		p = new PrintWriter(s.getOutputStream());
 		p.println(type+""+num);
 		p.flush();
+		
+		receiver = new CounterReciver(true, frame, num, s);
+		receiver.start();
 	}
 	
 	private void stampa()

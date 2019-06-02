@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.net.UnknownHostException;
 import java.io.BufferedReader;
 import java.net.*;
 import java.io.InputStreamReader;
@@ -13,18 +12,21 @@ public class CounterReciver extends Thread{
 	private Socket s1;
 	private int id;
 	
-	public CounterReciver(Boolean a, Frame f, int n) {
+	public CounterReciver(Boolean a, Frame f, int n, Socket S) {
 		this.active = a;
 		this.F = f;
 		id = n;
-	}
-	
-	public void connectNewCounter() throws UnknownHostException, IOException {
-
-		s1 = new Socket("localhost", 8055);
+		s1 = S;
+		InputStreamReader inp;
+		try {
+			inp = new InputStreamReader(s1.getInputStream());
+			reader = new BufferedReader(inp);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		InputStreamReader inp = new InputStreamReader(s1.getInputStream());
-		reader = new BufferedReader(inp);
+		System.out.println("Counter Receiver creato ");
 	}
 	
 	public void run()
