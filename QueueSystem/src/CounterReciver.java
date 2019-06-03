@@ -33,7 +33,7 @@ public class CounterReciver extends Thread{
 	public void run()
 	{
 		String message = "";
-		String off = "(UNACTIVE)";
+		String off = " (UNACTIVE)";
 		System.out.println("CounterReciver exists");
 		
 		while (true)

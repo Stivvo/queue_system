@@ -1,8 +1,5 @@
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 
 public class counterSleeper extends Thread {
 	
@@ -12,8 +9,6 @@ public class counterSleeper extends Thread {
 	public Semaforo mutexList;
 	public queue[] q;
 	public Semaforo[] s;
-
-
 	
 	public counterSleeper(list working, list sleeping, int[] nCounter, Semaforo mutexList, Semaforo[] s, queue[] q) {
 		this.working = working;
