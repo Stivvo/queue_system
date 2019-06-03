@@ -38,13 +38,12 @@ public class CounterReciver extends Thread{
 			} catch (IOException e) {
 				System.out.println("error reading message through BufferedReader");
 			}
-			if (Integer.parseInt(message.substring(1)) == this.id) {
+			if (Integer.valueOf(message.substring(1)).intValue() == this.id) {
 				
 				if (message.charAt(0) == 'd') {
 					active.setUnactive();
 					F.setTitle(F.getTitle() + off);
 				} else if (message.charAt(0) == 'i') {
-					System.out.println("Sleeper told me to wake up, but i'm too lazy");
 					active.setActive();
 					F.setTitle(F.getTitle().substring(0, F.getTitle().indexOf(off)));
 				}

@@ -60,11 +60,11 @@ public class counterSleeper extends Thread {
 					try {			
 						p = new PrintWriter(t.getSocket().getOutputStream());
 						sleeping.rm(t);
+						t.setT(QueueManagement.getNow());
 						working.in(t);
 						
-						p.print("i" + t.getNum());
+						p.println("i" + t.getNum());
 						p.flush();
-						System.out.println("wake up " + t.getNum() + "\n\n\n\n\n");
 						nCounter[t.getType() - 65]++;
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -74,7 +74,7 @@ public class counterSleeper extends Thread {
 				
 			i = (i + 1) % 4;
 			try {
-				Thread.sleep(2000); //reduce CPU usage	
+				Thread.sleep(1000); //reduce CPU usage
 			} catch (InterruptedException e) {
 				System.out.println("ERROR in counterSleeper sleep after search");
 				throw new RuntimeException();

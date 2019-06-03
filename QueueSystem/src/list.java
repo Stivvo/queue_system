@@ -73,16 +73,14 @@ public class list
 		
 		if (!this.isEmpty()) {
 		
-			long diff = 0;
+			long diff = QueueManagement.getNow().toInstant().getEpochSecond() 
+				- pa.getInfo().getT().getEpochSecond();
 					
 			while (pa != null) {
 				
-				diff = ZonedDateTime.now(ZoneId.of("Europe/Paris")).toInstant().getEpochSecond() 
-				- pa.getInfo().getT().getEpochSecond();
-				
 				System.out.println("second difference: " + diff);
 				
-				if (diff > 5) {
+				if (diff > 10) {
 					i = ((int)pa.getInfo().getType()) - 65;
 					
 					if (nCount[i]) {
@@ -99,7 +97,7 @@ public class list
 				pa = pa.getPtrNext();
 				
 				if (pa != null)
-					diff = ZonedDateTime.now(ZoneId.of("Europe/Paris")).toInstant().getEpochSecond()
+					diff = QueueManagement.getNow().toInstant().getEpochSecond()
 						- pa.getInfo().getT().getEpochSecond();
 			}
 		}
@@ -116,7 +114,7 @@ public class list
 		
 		if (pa != null) {
 			if (update) {
-				n.setT(ZonedDateTime.now(ZoneId.of("Europe/Paris")));
+				n.setT(QueueManagement.getNow());
 				pa.setInfo(n);
 			}
 			t = pa.getInfo();
