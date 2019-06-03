@@ -49,12 +49,11 @@ public class CounterReciver extends Thread{
 			{
 				System.out.println("CounterReciver recived "+message);
 				
-				if (message.charAt(0) == 'd')
-				{
+				if (message.charAt(0) == 'd') {
 					active.setState(false);
 					F.setTitle(F.getTitle() + off);
-					
 				} else if (message.charAt(0) == 'i') {
+					System.out.println("Sleeper told me to wake up, but i'm too lazy");
 					active.setState(true);
 					F.setTitle(F.getTitle().substring(0, F.getTitle().indexOf(off)));
 				}

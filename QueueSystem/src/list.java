@@ -74,10 +74,13 @@ public class list
 		
 		if (!this.isEmpty()) {
 		
-			long diff = ZonedDateTime.now(ZoneId.of("Europe/Paris")).toInstant().getEpochSecond() 
-				- pa.getInfo().getT().getEpochSecond();
+			long diff = 0;
 					
 			while (pa != null) {
+				
+				diff = ZonedDateTime.now(ZoneId.of("Europe/Paris")).toInstant().getEpochSecond() 
+				- pa.getInfo().getT().getEpochSecond();
+				
 				System.out.println("second difference: " + diff);
 				
 				if (diff > 5) {

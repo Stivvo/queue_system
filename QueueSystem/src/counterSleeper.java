@@ -49,11 +49,13 @@ public class counterSleeper extends Thread {
 			int flag = QueueManagement.isSomeoneWaiting(q, s);
 			if (flag > 0)
 			{
+				System.out.println();
 				if (flag == 1) {
-					t = sleeping.search((char)(65+QueueManagement.getIndexBlockedQueue(q, s)));
+					t = sleeping.search( (65+QueueManagement.getIndexBlockedQueue(q, s)));
 				} else {
 					t = sleeping.search('D');
 				}
+				System.out.println("t = sleeping.search() " + t.print());
 				
 				if (t.getNum() != -1)
 				{
@@ -64,7 +66,7 @@ public class counterSleeper extends Thread {
 						
 						p.print("i" + t.getNum());
 						p.flush();
-						System.out.println("wake up " + t.getNum());
+						System.out.println("wake up " + t.getNum() + "\n\n\n\n\n");
 						nCounter[t.getType() - 65]++;
 					} catch (IOException e) {
 						e.printStackTrace();
