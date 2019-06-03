@@ -151,6 +151,8 @@ public class counterSleeper extends Thread {
 					}catch (IOException e) {
 						e.printStackTrace();
 					}  
+				} else {
+					System.out.println("sleeping not found");
 				}
 			}
 			

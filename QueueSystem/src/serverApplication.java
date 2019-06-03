@@ -49,11 +49,10 @@ public class serverApplication {
 		lblService = new JLabel[3];
 		lblCounter = new JLabel[3];
 		lblWaiting = new JLabel[3];
-		sleeper = new counterSleeper(working, sleeping, nCounter, mutexList, s, q);
 		initialize();
 		q = new queue[3];
 		s = new Semaforo[3];
-		
+		sleeper = new counterSleeper(working, sleeping, nCounter, mutexList, s, q);
 		q[0] = new queue('A');
 		q[1] = new queue('C');
 		q[2] = new queue('P');

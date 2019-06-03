@@ -57,6 +57,7 @@ public class CounterReciver extends Thread{
 				}
 				else if (message.charAt(0) == 'i')
 				{
+					System.out.println("\n\n\n\n\nwaking up\n\n\n\n");
 					active.setState(true);
 					F.setTitle(F.getTitle().substring(0, F.getTitle().indexOf(off)));
 				}
