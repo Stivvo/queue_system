@@ -50,9 +50,9 @@ public class CounterReciver extends Thread{
 				}
 				
 				if (active.isActive())
-					System.out.println("ATTIVA");
+					System.out.println("ATTIVA id: " + this.id);
 				else
-					System.out.println("DISATTIVA");
+					System.out.println("DISATTIVA id: " + this.id);
 			}
 		}
 	}

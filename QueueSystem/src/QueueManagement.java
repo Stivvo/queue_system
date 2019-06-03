@@ -16,10 +16,14 @@ public class QueueManagement {
 			s[i].v();
 	}
 	
+	public static ZonedDateTime getNow() {
+		ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Europe/Paris"));
+		return zdt;
+	}
+	
 	public static int isSomeoneWaiting(queue[] q, Semaforo[] s)
 	{
-		ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Europe/Paris"));
-		Instant now = zdt.toInstant();
+		Instant now = getNow().toInstant();
 		int flag = 0;
 		
 		lock(s);
@@ -30,7 +34,7 @@ public class QueueManagement {
 				{
 					if (now.getEpochSecond() - 
 							q[i].front().getInfo().getT().getEpochSecond() 
-							>= 5)
+							>= 20)
 						flag++;
 				}				
 			
@@ -41,8 +45,7 @@ public class QueueManagement {
 	
 	public static int getIndexBlockedQueue(queue[] q, Semaforo[] s)
 	{
-		ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Europe/Paris"));
-		Instant now = zdt.toInstant();
+		Instant now = getNow().toInstant();
 		int iMax = 0;
 		long longest = 0;
 		long ltemp = 0;
