@@ -78,7 +78,7 @@ public class list
 				
 				System.out.println("second difference: " + diff);
 				
-				if (diff > 10) {
+				if (diff > 20) {
 					i = ((int)pa.getInfo().getType()) - 65;
 					
 					if (nCount[i]) {

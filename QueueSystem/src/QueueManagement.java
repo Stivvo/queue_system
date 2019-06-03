@@ -34,7 +34,7 @@ public class QueueManagement {
 				{
 					if (now.getEpochSecond() - 
 							q[i].front().getInfo().getT().getEpochSecond() 
-							>= 20)
+							>= 10)
 						flag++;
 				}				
 			
