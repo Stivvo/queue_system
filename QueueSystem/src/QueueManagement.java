@@ -16,14 +16,14 @@ public class QueueManagement {
 			s[i].v();
 	}
 	
-	public static ZonedDateTime getNow() {
+	public static Instant getNow() {
 		ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Europe/Paris"));
-		return zdt;
+		return zdt.toInstant();
 	}
 	
 	public static int isSomeoneWaiting(queue[] q, Semaforo[] s)
 	{
-		Instant now = getNow().toInstant();
+		Instant now = getNow();
 		int flag = 0;
 		
 		lock(s);
@@ -45,7 +45,7 @@ public class QueueManagement {
 	
 	public static int getIndexBlockedQueue(queue[] q, Semaforo[] s)
 	{
-		Instant now = getNow().toInstant();
+		Instant now = getNow();
 		int iMax = 0;
 		long longest = 0;
 		long ltemp = 0;

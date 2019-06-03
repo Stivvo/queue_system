@@ -1,6 +1,5 @@
 import java.net.Socket;
 import java.time.Instant;
-import java.time.ZonedDateTime;
 
 public class infoCounter 
 {
@@ -15,11 +14,11 @@ public class infoCounter
 		this.num = num;
 	}
 	
-	public infoCounter(char type, int num, ZonedDateTime zdt, Socket sock)
+	public infoCounter(char type, int num, Instant t, Socket sock)
 	{
 		this.type = type;
 		this.num = num;
-		this.setT(zdt);
+		this.t = t;
 		s = sock;
 	}
 	
@@ -45,9 +44,9 @@ public class infoCounter
 		return false;
 	}
 	
-	public void setT(ZonedDateTime zdt)
+	public void setT(Instant t)
 	{
-		this.t = zdt.toInstant();
+		this.t = t;
 	}
 	
 	public Instant getT()

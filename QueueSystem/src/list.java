@@ -1,6 +1,4 @@
 import java.net.Socket;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 
 public class list 
 {
@@ -73,7 +71,7 @@ public class list
 		
 		if (!this.isEmpty()) {
 		
-			long diff = QueueManagement.getNow().toInstant().getEpochSecond() 
+			long diff = QueueManagement.getNow().getEpochSecond() 
 				- pa.getInfo().getT().getEpochSecond();
 					
 			while (pa != null) {
@@ -91,13 +89,13 @@ public class list
 				}
 				else if (diff > 9999) {//se l'attesa la differenza di tempo esce dallo spazio long
 					infoCounter temp = pa.getInfo();
-					temp.setT(ZonedDateTime.now(ZoneId.of("Europe/Paris")));
+					temp.setT(QueueManagement.getNow());
 					pa.setInfo(temp);
 				}
 				pa = pa.getPtrNext();
 				
 				if (pa != null)
-					diff = QueueManagement.getNow().toInstant().getEpochSecond()
+					diff = QueueManagement.getNow().getEpochSecond()
 						- pa.getInfo().getT().getEpochSecond();
 			}
 		}

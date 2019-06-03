@@ -3,8 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+
 import javax.swing.JLabel;
 
 public class counterConnector extends Thread{
@@ -55,7 +54,7 @@ public class counterConnector extends Thread{
 				 	"readed.substring(0): " + readed.substring(0));
 				 infoCounter counter = new infoCounter(
 					readed.charAt(0), Integer.parseInt
-						(readed.substring(1)), ZonedDateTime.now(ZoneId.of("Europe/Paris")), sock);
+						(readed.substring(1)), QueueManagement.getNow(), sock);
 				
 				 mutexL.p();
 				 System.out.println("counter.print: " + counter.print());
