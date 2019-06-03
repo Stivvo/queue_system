@@ -102,7 +102,8 @@ public class counterSleeper extends Thread {
 			if (t.getNum() != -1) {
 				j = (int)t.getType() - 65;
 				
-				if (nCounter[j] > 1) {
+				if (nCounter[j] > 1 && isSomeoneWaiting() > 0) {
+					
 					try {
 						p = new PrintWriter(t.getSocket().getOutputStream());
 						sleeping.in(t);
@@ -114,15 +115,7 @@ public class counterSleeper extends Thread {
 						e.printStackTrace();
 					}
 				} //end if (nCounter[j] > 1)
-			} else {
-				try {
-					Thread.sleep(1000); //reduce CPU usage	
-				} catch (InterruptedException e) {
-					System.out.println("ERROR in counterSleeper sleep after search");
-					throw new RuntimeException();
-				}
-			}
-			
+			} 
 			int flag = isSomeoneWaiting();
 			if (flag > 0)
 			{
@@ -136,14 +129,14 @@ public class counterSleeper extends Thread {
 				if (t.getNum() != -1)
 				{
 					try {
-						System.out.println("sleeping found");
+			
 						p = new PrintWriter(t.getSocket().getOutputStream());
 						sleeping.rm(t);
 						working.in(t);
 						p.print("i" + t.getNum());
 						p.flush();
 						System.out.println("wake up " + t.getNum());
-						nCounter[Integer.valueOf(t.getType() + "") - 65]++;						
+						nCounter[t.getType() - 65]++;						
 					}catch (IOException e) {
 						e.printStackTrace();
 					}  
@@ -153,6 +146,12 @@ public class counterSleeper extends Thread {
 			
 				
 			i = (i + 1) % 4;
+			try {
+				Thread.sleep(2000); //reduce CPU usage	
+			} catch (InterruptedException e) {
+				System.out.println("ERROR in counterSleeper sleep after search");
+				throw new RuntimeException();
+			}
 		}
 	}
 }
