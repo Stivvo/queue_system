@@ -132,7 +132,7 @@ public class Counter
 				}
 			}
 		});
-		frame.setBounds(100, 100, 280, 190);
+		frame.setBounds(100, 100, 370, 170);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton btn = new JButton("New button");
