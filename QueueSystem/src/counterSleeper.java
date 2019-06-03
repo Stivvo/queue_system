@@ -24,71 +24,6 @@ public class counterSleeper extends Thread {
 		this.q = q;
 	}
 	
-	public void lock()
-	{
-		for (int i = 0; i < 3; i++)
-			s[i].p();
-	}
-	
-	public void unLock()
-	{
-		for (int i = 0; i < 3; i++)
-			s[i].v();
-	}
-	
-	public int isSomeoneWaiting() 
-	{
-		ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Europe/Paris"));
-		Instant now = zdt.toInstant();
-		int flag = 0;
-		
-		lock();
-		
-		for (int i = 0; i < 3; i++)
-		{
-				if (!q[i].isEmpty()) 
-				{
-					if (now.getEpochSecond() - 
-							q[i].front().getInfo().getT().getEpochSecond() 
-							>= 5)
-						flag++;
-				}				
-			
-		}
-		unLock();
-		return flag;
-	}
-	
-	public int getIndexBlockedQueue() 
-	{
-		ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Europe/Paris"));
-		Instant now = zdt.toInstant();
-		int iMax = 0;
-		long longest = 0;
-		long ltemp = 0;
-		
-		lock();
-		
-		for (int i = 0; i < 3; i++)
-		{
-			if (!q[i].isEmpty())
-			{
-				ltemp = now.getEpochSecond() - 
-						q[i].front().getInfo().getT().getEpochSecond();
-				
-				if (ltemp > longest)
-				{
-					longest = ltemp;
-					iMax = i;
-				}
-			}
-		}
-		unLock();
-		return iMax;
-	}
-	
-	
-	
 	public void run () 
 	{
 		infoCounter t;
@@ -102,7 +37,7 @@ public class counterSleeper extends Thread {
 			if (t.getNum() != -1) {
 				j = (int)t.getType() - 65;
 				
-				if (nCounter[j] > 1 && isSomeoneWaiting() > 0) {
+				if (nCounter[j] > 1 && QueueManagement.isSomeoneWaiting(q, s) > 0) {
 					
 					try {
 						p = new PrintWriter(t.getSocket().getOutputStream());
@@ -116,11 +51,11 @@ public class counterSleeper extends Thread {
 					}
 				} //end if (nCounter[j] > 1)
 			} 
-			int flag = isSomeoneWaiting();
+			int flag = QueueManagement.isSomeoneWaiting(q, s);
 			if (flag > 0)
 			{
 				if (flag == 1) {
-					t = sleeping.search(65+getIndexBlockedQueue());
+					t = sleeping.search(65+QueueManagement.getIndexBlockedQueue(q, s));
 				} else {
 					t = sleeping.search('D');
 				}
