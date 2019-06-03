@@ -39,6 +39,7 @@ public class serverCounter extends Thread {
 	
 	public void lock()
 	{
+
 		for (int i = 0; i < 3; i++)
 			s[i].p();
 	}

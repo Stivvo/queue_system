@@ -12,6 +12,8 @@ public class counterSleeper extends Thread {
 	public Semaforo mutexList;
 	public queue[] q;
 	public Semaforo[] s;
+
+
 	
 	public counterSleeper(list working, list sleeping, int[] nCounter, Semaforo mutexList, Semaforo[] s, queue[] q) {
 		this.working = working;
@@ -86,6 +88,8 @@ public class counterSleeper extends Thread {
 		unLock();
 		return iMax;
 	}
+	
+	
 	
 	public void run () 
 	{
