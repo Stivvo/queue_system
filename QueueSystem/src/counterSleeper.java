@@ -50,23 +50,23 @@ public class counterSleeper extends Thread {
 			if (flag > 0)
 			{
 				if (flag == 1) {
-					t = sleeping.search(65+QueueManagement.getIndexBlockedQueue(q, s));
+					t = sleeping.search((char)(65+QueueManagement.getIndexBlockedQueue(q, s)));
 				} else {
 					t = sleeping.search('D');
 				}
 				
 				if (t.getNum() != -1)
 				{
-					try {
-			
+					try {			
 						p = new PrintWriter(t.getSocket().getOutputStream());
 						sleeping.rm(t);
 						working.in(t);
+						
 						p.print("i" + t.getNum());
 						p.flush();
 						System.out.println("wake up " + t.getNum());
-						nCounter[t.getType() - 65]++;						
-					}catch (IOException e) {
+						nCounter[t.getType() - 65]++;
+					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				} 

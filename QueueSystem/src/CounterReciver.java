@@ -40,7 +40,7 @@ public class CounterReciver extends Thread{
 			System.out.println("CounterReciver is working");
 			try {
 				message = reader.readLine();
-				System.out.println("received");
+				System.out.println("received"); ///*_*_*_*_*_*_*_* GRAMMAR ERROR *_*_*_*_*_*_*_*_*_*
 				System.out.println("CounterReciver message: " + message);
 			} catch (IOException e) {
 				System.out.println("error reading message through BufferedReader");
@@ -48,18 +48,17 @@ public class CounterReciver extends Thread{
 			if (Integer.parseInt(message.substring(1)) == this.id)
 			{
 				System.out.println("CounterReciver recived "+message);
+				
 				if (message.charAt(0) == 'd')
 				{
 					active.setState(false);
 					F.setTitle(F.getTitle() + off);
 					
-				}
-				else if (message.charAt(0) == 'i')
-				{
-					
+				} else if (message.charAt(0) == 'i') {
 					active.setState(true);
 					F.setTitle(F.getTitle().substring(0, F.getTitle().indexOf(off)));
 				}
+				
 				if (active.isActive())
 					System.out.println("ATTIVA");
 				else
