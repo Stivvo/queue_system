@@ -46,8 +46,6 @@ public class counterSleeper extends Thread {
 		
 		for (int i = 0; i < 3; i++)
 		{
-			if (i != 1)
-			{
 				if (!q[i].isEmpty()) 
 				{
 					if (now.getEpochSecond() - 
@@ -55,7 +53,7 @@ public class counterSleeper extends Thread {
 							>= 5)
 						flag++;
 				}				
-			}
+			
 		}
 		unLock();
 		return flag;
@@ -109,11 +107,8 @@ public class counterSleeper extends Thread {
 						p = new PrintWriter(t.getSocket().getOutputStream());
 						sleeping.in(t);
 						working.rm(t);
-						System.out.println("suspend " + t.getNum());
 						p.println("d" + t.getNum());
 						p.flush();
-						System.out.println("sent");
-						
 						nCounter[j]--;
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -141,6 +136,7 @@ public class counterSleeper extends Thread {
 				if (t.getNum() != -1)
 				{
 					try {
+						System.out.println("sleeping found");
 						p = new PrintWriter(t.getSocket().getOutputStream());
 						sleeping.rm(t);
 						working.in(t);
@@ -151,9 +147,8 @@ public class counterSleeper extends Thread {
 					}catch (IOException e) {
 						e.printStackTrace();
 					}  
-				} else {
-					System.out.println("sleeping not found");
-				}
+					
+				} 
 			}
 			
 				
