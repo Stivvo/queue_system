@@ -159,7 +159,7 @@ public class list
 		node<infoCounter> pa = p;
 		while (pa != null)
 		{
-			System.out.println(pa.getInfo().getType() + ", " + pa.getInfo().getNum());
+			System.out.println(pa.getInfo().print());
 			pa = pa.getPtrNext();
 		}
 	}

@@ -10,12 +10,15 @@ public class CounterState {
 		active = state;
 	}
 	
-	
 	public Boolean isActive() {
 		return active;
 	}
 	
-	public void setState(Boolean state) {
-		active = state;
+	public void setActive() {
+		active = true;
+	}
+	
+	public void setUnactive() {
+		active = false;
 	}
 }

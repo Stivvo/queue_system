@@ -72,9 +72,7 @@ public class serverDealer extends Thread{
 				operate = reader.readLine();
 				i = this.switchCar(operate);
 				
-				if (i != -1)
-				{
-					System.out.println("pushhhh");
+				if (i != -1) {
 					s[i].p();
 					q[i].NEWENTRY(ZonedDateTime.now(ZoneId.of("Europe/Paris")) );
 					LW[i].setText("" + q[i].getDim());

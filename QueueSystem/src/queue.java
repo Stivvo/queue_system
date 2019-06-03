@@ -31,7 +31,6 @@ public class queue
 		return false;
 	}
 
-		
 	public Cliente Rear() {
 		if (!isEmpty())
 			return pRear.getInfo();
@@ -54,6 +53,7 @@ public class queue
 		else 
 		{
 			node<Cliente> pn = pFront;
+			System.out.println("pn: " + pn.getInfo().getTicket());
 			pFront = pFront.getPtrNext();
 			pn = null;
 		}

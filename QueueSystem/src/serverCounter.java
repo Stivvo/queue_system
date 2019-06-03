@@ -94,7 +94,6 @@ public class serverCounter extends Thread {
 						System.out.println("updating " + temp.print());
 				}
 				s[j].v();
-				System.out.println("operate: " + operate + "\n");
 			}
 		}
 	}

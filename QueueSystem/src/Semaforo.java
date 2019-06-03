@@ -11,12 +11,9 @@ public class Semaforo
 	{ 
 		while (n <= 0)
 		{
-			try 
-			{ 
+			try { 
 				wait();
-			} 
-			catch (InterruptedException e) 
-			{
+			} catch (InterruptedException e) {
 				System.out.println("Error in semaphore");
 			}
 		}

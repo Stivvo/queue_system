@@ -37,10 +37,7 @@ public class Counter
 		 * in java, every word separated by spaces 
 		 * you give through command line becomes a String element in the String array args
 		 */
-		System.out.println("arg1: " + args[0]);
-		System.out.println("arg2: " + args[1]);
-		
-		System.out.println("MAIN sportelloAvanzato");
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

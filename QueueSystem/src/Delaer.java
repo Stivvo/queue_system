@@ -34,7 +34,6 @@ public class Delaer {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println(read);
 		ticket.setText(read);
 	}
 	
