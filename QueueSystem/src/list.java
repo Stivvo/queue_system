@@ -36,7 +36,6 @@ public class list
 			top.getInfo().setSock(s);
 			
 		}
-		System.out.println("setted");
 	}
 	
 	public infoCounter rm(infoCounter n)
@@ -87,10 +86,8 @@ public class list
 					i = ((int)pa.getInfo().getType()) - 65;
 					
 					if (nCount[i]) {
-						System.out.println("return " + pa.getInfo().print() + "\n\n\n\n\n\n\n");
 						return pa.getInfo();
 					} else {
-						System.out.println("set " + pa.getInfo().print() + " to true");
 						nCount[i] = true;
 					}
 				}
@@ -105,8 +102,7 @@ public class list
 					diff = ZonedDateTime.now(ZoneId.of("Europe/Paris")).toInstant().getEpochSecond()
 						- pa.getInfo().getT().getEpochSecond();
 			}
-		} else
-			System.out.println("empty");
+		}
 		return t;
 	}
 	

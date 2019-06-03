@@ -45,7 +45,6 @@ public class NewCounter extends Thread
 		
 		writer.println(c+  "" +temp.getNum() );
 		writer.flush();
-		System.out.println(c+  "" +temp.getNum() );
 		
 		String readed = "";
 		try {
@@ -55,7 +54,6 @@ public class NewCounter extends Thread
 		}
 		
 		if (readed.compareTo("ok") == 0) {
-			System.out.println("I enter");
 			String[] argh = { "" + temp.getType(), "" +temp.getNum() };
 
 			try {
@@ -66,7 +64,6 @@ public class NewCounter extends Thread
 				e.printStackTrace();
 			}
 		}
-		System.out.println(readed);
 	}
 	
 	public void connect() 

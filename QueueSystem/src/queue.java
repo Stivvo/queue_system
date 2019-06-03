@@ -56,9 +56,6 @@ public class queue
 			node<Cliente> pn = pFront;
 			pFront = pFront.getPtrNext();
 			pn = null;
-			
-			if (pn == null)
-				System.out.println("pop");
 		}
 		return i;
 	}

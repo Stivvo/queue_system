@@ -80,9 +80,7 @@ public class serverCounter extends Thread {
 			{					
 				s[j].p();
 				
-				if (!q[j].isEmpty())
-				{
-					System.out.println("ready to NEXT");
+				if (!q[j].isEmpty()) {
 					
 					LS[j].setText("" + q[j].NEXT());
 					LC[j].setText("" + sub);

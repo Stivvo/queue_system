@@ -21,33 +21,24 @@ public class CounterReciver extends Thread{
 		try {
 			inp = new InputStreamReader(s1.getInputStream());
 			reader = new BufferedReader(inp);
-			System.out.println("Counter reader creato");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		System.out.println("Counter Receiver creato ");
 	}
 	
 	public void run()
 	{
 		String message = "";
 		String off = " (UNACTIVE)";
-		System.out.println("CounterReciver exists");
 		
-		while (true)
-		{
-			System.out.println("CounterReciver is working");
+		while (true) {
 			try {
 				message = reader.readLine();
-				System.out.println("received"); ///*_*_*_*_*_*_*_* GRAMMAR ERROR *_*_*_*_*_*_*_*_*_*
 				System.out.println("CounterReciver message: " + message);
 			} catch (IOException e) {
 				System.out.println("error reading message through BufferedReader");
 			}
-			if (Integer.parseInt(message.substring(1)) == this.id)
-			{
-				System.out.println("CounterReciver recived "+message);
+			if (Integer.parseInt(message.substring(1)) == this.id) {
 				
 				if (message.charAt(0) == 'd') {
 					active.setState(false);

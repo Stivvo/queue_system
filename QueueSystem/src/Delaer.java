@@ -26,15 +26,12 @@ public class Delaer {
 	public void stampa(int i)
 	{
 		cont[i]++;
-		System.out.println("Communication");
 		pr.println(car[i]);
 		pr.flush();
-		System.out.println("received");
 		String read = "---";
 		try {
 			 read = reader.readLine();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println(read);
@@ -63,7 +60,6 @@ public class Delaer {
 			inp = new InputStreamReader(s.getInputStream());
 			reader = new BufferedReader(inp);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -84,18 +80,12 @@ public class Delaer {
 			}
 		});
 	}
-
-	/**
-	 * Create the application.
-	 */
+	
 	public Delaer() 
 	{
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	void fKey(KeyEvent e, JButton btnA, JButton btnB, JButton btnC)
 	{
 		char c = e.getKeyChar();
@@ -107,15 +97,12 @@ public class Delaer {
 			switch(c) 
 			{
 			case 'a':
-				System.out.println("a");
 				stampa(0);
 				break;
 			case 'b':
-				System.out.println("b");
 				stampa(1);
 				break;
 			case 'c':
-				System.out.println("c");
 				stampa(2);
 				break;
 			}			

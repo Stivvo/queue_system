@@ -47,9 +47,8 @@ public class counterSleeper extends Thread {
 				} //end if (nCounter[j] > 1)
 			} 
 			int flag = QueueManagement.isSomeoneWaiting(q, s);
-			if (flag > 0)
-			{
-				System.out.println();
+			
+			if (flag > 0) {
 				if (flag == 1) {
 					t = sleeping.search( (65+QueueManagement.getIndexBlockedQueue(q, s)));
 				} else {
@@ -57,8 +56,7 @@ public class counterSleeper extends Thread {
 				}
 				System.out.println("t = sleeping.search() " + t.print());
 				
-				if (t.getNum() != -1)
-				{
+				if (t.getNum() != -1) {
 					try {			
 						p = new PrintWriter(t.getSocket().getOutputStream());
 						sleeping.rm(t);

@@ -50,7 +50,6 @@ public class Counter
 					
 					window.frame.setVisible(true);
 					window.connect();
-					System.out.println("MAIN sportelloAvanzato");
 					
 				} catch (Exception e) {
 					e.printStackTrace();
