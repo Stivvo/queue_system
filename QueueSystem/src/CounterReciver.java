@@ -23,7 +23,6 @@ public class CounterReciver extends Thread{
 			reader = new BufferedReader(inp);
 			System.out.println("Counter reader creato");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

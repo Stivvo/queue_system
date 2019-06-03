@@ -26,7 +26,7 @@ public class QueueManagement {
 		
 		for (int i = 0; i < 3; i++)
 		{
-				if (!q[i].isEmpty()) 
+				if (!q[i].isEmpty())
 				{
 					if (now.getEpochSecond() - 
 							q[i].front().getInfo().getT().getEpochSecond() 

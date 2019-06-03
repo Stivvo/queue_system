@@ -3,9 +3,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.SocketException;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 
 import javax.swing.JLabel;
 
@@ -20,10 +17,8 @@ public class serverCounter extends Thread {
 	private JLabel LW[] = new JLabel[3];
 	private list working = new list();
 	
-	
-	
 	public serverCounter(queue[] q1, Semaforo[] s1, JLabel[] LS,
-						JLabel[] LC,JLabel[] LW, Socket socket, list working) throws IOException 
+		JLabel[] LC,JLabel[] LW, Socket socket, list working) throws IOException 
 	{
 		super();
 		q = q1;
@@ -35,72 +30,6 @@ public class serverCounter extends Thread {
 		sock = socket;
 		InputStreamReader inp = new InputStreamReader(sock.getInputStream());
 		reader = new BufferedReader(inp);
-	}
-	
-	public void lock()
-	{
-
-		for (int i = 0; i < 3; i++)
-			s[i].p();
-	}
-	
-	public void unLock()
-	{
-		for (int i = 0; i < 3; i++)
-			s[i].v();
-	}
-	
-	public Boolean isSomeoneWaiting() 
-	{
-		ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Europe/Paris"));
-		Instant now = zdt.toInstant();
-		Boolean flag = false;
-		
-		lock();
-		
-		for (int i = 0; i < 3; i++)
-		{
-			if (i != 1)
-			{
-				if (!q[i].isEmpty()) 
-				{
-					if (now.getEpochSecond() - 
-							q[i].front().getInfo().getT().getEpochSecond() 
-							>= 5)
-						flag = true;
-				}				
-			}
-		}
-		unLock();
-		return flag;
-	}
-	
-	public int getIndexBlockedQueue() 
-	{
-		ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Europe/Paris"));
-		Instant now = zdt.toInstant();
-		int iMax = 0;
-		long longest = 0;
-		long ltemp = 0;
-		
-		lock();
-		
-		for (int i = 0; i < 3; i++)
-		{
-			if (!q[i].isEmpty())
-			{
-				ltemp = now.getEpochSecond() - 
-						q[i].front().getInfo().getT().getEpochSecond();
-				
-				if (ltemp > longest)
-				{
-					longest = ltemp;
-					iMax = i;
-				}
-			}
-		}
-		unLock();
-		return iMax;
 	}
 	
 	public void run()  
@@ -136,11 +65,11 @@ public class serverCounter extends Thread {
 			
 			if (i == 3 || i == 4)
 			{
-				if (!q[1].isEmpty() && !isSomeoneWaiting()) {
+				if (!q[1].isEmpty() && QueueManagement.isSomeoneWaiting(q, s) == 0) {
 					System.out.println("j = 1");
 					j = 1;
 				} else {
-					j = getIndexBlockedQueue();
+					j = QueueManagement.getIndexBlockedQueue(q, s);
 					System.out.println("j2 = " + j);
 				}	
 			}

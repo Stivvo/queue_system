@@ -55,7 +55,6 @@ public class counterSleeper extends Thread {
 					t = sleeping.search('D');
 				}
 				
-				
 				if (t.getNum() != -1)
 				{
 					try {
@@ -69,11 +68,9 @@ public class counterSleeper extends Thread {
 						nCounter[t.getType() - 65]++;						
 					}catch (IOException e) {
 						e.printStackTrace();
-					}  
-					
+					}
 				} 
 			}
-			
 				
 			i = (i + 1) % 4;
 			try {
