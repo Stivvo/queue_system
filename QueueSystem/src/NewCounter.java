@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 
 public class NewCounter extends Thread
 {
@@ -85,8 +87,11 @@ public class NewCounter extends Thread
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);		
 		
-		JSpinner spinner = new JSpinner();
+		SpinnerModel sm = new SpinnerNumberModel(0, 0, 100, 1);
+		
+		JSpinner spinner = new JSpinner(sm);
 		spinner.setBounds(41, 93, 105, 22);
+		spinner.getModel();
 		frame.getContentPane().add(spinner);
 		
 		JButton btnFinance = new JButton("Finance");
@@ -114,7 +119,7 @@ public class NewCounter extends Thread
 		
 		btnPackage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				createCounter('C', spinner);	
+				createCounter('C', spinner);
 			}});
 		
 		JButton btnPolifunzione = new JButton("Multipurpose");
