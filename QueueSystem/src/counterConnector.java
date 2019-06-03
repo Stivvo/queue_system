@@ -15,11 +15,11 @@ public class counterConnector extends Thread{
 	private JLabel[] LW;
 	private list working;
 	private Semaforo mutexL;
-	private int[] nCounter;
+	//private int[] nCounter;
 	
 	public counterConnector(
 			queue[] q1, Semaforo[] s1, JLabel[] LS, JLabel[] LC, JLabel[] LW,
-			list working, Semaforo mutexL, int[] nCounter)
+			list working, Semaforo mutexL/*, int[] nCounter*/)
 			throws IOException {
 		super();
 		setName("counterConnector");
@@ -30,7 +30,7 @@ public class counterConnector extends Thread{
 		this.LW = LW;
 		this.mutexL = mutexL;
 		this.working = working;
-		this.nCounter = nCounter;
+		//this.nCounter = nCounter;
 		ss = new ServerSocket(8045);
 	}
 	
@@ -47,7 +47,7 @@ public class counterConnector extends Thread{
 				 
 				 int t =  readed.charAt(0) - 65;
 				 
-				 nCounter[t]++;
+				 //nCounter[t]++;
 				 
 				 System.out.println(
 					"readed.charAt: " + readed.charAt(0) + 

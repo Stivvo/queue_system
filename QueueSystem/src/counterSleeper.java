@@ -10,10 +10,9 @@ public class counterSleeper extends Thread {
 	public queue[] q;
 	public Semaforo[] s;
 	
-	public counterSleeper(list working, list sleeping, int[] nCounter, Semaforo mutexList, Semaforo[] s, queue[] q) {
+	public counterSleeper(list working, list sleeping, /*int[] nCounter,*/ Semaforo mutexList, Semaforo[] s, queue[] q) {
 		this.working = working;
 		this.sleeping = sleeping;
-		this.nCounter = nCounter;
 		this.mutexList = mutexList;
 		this.s = s;
 		this.q = q;
@@ -31,30 +30,29 @@ public class counterSleeper extends Thread {
 			
 			if (t.getNum() != -1) {
 				j = (int)t.getType() - 65;
-				
-				if (nCounter[j] > 1 && QueueManagement.isSomeoneWaiting(q, s) > 0) {
 					
-					try {
-						p = new PrintWriter(t.getSocket().getOutputStream());
-						sleeping.in(t);
-						working.rm(t);
-						p.println("d" + t.getNum());
-						p.flush();
-						nCounter[j]--;
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				} //end if (nCounter[j] > 1)
-			} 
+				try {
+					p = new PrintWriter(t.getSocket().getOutputStream());
+					sleeping.in(t);
+					working.rm(t);
+					p.println("d" + t.getNum());
+					p.flush();
+					//nCounter[j]--;
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+				
 			int flag = QueueManagement.isSomeoneWaiting(q, s);
 			
 			if (flag > 0) {
-				if (flag == 1) {
-					t = sleeping.search( (65+QueueManagement.getIndexBlockedQueue(q, s)));
+				if (flag >= 1) {
+					System.out.println("IndexBlockedQueue: " + (char)(65+QueueManagement.getIndexBlockedQueue(q, s)));
+					t = sleeping.search((char)(65+QueueManagement.getIndexBlockedQueue(q, s)));
 				} else {
 					t = sleeping.search('D');
 				}
-				System.out.println("t = sleeping.search() " + t.print());
+				//System.out.println("t = sleeping.search() " + t.print());
 				
 				if (t.getNum() != -1) {
 					try {			
@@ -65,7 +63,6 @@ public class counterSleeper extends Thread {
 						
 						p.println("i" + t.getNum());
 						p.flush();
-						nCounter[t.getType() - 65]++;
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

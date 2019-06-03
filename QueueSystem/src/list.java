@@ -27,12 +27,10 @@ public class list
 		if (!isEmpty()) {
 			node<infoCounter> top = p;
 			
-			while (top.getPtrNext() != null) {
+			while (top.getPtrNext() != null)
 				top = top.getPtrNext();
-			}
 			
 			top.getInfo().setSock(s);
-			
 		}
 	}
 	
@@ -75,8 +73,6 @@ public class list
 				- pa.getInfo().getT().getEpochSecond();
 					
 			while (pa != null) {
-				
-				System.out.println("second difference: " + diff);
 				
 				if (diff > 20) {
 					i = ((int)pa.getInfo().getType()) - 65;
