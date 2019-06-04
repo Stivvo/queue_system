@@ -50,7 +50,7 @@ public class counterSleeper extends Thread {
 				}
 				if (t.getNum() != -1 || flag != 1) //apro un polifunzionale se non c'è nessuno specifico oppure ci sono più code in attesa 
 				{
-					System.out.println("Opening polifunc");
+					System.out.println("May open polifunc");
 					t.set(sleeping.search('D'));
 				}
 				
@@ -61,6 +61,7 @@ public class counterSleeper extends Thread {
 						t.setT(QueueManagement.getNow());
 						working.in(t);
 						
+						System.out.println("opening " + t.print());
 						p.println("i" + t.getNum());
 						p.flush();
 					} catch (IOException e) {

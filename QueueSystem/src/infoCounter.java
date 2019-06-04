@@ -26,7 +26,6 @@ public class infoCounter
 	
 	public int getNum() {return num;}
 	
-	
 	public void setSock(Socket sock) {
 		s = sock;
 	}

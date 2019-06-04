@@ -23,7 +23,6 @@ public class QueueManagement {
 	
 	public static int isSomeoneWaiting(queue[] q, Semaforo[] s)
 	{
-		Instant now = getNow();
 		int flag = 0;
 		
 		lock(s);
@@ -44,7 +43,6 @@ public class QueueManagement {
 	
 	public static int getIndexBlockedQueue(queue[] q, Semaforo[] s)
 	{
-		Instant now = getNow();
 		int iMax = 0;
 		long longest = 0;
 		long ltemp = 0;

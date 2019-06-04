@@ -18,7 +18,10 @@ public class list
 	
 	public void in (infoCounter x)
 	{
-		node<infoCounter> n = new node<infoCounter>(x, p);
+		node<infoCounter> n = new node<infoCounter>();
+		n.setPtrNext(p);
+		n.info = new infoCounter('A', -1);
+		n.info.set(x);
 		p = n;
 	}
 	
@@ -40,21 +43,18 @@ public class list
 		
 		if (p.getInfo().eq(n))
 		{
-			t = p.getInfo();
+			t.set(p.getInfo());
 			p = p.getPtrNext();
-		}
-		else
-		{
+		} else {
 			node<infoCounter> pa = p;
 			
 			while (pa.getPtrNext() != null && 
 					!pa.getPtrNext().getInfo().eq(n))
 					pa = pa.getPtrNext();
 			
-			if (pa.getPtrNext() != null)
-			{
-				t = pa.getPtrNext().getInfo();
-				pa.setPtrNext(pa.getPtrNext().getPtrNext());				
+			if (pa.getPtrNext() != null) {
+				t.set(pa.getPtrNext().getInfo());
+				pa.setPtrNext(pa.getPtrNext().getPtrNext());
 			}
 		}
 		return t;
@@ -62,37 +62,33 @@ public class list
 	
 	public infoCounter search() //searches for inactive counters
 	{
-		node<infoCounter>pa = p;
 		infoCounter t = new infoCounter('0', -1);
-		Boolean[] nCount = {false, false, false, false};
-		int i = 0;
 		
 		if (!this.isEmpty()) {
-		
-			long diff = QueueManagement.getNow().getEpochSecond() 
-				- pa.getInfo().getT().getEpochSecond();
+			node<infoCounter>pa = p;
+			Boolean[] nCount = {false, false, false, false};
+			int i = 0;
+			long diff = 0;
 					
-			while (pa != null) {
+			while (pa != null && pa.info != null) {
+				
+				diff = QueueManagement.getNow().getEpochSecond() 
+						- pa.getInfo().getT().getEpochSecond();
 				
 				if (diff > 20) {
 					i = ((int)pa.getInfo().getType()) - 65;
 					
-					if (nCount[i]) {
+					if (nCount[i])
 						return pa.getInfo();
-					} else {
+					else
 						nCount[i] = true;
-					}
-				}
-				else if (diff > 9999) {//se l'attesa la differenza di tempo esce dallo spazio long
+				} else
+				if (diff > 9999) {//se l'attesa la differenza di tempo esce dallo spazio long
 					infoCounter temp = pa.getInfo();
 					temp.setT(QueueManagement.getNow());
-					pa.setInfo(temp);
+					pa.info.set(temp);
 				}
 				pa = pa.getPtrNext();
-				
-				if (pa != null)
-					diff = QueueManagement.getNow().getEpochSecond()
-						- pa.getInfo().getT().getEpochSecond();
 			}
 		}
 		return t;
@@ -109,7 +105,7 @@ public class list
 		if (pa != null) {
 			if (update) {
 				n.setT(QueueManagement.getNow());
-				pa.setInfo(n);
+				pa.info.set(n);
 			}
 			t = pa.getInfo();
 		}
