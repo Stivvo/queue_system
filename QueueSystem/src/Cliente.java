@@ -1,5 +1,4 @@
 import java.time.Instant;
-import java.time.ZonedDateTime;
 
 //ZonedDateTime zdt = ZonedDateTime.now(ZonedDateTime.now(ZoneId.of("Europe/Paris")));
 
@@ -8,10 +7,10 @@ public class Cliente
 	private String ticket;
 	Instant t;
 	
-	public Cliente(String ticket, ZonedDateTime zdt)
+	public Cliente(String ticket, Instant t1)
 	{
 		this.ticket = ticket;
-		this.t = zdt.toInstant();
+		this.t = t1;
 		
 		/*
 		 * la zdt è fornita da serverDealer

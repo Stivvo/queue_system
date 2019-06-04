@@ -1,6 +1,3 @@
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-
 /**
  * this class veryfies if queue, list and node are working
  */
@@ -16,7 +13,7 @@ public class Test
 		
 		for (i = 0; i < len; i++)
 		{
-			q.NEWENTRY(ZonedDateTime.now(ZoneId.of("Europe/Paris")));
+			q.NEWENTRY(QueueManagement.getNow());
 			
 			try {
 			    Thread.sleep(1000);

@@ -4,8 +4,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 
 import javax.swing.JLabel;
 
@@ -74,7 +72,7 @@ public class serverDealer extends Thread{
 				
 				if (i != -1) {
 					s[i].p();
-					q[i].NEWENTRY(ZonedDateTime.now(ZoneId.of("Europe/Paris")) );
+					q[i].NEWENTRY(QueueManagement.getNow());
 					LW[i].setText("" + q[i].getDim());
 					Cliente client = q[i].Rear();
 					

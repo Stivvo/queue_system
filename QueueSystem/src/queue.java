@@ -1,4 +1,4 @@
-import java.time.ZonedDateTime;
+import java.time.Instant;
 
 public class queue
 {
@@ -60,13 +60,13 @@ public class queue
 		return i;
 	}
 
-	public void NEWENTRY(ZonedDateTime zdt)
+	public void NEWENTRY(Instant t1)
 	{
 		counter++;
 		if (counter > 99) {
 			counter = 0;
 		}
-		Cliente clientE = new Cliente(String.valueOf(service) + counter, zdt);
+		Cliente clientE = new Cliente(String.valueOf(service) + counter, t1);
 		node<Cliente> pn = new node<Cliente>(clientE, null);
 		dim++;
 		
