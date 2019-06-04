@@ -9,7 +9,6 @@ import java.time.ZonedDateTime;
 
 import javax.swing.JLabel;
 
-
 public class serverDealer extends Thread{
 	
 	private Socket sock;

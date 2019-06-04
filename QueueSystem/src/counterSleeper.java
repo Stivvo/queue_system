@@ -10,7 +10,7 @@ public class counterSleeper extends Thread {
 	public queue[] q;
 	public Semaforo[] s;
 	
-	public counterSleeper(list working, list sleeping, /*int[] nCounter,*/ Semaforo mutexList, Semaforo[] s, queue[] q) {
+	public counterSleeper(list working, list sleeping, Semaforo mutexList, Semaforo[] s, queue[] q) {
 		this.working = working;
 		this.sleeping = sleeping;
 		this.mutexList = mutexList;
@@ -21,7 +21,7 @@ public class counterSleeper extends Thread {
 	public void run () 
 	{
 		infoCounter t;
-		int i = 0, j = 0;
+		int i = 0;
 		
 		while (true)
 		{ //Searches for inactive counters and closes them
@@ -29,24 +29,24 @@ public class counterSleeper extends Thread {
 			PrintWriter p;
 			
 			if (t.getNum() != -1) {
-				j = (int)t.getType() - 65;
+				if (QueueManagement.isSomeoneWaiting(q, s) > 0) {
 					
-				try {
-					p = new PrintWriter(t.getSocket().getOutputStream());
-					sleeping.in(t);
-					working.rm(t);
-					p.println("d" + t.getNum());
-					p.flush();
-					//nCounter[j]--;
-				} catch (IOException e) {
-					e.printStackTrace();
+					try {
+						p = new PrintWriter(t.getSocket().getOutputStream());
+						sleeping.in(t);
+						working.rm(t);
+						p.println("d" + t.getNum());
+						p.flush();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 				
 			int flag = QueueManagement.isSomeoneWaiting(q, s);
 			
 			if (flag > 0) {
-				if (flag >= 1) {
+				if (flag == 1) {
 					System.out.println("IndexBlockedQueue: " + (char)(65+QueueManagement.getIndexBlockedQueue(q, s)));
 					t = sleeping.search((char)(65+QueueManagement.getIndexBlockedQueue(q, s)));
 				} else {

@@ -20,8 +20,6 @@ public class serverApplication {
 	private list working;
 	private list sleeping;
 	private Semaforo mutexList;
-	//private int[] nCounter = {0, 0, 0, 0};
-	//a position for the number of each type of sounter
 	
 	private dealerConnector thDealerConnect;
 	private counterConnector thCounterConnect;
@@ -52,7 +50,7 @@ public class serverApplication {
 		initialize();
 		q = new queue[3];
 		s = new Semaforo[3];
-		sleeper = new counterSleeper(working, sleeping, /*nCounter,*/ mutexList, s, q);
+		sleeper = new counterSleeper(working, sleeping, mutexList, s, q);
 		q[0] = new queue('A');
 		q[1] = new queue('C');
 		q[2] = new queue('P');
