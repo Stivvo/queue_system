@@ -20,39 +20,39 @@ public class counterSleeper extends Thread {
 	
 	public void run () 
 	{
-		infoCounter t;
+		infoCounter t = new infoCounter('A', -1);
 		int i = 0;
 		
 		while (true)
 		{ //Searches for inactive counters and closes them
-			t = working.search();
+			t.set(working.search());
 			PrintWriter p;
 			
-			if (t.getNum() != -1) {
-				if (QueueManagement.isSomeoneWaiting(q, s) > 0) {
-					
-					try {
-						p = new PrintWriter(t.getSocket().getOutputStream());
-						sleeping.in(t);
-						working.rm(t);
-						p.println("d" + t.getNum());
-						p.flush();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+			if (t.getNum() != -1) {					
+				try {
+					p = new PrintWriter(t.getSocket().getOutputStream());
+					sleeping.in(t);
+					working.rm(t);
+					p.println("d" + t.getNum());
+					p.flush();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
 			}
 				
 			int flag = QueueManagement.isSomeoneWaiting(q, s);
+			t = new infoCounter('A', -1);
 			
 			if (flag > 0) {
 				if (flag == 1) {
 					System.out.println("IndexBlockedQueue: " + (char)(65+QueueManagement.getIndexBlockedQueue(q, s)));
-					t = sleeping.search((char)(65+QueueManagement.getIndexBlockedQueue(q, s)));
-				} else {
-					t = sleeping.search('D');
+					t.set(sleeping.search((char)(65+QueueManagement.getIndexBlockedQueue(q, s))));
 				}
-				//System.out.println("t = sleeping.search() " + t.print());
+				if (t.getNum() != -1 || flag != 1) //apro un polifunzionale se non c'è nessuno specifico oppure ci sono più code in attesa 
+				{
+					System.out.println("Opening polifunc");
+					t.set(sleeping.search('D'));
+				}
 				
 				if (t.getNum() != -1) {
 					try {			

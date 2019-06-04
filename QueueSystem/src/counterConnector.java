@@ -29,7 +29,6 @@ public class counterConnector extends Thread{
 		this.LW = LW;
 		this.mutexL = mutexL;
 		this.working = working;
-		//this.nCounter = nCounter;
 		ss = new ServerSocket(8045);
 	}
 	
