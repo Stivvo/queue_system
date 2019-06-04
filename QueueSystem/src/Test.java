@@ -72,6 +72,18 @@ public class Test
 			}
 		}
 		
+		for (i = 0; i < a.length; i++) {
+			if (l.rm(l.search(a[i])).getNum() == -1) {
+				System.out.println("rm: " + temp.getType() + ", " + temp.getNum() + " not found");
+				return false;
+			}
+		}
+		
+		if (!l.isEmpty()) {
+			System.out.println("queue not empty");
+			return false;
+		}
+		
 		return true;
 	}
 }
