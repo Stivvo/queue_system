@@ -66,4 +66,23 @@ public class QueueManagement {
 		unLock(s);
 		return iMax;
 	}
+	
+	public static int getIndexAvg(queue[] q, Semaforo[] s) {
+		int iMax = -1;
+		long max = -1;
+		int tmp = 0;
+		
+		lock(s);
+		
+		for (int i = 0; i < 3; i++) {
+			tmp = q[i].getAvg();
+			if (tmp != -1 && tmp > max) {
+				max = tmp;
+				iMax = i;
+			}
+		}
+		unLock(s);
+		return iMax;		
+	}
+	
 }

@@ -77,4 +77,27 @@ public class queue
 			pRear = pn;
 		}
 	}
+	
+	public int getAvg() {
+		if (isEmpty())
+			return -1;
+		
+		node<Cliente>pa = pFront;
+		long avg = 0;
+		int n = 0;
+		
+		while (pa != null) {
+			
+			if (pa.getPtrNext() == null)
+				avg += pa.info.getT().getEpochSecond() - QueueManagement.getNow().getEpochSecond();
+			else
+				avg += pa.info.getT().getEpochSecond() - pa.info.getT().getEpochSecond();
+			
+			n++;
+			pa = pa.getPtrNext();
+		}
+		
+		return (int)(avg / n);
+	}
+	
 }
