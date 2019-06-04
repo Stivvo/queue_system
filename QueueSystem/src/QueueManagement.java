@@ -31,7 +31,7 @@ public class QueueManagement {
 		{
 				if (!q[i].isEmpty())
 				{
-					if (q[i].rear().getInfo().getT().getEpochSecond() -
+					if (getNow().getEpochSecond() -
 							q[i].front().getInfo().getT().getEpochSecond() 
 							>= 30)
 						flag++;
@@ -53,8 +53,8 @@ public class QueueManagement {
 		{
 			if (!q[i].isEmpty())
 			{
-				ltemp = q[i].front().getInfo().getT().getEpochSecond() - 
-						q[i].rear().getInfo().getT().getEpochSecond();
+				ltemp = getNow().getEpochSecond() - 
+						q[i].front().getInfo().getT().getEpochSecond();
 				
 				if (ltemp > longest)
 				{
