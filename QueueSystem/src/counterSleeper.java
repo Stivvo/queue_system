@@ -40,16 +40,14 @@ public class counterSleeper extends Thread {
 				}
 			}
 				
-			int flag = QueueManagement.isSomeoneWaiting(q, s);
+			int flag = QueueManagement.getIndexAvg(q, s);
 			t = new infoCounter('A', -1);
 			
-			if (flag > 0) {
-				if (flag == 1) {
-					System.out.println("IndexBlockedQueue: " + (char)(65+QueueManagement.getIndexBlockedQueue(q, s)));
-					t.set(sleeping.search((char)(65+QueueManagement.getIndexBlockedQueue(q, s))));
-				}
-				if (t.getNum() != -1 || flag != 1) //apro un polifunzionale se non c'è nessuno specifico oppure ci sono più code in attesa 
-				{
+			if (flag != -1) { 
+				t.set(sleeping.search((char)(65 + flag)));
+				
+				if (t.getNum() == -1)  
+				{//apro un polifunzionale se non c'è nessuno specifico oppure ci sono più code in attesa
 					System.out.println("May open polifunc");
 					t.set(sleeping.search('D'));
 				}
