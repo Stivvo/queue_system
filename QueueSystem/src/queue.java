@@ -83,20 +83,15 @@ public class queue
 			return -1;
 		
 		node<Cliente>pa = pFront;
-		long avg = 0;
-		int n = 0;
+		long avg = QueueManagement.getNow().getEpochSecond() - pFront.info.getT().getEpochSecond();
+		int n = 1;
 		
-		while (pa != null) {
-			
-			if (pa.getPtrNext() == null)
-				avg += pa.info.getT().getEpochSecond() - QueueManagement.getNow().getEpochSecond();
-			else
-				avg += pa.info.getT().getEpochSecond() - pa.info.getT().getEpochSecond();
+		while (pa.getPtrNext() != null) {
+			avg += pa.getInfo().getT().getEpochSecond() - pa.getPtrNext().info.getT().getEpochSecond();
 			
 			n++;
 			pa = pa.getPtrNext();
 		}
-		
 		return (int)(avg / n);
 	}
 	

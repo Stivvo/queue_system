@@ -76,6 +76,7 @@ public class QueueManagement {
 		
 		for (int i = 0; i < 3; i++) {
 			tmp = q[i].getAvg();
+			System.out.println(i + " avg: " + tmp);
 			if (tmp != -1 && tmp > 5 && tmp > max) { //un attesa media di almeno 5
 				max = tmp;
 				iMax = i;
