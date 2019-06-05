@@ -55,10 +55,10 @@ serverDealer: su richiesta di Dealer, aggiunge clienti in una determinata coda
 
 --- connettori ---
 
-counterConnector: thread per connettere n serverCounter
+counterConnector: thread per connettere n serverCounter(cioè n counter)
 
-counterCreatorConnector: connette un serverCounterOpener
+counterCreatorConnector: connette n serverCounterOpener (cioè n newCounter)
 
-dealerConnector: connette un serverDealer
+dealerConnector: connette n serverDealer (cioè n Dealer)
 
 
