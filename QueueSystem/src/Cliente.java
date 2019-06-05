@@ -33,4 +33,9 @@ public class Cliente
 		return t;
 	}
 	
+	public void set(Cliente x) {
+		this.ticket = x.ticket;
+		this.t = x.t;
+	}
+	
 }

@@ -19,9 +19,8 @@ public class serverApplication {
 
 	private list working;
 	private list sleeping;
+	private list counter;
 	private Semaforo mutexList;
-	private int[] nCounter = {0, 0, 0, 0};
-	//a position for the number of each type of sounter
 	
 	private dealerConnector thDealerConnect;
 	private counterConnector thCounterConnect;
@@ -43,6 +42,8 @@ public class serverApplication {
 
 	public serverApplication() throws IOException 
 	{
+		
+		counter = new list();
 		working = new list();
 		sleeping = new list();
 		mutexList = new Semaforo(1);
@@ -52,7 +53,7 @@ public class serverApplication {
 		initialize();
 		q = new queue[3];
 		s = new Semaforo[3];
-		sleeper = new counterSleeper(working, sleeping, nCounter, mutexList, s, q);
+		sleeper = new counterSleeper(working, sleeping, counter, mutexList, s, q);
 		q[0] = new queue('A');
 		q[1] = new queue('C');
 		q[2] = new queue('P');
@@ -61,8 +62,8 @@ public class serverApplication {
 			s[i] = new Semaforo(1);
 		
 		thDealerConnect = new dealerConnector(q, s, lblWaiting);
-		thCounterConnect = new counterConnector(q, s, lblService, lblCounter, lblWaiting, working, mutexList, nCounter);
-		thCounterCreatorConnect = new counterCreatorConnector(working, sleeping, mutexList);
+		thCounterConnect = new counterConnector(q, s, lblService, lblCounter, lblWaiting, working, counter, mutexList/*, nCounter*/);
+		thCounterCreatorConnect = new counterCreatorConnector(counter, mutexList);
 		
 		JLabel lblAssisting = new JLabel("Assisting");
 		lblAssisting.setHorizontalAlignment(SwingConstants.CENTER);

@@ -7,7 +7,6 @@ import java.net.SocketException;
 
 import javax.swing.JLabel;
 
-
 public class serverDealer extends Thread{
 	
 	private Socket sock;

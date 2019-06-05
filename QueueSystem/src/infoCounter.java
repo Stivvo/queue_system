@@ -20,12 +20,14 @@ public class infoCounter
 		this.num = num;
 		this.t = t;
 		s = sock;
+		
+		if (sock == null)
+			System.out.println(this.print() + " socket null");//non ha detto nulla
 	}
 	
 	public char getType() {return type;}
 	
 	public int getNum() {return num;}
-	
 	
 	public void setSock(Socket sock) {
 		s = sock;
@@ -42,6 +44,13 @@ public class infoCounter
 			return true;
 		
 		return false;
+	}
+	
+	public void set(infoCounter x) {
+		this.type = x.type;
+		this.num = x.num;
+		this.t = x.t;
+		this.s = x.s;
 	}
 	
 	public void setT(Instant t)

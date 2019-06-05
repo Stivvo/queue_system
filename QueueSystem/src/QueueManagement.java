@@ -23,7 +23,6 @@ public class QueueManagement {
 	
 	public static int isSomeoneWaiting(queue[] q, Semaforo[] s)
 	{
-		Instant now = getNow();
 		int flag = 0;
 		
 		lock(s);
@@ -32,12 +31,11 @@ public class QueueManagement {
 		{
 				if (!q[i].isEmpty())
 				{
-					if (now.getEpochSecond() - 
+					if (getNow().getEpochSecond() -
 							q[i].front().getInfo().getT().getEpochSecond() 
-							>= 10)
+							>= 30)
 						flag++;
-				}				
-			
+				}
 		}
 		unLock(s);
 		return flag;
@@ -45,7 +43,6 @@ public class QueueManagement {
 	
 	public static int getIndexBlockedQueue(queue[] q, Semaforo[] s)
 	{
-		Instant now = getNow();
 		int iMax = 0;
 		long longest = 0;
 		long ltemp = 0;
@@ -56,7 +53,7 @@ public class QueueManagement {
 		{
 			if (!q[i].isEmpty())
 			{
-				ltemp = now.getEpochSecond() - 
+				ltemp = getNow().getEpochSecond() - 
 						q[i].front().getInfo().getT().getEpochSecond();
 				
 				if (ltemp > longest)
@@ -69,4 +66,24 @@ public class QueueManagement {
 		unLock(s);
 		return iMax;
 	}
+	
+	public static int getIndexAvg(queue[] q, Semaforo[] s) {
+		int iMax = -1;
+		long max = -1;
+		int tmp = 0;
+		
+		lock(s);
+		
+		for (int i = 0; i < 3; i++) {
+			tmp = q[i].getAvg();
+			System.out.println(i + " avg: " + tmp);
+			if (tmp != -1 && tmp > 5 && tmp > max) { //un attesa media di almeno 5
+				max = tmp;
+				iMax = i;
+			}
+		}
+		unLock(s);
+		return iMax;		
+	}
+	
 }

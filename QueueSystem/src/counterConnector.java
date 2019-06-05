@@ -14,23 +14,23 @@ public class counterConnector extends Thread{
 	private JLabel[] LC;
 	private JLabel[] LW;
 	private list working;
+	private list counter;
 	private Semaforo mutexL;
-	private int[] nCounter;
 	
 	public counterConnector(
 			queue[] q1, Semaforo[] s1, JLabel[] LS, JLabel[] LC, JLabel[] LW,
-			list working, Semaforo mutexL, int[] nCounter)
+			list working, list counter, Semaforo mutexL)
 			throws IOException {
 		super();
 		setName("counterConnector");
 		q = q1;
 		s = s1;
+		this.counter = counter;
 		this.LS = LS;
 		this.LC = LC;
 		this.LW = LW;
 		this.mutexL = mutexL;
 		this.working = working;
-		this.nCounter = nCounter;
 		ss = new ServerSocket(8045);
 	}
 	
@@ -40,28 +40,32 @@ public class counterConnector extends Thread{
 			serverCounter thSCounter;
 
 			try {
-				 sock = ss.accept();
-				 thSCounter = new serverCounter(q, s, LS, LC, LW, sock, working);
-				 BufferedReader read = new BufferedReader(new InputStreamReader(sock.getInputStream()));
-				 String readed = read.readLine();
-				 
-				 int t =  readed.charAt(0) - 65;
-				 
-				 nCounter[t]++;
-				 
-				 System.out.println(
-					"readed.charAt: " + readed.charAt(0) + 
-				 	"readed.substring(0): " + readed.substring(0));
-				 infoCounter counter = new infoCounter(
+				sock = ss.accept();
+				if (sock == null)
+					System.out.println("ss.accept() == null ");
+				BufferedReader read = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+				String readed = read.readLine();
+				thSCounter = new serverCounter(q, s, LS, LC, LW, sock, working);
+				
+				int t =  readed.charAt(0) - 65;
+				System.out.println("counterConnector t: " + t);
+				
+				System.out.println(
+				"readed.charAt: " + readed.charAt(0) + 
+					"readed.substring(0): " + readed.substring(0));
+				infoCounter counter = new infoCounter(
 					readed.charAt(0), Integer.parseInt
 						(readed.substring(1)), QueueManagement.getNow(), sock);
 				
-				 mutexL.p();
-				 System.out.println("counter.print: " + counter.print());
-				 working.in(counter);
-				 mutexL.v();
+				mutexL.p();
+				System.out.println("counter.print: " + counter.print());
+				working.in(counter);
+				this.counter.in(new infoCounter(
+					readed.charAt(0), Integer.parseInt
+						(readed.substring(1)), QueueManagement.getNow(), sock));
+				mutexL.v();
 				 
-				 thSCounter.start();
+				thSCounter.start();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
