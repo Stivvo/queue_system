@@ -67,7 +67,7 @@ public class counterSleeper extends Thread {
 				if (t2.getNum() != -1) {
 					try {
 						if (t2.getSocket() == null)
-							t2.setSock(counter.getSocketByID(t.getType(), t.getNum()));
+							t2.setSock(counter.search(t, false).getSocket());
 						
 						p = new PrintWriter(t2.getSocket().getOutputStream());
 						sleeping.rm(t2);

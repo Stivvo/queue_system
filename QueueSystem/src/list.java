@@ -1,4 +1,3 @@
-import java.net.Socket;
 
 public class list 
 {
@@ -137,18 +136,4 @@ public class list
 			pa = pa.getPtrNext();
 		}
 	}
-	
-	public Socket getSocketByID(char c, int num) {
-		node<infoCounter> pa = p;
-		
-		while (pa != null && (pa.getInfo().getType() != c ||  pa.getInfo().getNum() != num)) {
-			pa = pa.getPtrNext();
-		}
-		
-		if (pa.getInfo().getType() == c && pa.getInfo().getNum() == num)
-			return pa.getInfo().getSocket();
-			
-		return null;
-	}
-	
 }
