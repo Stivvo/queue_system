@@ -26,7 +26,7 @@ Counter: sportello, contiene un bottone per mandare avanti una coda
 
 Dealer: distributore di ticket
 
-serverApplication: tabellone con le informazioni delle code che avanzano
+serverApplication: tabellone con le informazioni delle code che avanzano, e funge da server per i client Counter, Dealer e NewCounter
 
 NewCounter: serve per creare nuovi sportelli
 
