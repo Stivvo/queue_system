@@ -14,16 +14,18 @@ public class counterConnector extends Thread{
 	private JLabel[] LC;
 	private JLabel[] LW;
 	private list working;
+	private list counter;
 	private Semaforo mutexL;
 	
 	public counterConnector(
 			queue[] q1, Semaforo[] s1, JLabel[] LS, JLabel[] LC, JLabel[] LW,
-			list working, Semaforo mutexL)
+			list working, list counter, Semaforo mutexL)
 			throws IOException {
 		super();
 		setName("counterConnector");
 		q = q1;
 		s = s1;
+		this.counter = counter;
 		this.LS = LS;
 		this.LC = LC;
 		this.LW = LW;
@@ -58,6 +60,9 @@ public class counterConnector extends Thread{
 				mutexL.p();
 				System.out.println("counter.print: " + counter.print());
 				working.in(counter);
+				this.counter.in(new infoCounter(
+					readed.charAt(0), Integer.parseInt
+						(readed.substring(1)), QueueManagement.getNow(), sock));
 				mutexL.v();
 				 
 				thSCounter.start();

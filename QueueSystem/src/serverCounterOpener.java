@@ -6,20 +6,18 @@ import java.io.InputStreamReader;
 
 public class serverCounterOpener extends Thread 
 {
-	private list working;
-	private list sleeping;
+	private list counter;
 	private Semaforo mutexL;
 	
 	private PrintWriter write;
 	private BufferedReader read;
 	private Socket s;
 	
-	public serverCounterOpener(Socket sock, list working, list sleeping, Semaforo mutexList)
+	public serverCounterOpener(Socket sock, list counter, Semaforo mutexList)
 	{
 		super();
 		s = sock;
-		this.working = working;
-		this.sleeping = sleeping;
+		this.counter = counter;
 		mutexL = mutexList;
 		
 		try {
@@ -45,8 +43,7 @@ public class serverCounterOpener extends Thread
 		
 			mutexL.p();
 			
-			if (working.search(inf.getNum()).getNum() != -1 ||
-				sleeping.search(inf.getNum()).getNum() != -1)
+			if (counter.search(inf.getNum()).getNum() != -1)
 				write.println("already exists");
 			else
 				write.println("ok"); 

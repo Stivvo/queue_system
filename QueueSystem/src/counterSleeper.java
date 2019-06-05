@@ -5,14 +5,16 @@ public class counterSleeper extends Thread {
 	
 	public list working;
 	public list sleeping;
+	public list counter;
 	public int[] nCounter;
 	public Semaforo mutexList;
 	public queue[] q;
 	public Semaforo[] s;
 	
-	public counterSleeper(list working, list sleeping, Semaforo mutexList, Semaforo[] s, queue[] q) {
+	public counterSleeper(list working, list sleeping, list counter, Semaforo mutexList, Semaforo[] s, queue[] q) {
 		this.working = working;
 		this.sleeping = sleeping;
+		this.counter = counter;
 		this.mutexList = mutexList;
 		this.s = s;
 		this.q = q;
@@ -21,6 +23,7 @@ public class counterSleeper extends Thread {
 	public void run () 
 	{
 		infoCounter t = new infoCounter('A', -1);
+		infoCounter t2 = new infoCounter('A', -1);
 		int i = 0;
 		
 		while (true)
@@ -36,11 +39,8 @@ public class counterSleeper extends Thread {
 			if (t.getNum() != -1) {					
 				try {
 					
-					if (t == null)
-						System.out.println("t null ");
-					
 					if (t.getSocket() == null)
-						System.out.println("t socket null " + t.print());
+						t.setSock(counter.getSocketByID(t.getType(), t.getNum()));
 					
 					p = new PrintWriter(t.getSocket().getOutputStream());
 					sleeping.in(t);
@@ -53,26 +53,29 @@ public class counterSleeper extends Thread {
 			}
 				
 			int flag = QueueManagement.getIndexAvg(q, s);
-			t = new infoCounter('A', -1);
+			t2 = new infoCounter('A', -1);
 			
 			if (flag != -1) { 
-				t.set(sleeping.search((char)(65 + flag)));
+				t2.set(sleeping.search((char)(65 + flag)));
 				
-				if (t.getNum() == -1)  
+				if (t2.getNum() == -1)  
 				{//apro un polifunzionale se non c'è nessuno specifico oppure ci sono più code in attesa
 					System.out.println("May open polifunc");
-					t.set(sleeping.search('D'));
+					t2.set(sleeping.search('D'));
 				}
 				
-				if (t.getNum() != -1) {
-					try {			
-						p = new PrintWriter(t.getSocket().getOutputStream());
-						sleeping.rm(t);
-						t.setT(QueueManagement.getNow());
-						working.in(t);
+				if (t2.getNum() != -1) {
+					try {
+						if (t2.getSocket() == null)
+							t2.setSock(counter.getSocketByID(t.getType(), t.getNum()));
 						
-						System.out.println("opening " + t.print());
-						p.println("i" + t.getNum());
+						p = new PrintWriter(t2.getSocket().getOutputStream());
+						sleeping.rm(t2);
+						t2.setT(QueueManagement.getNow());
+						working.in(t2);
+						
+						System.out.println("opening " + t2.print());
+						p.println("i" + t2.getNum());
 						p.flush();
 					} catch (IOException e) {
 						e.printStackTrace();
