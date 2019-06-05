@@ -1,7 +1,5 @@
 import java.awt.EventQueue;
 import java.io.IOException;
-import java.net.InetAddress;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -22,7 +20,6 @@ public class serverApplication {
 	private list sleeping;
 	private list counter;
 	private Semaforo mutexList;
-	private JLabel lblNewLabel;
 	private dealerConnector thDealerConnect;
 	private counterConnector thCounterConnect;
 	private counterCreatorConnector thCounterCreatorConnect;
@@ -82,15 +79,11 @@ public class serverApplication {
 		lblPeopleInThe.setBounds(580, 26, 198, 38);
 		frame.getContentPane().add(lblPeopleInThe);
 		
-	    lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(116, 358, 48, 14);
-		frame.getContentPane().add(lblNewLabel);
-		
 		thDealerConnect.start();
 		thCounterConnect.start();
 		thCounterCreatorConnect.start();
 		sleeper.start();
-		lblNewLabel.setText(InetAddress.getLocalHost().getHostAddress());
+		
 	}
 
 	private void initialize() 
