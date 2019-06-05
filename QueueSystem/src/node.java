@@ -1,6 +1,6 @@
 public class node <T>
 {
-	public T info;
+	private T info;
 	private node<T> ptr;
 	
 	public node() 
@@ -22,6 +22,10 @@ public class node <T>
 	public T getInfo() 
 	{
 		return info;
+	}
+	
+	public void setInfo(T info) {
+		this.info = info;
 	}
 	
 	public node<T> getPtrNext() 

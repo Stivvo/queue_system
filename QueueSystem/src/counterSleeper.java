@@ -33,7 +33,7 @@ public class counterSleeper extends Thread {
 			System.out.println("print sleeping");
 			sleeping.stampa();
 			
-			t.set(working.search());
+			t = working.search();
 			PrintWriter p;
 			
 			if (t.getNum() != -1) {					
@@ -56,12 +56,12 @@ public class counterSleeper extends Thread {
 			t2 = new infoCounter('A', -1);
 			
 			if (flag != -1) { 
-				t2.set(sleeping.search((char)(65 + flag)));
+				t2 = sleeping.search((char)(65 + flag));
 				
 				if (t2.getNum() == -1)  
 				{//apro un polifunzionale se non c'è nessuno specifico oppure ci sono più code in attesa
 					System.out.println("May open polifunc");
-					t2.set(sleeping.search('D'));
+					t2 = sleeping.search('D');
 				}
 				
 				if (t2.getNum() != -1) {

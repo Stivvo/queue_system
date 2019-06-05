@@ -18,10 +18,8 @@ public class list
 	
 	public void in (infoCounter x)
 	{
-		node<infoCounter> n = new node<infoCounter>();
+		node<infoCounter> n = new node<infoCounter>(x, null);
 		n.setPtrNext(p);
-		n.info = new infoCounter('A', -1);
-		n.info.set(x);
 		p = n;
 	}
 	
@@ -31,7 +29,7 @@ public class list
 		
 		if (p.getInfo().eq(n))
 		{
-			t.set(p.getInfo());
+			t = p.getInfo();
 			p = p.getPtrNext();
 		} else {
 			node<infoCounter> pa = p;
@@ -41,7 +39,7 @@ public class list
 					pa = pa.getPtrNext();
 			
 			if (pa.getPtrNext() != null) {
-				t.set(pa.getPtrNext().getInfo());
+				t = pa.getPtrNext().getInfo();
 				pa.setPtrNext(pa.getPtrNext().getPtrNext());
 			}
 		}
@@ -58,7 +56,7 @@ public class list
 			int i = 0;
 			long diff = 0;
 					
-			while (pa != null && pa.info != null) {
+			while (pa != null && pa.getInfo() != null) {
 				
 				diff = QueueManagement.getNow().getEpochSecond() 
 						- pa.getInfo().getT().getEpochSecond();
@@ -74,7 +72,7 @@ public class list
 				if (diff > 9999) {//se l'attesa la differenza di tempo esce dallo spazio long
 					infoCounter temp = pa.getInfo();
 					temp.setT(QueueManagement.getNow());
-					pa.info.set(temp);
+					pa.setInfo(temp);
 				}
 				pa = pa.getPtrNext();
 			}
@@ -93,7 +91,7 @@ public class list
 		if (pa != null) {
 			if (update) {
 				n.setT(QueueManagement.getNow());
-				pa.info.set(n);
+				pa.setInfo(n);
 			}
 			t = pa.getInfo();
 		}

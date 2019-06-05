@@ -46,13 +46,6 @@ public class infoCounter
 		return false;
 	}
 	
-	public void set(infoCounter x) {
-		this.type = x.type;
-		this.num = x.num;
-		this.t = x.t;
-		this.s = x.s;
-	}
-	
 	public void setT(Instant t)
 	{
 		this.t = t;

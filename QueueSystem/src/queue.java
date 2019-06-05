@@ -87,7 +87,7 @@ public class queue
 		int n = 1;
 		
 		while (pa != null) {
-            avg +=  QueueManagement.getNow().getEpochSecond() - pa.info.getT().getEpochSecond();
+            avg +=  QueueManagement.getNow().getEpochSecond() - pa.getInfo().getT().getEpochSecond();
 			
 			n++;
 			pa = pa.getPtrNext();
