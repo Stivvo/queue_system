@@ -4,17 +4,21 @@ Cliente: numero del ticket + data ritirato dal cliente
 
 infoCounter: informazioni di uno sportello (tipo, numero, data ultimo servizio, socket)
 
-node: classe nodo utilizzata come nodo di infoCounter o Cliente
+node: classe nodo utilizzata come nodo di infoCounter o Cliente (template)
 
 queue: coda di nodi Cliente
 
-list: lista di nodi infoCounter
+list: lista di nodi infoCounter, con metodi di ricerca per infoCounter, int o
+char; update delle date di ultimo servizio, ricerca di sportelli inattivi; rimozione
 
-Test: contiene metodi per il test automatico delle strutture dati
+Test: contiene metodi per il test automatico di queue e list
 
 Semaforo: classe semaforo custom
 
 launch: lancia nell'ordine corretto tutte le finestre per il funzionamento del programma
+
+counterState: utilizzata per passare per riferimento lo stato di attività di un
+Counter (active), quindi contiene solo un attributo Boolean
 
 --- grafiche ---
 
@@ -28,9 +32,20 @@ NewCounter: serve per creare nuovi sportelli
 
 --- thread ---
 
-counterReciver: legge i messaggi di counterSleeper e attiva o disattiva uno sportello
+counterReciver: legge i messaggi di counterSleeper e attiva o disattiva uno
+sportello modificandne la barra del titolo e ponendo active = false
 
-countreSleeper: controlla per sportelli inattivi da sospendere o, eventualmente, li riattiva
+counterSleeper: comunica a counterReciver:
+"i"+ numero sportello: attiva
+"d"+ numero sportello: disattiva
+utilizza la lista working per memorizzare tutti gli sportelli attivi,
+una coda speeping per quelli sospesi.
+Quando uno sportello cambia stato viene spostato da una lista ad un altra
+
+QueueManagement: contiene metodi che gestiscono le code
+isSomeoneWaiting: ritorna quante code risultano in stato di sovraccarico
+getIndexBlockedQueue: ritorna l'indice della coda con maggiore tempo di attesa,
+quindi da riattivare
 
 serverCounter: manda avanti le code su segnale di un Counter e gestisce cosa devono fare i polifunzionali
 
