@@ -1,5 +1,3 @@
-import java.net.Socket;
-
 public class list 
 {
 	private node<infoCounter> p;
@@ -23,18 +21,6 @@ public class list
 		n.info = new infoCounter('A', -1);
 		n.info.set(x);
 		p = n;
-	}
-	
-	public void setlast(Socket s) {
-		
-		if (!isEmpty()) {
-			node<infoCounter> top = p;
-			
-			while (top.getPtrNext() != null)
-				top = top.getPtrNext();
-			
-			top.getInfo().setSock(s);
-		}
 	}
 	
 	public infoCounter rm(infoCounter n)
@@ -90,7 +76,7 @@ public class list
 				}
 				pa = pa.getPtrNext();
 			}
-		}
+		} //end if !this.isEmpty()
 		return t;
 	}
 	

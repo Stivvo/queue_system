@@ -25,16 +25,28 @@ public class counterSleeper extends Thread {
 		
 		while (true)
 		{ //Searches for inactive counters and closes them
+			System.out.println("print working");
+			working.stampa();
+			System.out.println("print sleeping");
+			sleeping.stampa();
+			
 			t.set(working.search());
 			PrintWriter p;
 			
 			if (t.getNum() != -1) {					
 				try {
+					
+					if (t == null)
+						System.out.println("t null ");
+					
+					if (t.getSocket() == null)
+						System.out.println("t socket null " + t.print());
+					
 					p = new PrintWriter(t.getSocket().getOutputStream());
 					sleeping.in(t);
 					working.rm(t);
 					p.println("d" + t.getNum());
-					p.flush();
+					p.flush();	
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

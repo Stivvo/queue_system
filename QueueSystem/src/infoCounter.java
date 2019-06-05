@@ -20,6 +20,9 @@ public class infoCounter
 		this.num = num;
 		this.t = t;
 		s = sock;
+		
+		if (sock == null)
+			System.out.println(this.print() + " socket null");//non ha detto nulla
 	}
 	
 	public char getType() {return type;}
