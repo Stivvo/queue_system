@@ -1,6 +1,5 @@
 import java.awt.EventQueue;
 import java.io.IOException;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -21,7 +20,6 @@ public class serverApplication {
 	private list sleeping;
 	private list counter;
 	private Semaforo mutexList;
-	
 	private dealerConnector thDealerConnect;
 	private counterConnector thCounterConnect;
 	private counterCreatorConnector thCounterCreatorConnect;
@@ -85,6 +83,7 @@ public class serverApplication {
 		thCounterConnect.start();
 		thCounterCreatorConnect.start();
 		sleeper.start();
+		
 	}
 
 	private void initialize() 
