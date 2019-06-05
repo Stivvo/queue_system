@@ -135,16 +135,16 @@ public class Counter
 		frame.setBounds(100, 100, 370, 170);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JButton btn = new JButton("New button");
-		frame.getContentPane().add(btn, BorderLayout.CENTER);
+		JButton btnCallNext = new JButton("Call Next");
+		frame.getContentPane().add(btnCallNext, BorderLayout.CENTER);
 		
-		btn.addActionListener(new ActionListener() {
+		btnCallNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				stampa();
 			}
 		});
 		
-		btn.addKeyListener(new KeyAdapter() {
+		btnCallNext.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) 
 			{
