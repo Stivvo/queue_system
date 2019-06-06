@@ -112,7 +112,7 @@ public class Delaer {
 	{
 		frame = new JFrame();
 		frame.setTitle("Dealer");
-		frame.setBounds(100, 100, 360, 236);
+		frame.setBounds(100, 100, 418, 179);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -125,7 +125,7 @@ public class Delaer {
 				stampa(0);
 			}
 		});
-		btnA.setBounds(12, 79, 98, 25);
+		btnA.setBounds(12, 61, 119, 25);
 		frame.getContentPane().add(btnA);
 		
 		// -- B ---
@@ -136,7 +136,7 @@ public class Delaer {
 				stampa(1);
 			}
 		});
-		btnB.setBounds(120, 79, 98, 25);
+		btnB.setBounds(143, 61, 127, 25);
 		frame.getContentPane().add(btnB);
 		
 		// -- C ---
@@ -147,7 +147,7 @@ public class Delaer {
 				stampa(2);
 			}
 		});
-		btnC.setBounds(230, 79, 98, 25);
+		btnC.setBounds(282, 61, 119, 25);
 		frame.getContentPane().add(btnC);
 		
 		// -- label scegli sportello
@@ -159,7 +159,7 @@ public class Delaer {
 		ticket = new JLabel("---");
 		ticket.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		ticket.setHorizontalAlignment(SwingConstants.CENTER);
-		ticket.setBounds(122, 133, 98, 53);
+		ticket.setBounds(160, 89, 98, 53);
 		frame.getContentPane().add(ticket);
 		
 		btnA.addKeyListener(new KeyAdapter() {

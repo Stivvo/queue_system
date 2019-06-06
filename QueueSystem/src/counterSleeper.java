@@ -35,7 +35,7 @@ public class counterSleeper extends Thread {
 			t = working.search();
 			PrintWriter p;
 			
-			if (t.getNum() != -1) {					
+			if (t.getNum() != -1) {
 				try {
 					if (t.getSocket() == null)
 						t.setSock(counter.search(t, false).getSocket());
