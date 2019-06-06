@@ -1,4 +1,3 @@
-
 public class list 
 {
 	private node<infoCounter> p;
@@ -63,10 +62,14 @@ public class list
 				if (diff > 20) {
 					i = ((int)pa.getInfo().getType()) - 65;
 					
-					if (nCount[i])
+					if (nCount[i] == true) {
 						return pa.getInfo();
-					else
+
+					}
+					else {
 						nCount[i] = true;
+					}
+						
 				} else
 				if (diff > 9999) {//se l'attesa la differenza di tempo esce dallo spazio long
 					infoCounter temp = pa.getInfo();
@@ -75,7 +78,16 @@ public class list
 				}
 				pa = pa.getPtrNext();
 			}
+			
+			for (int j = 0; j < 3; j++) {
+				if (nCount[j] && nCount[3]) {
+					t = search((char)('A'+j));
+					return t;
+				}
+			}
 		} //end if !this.isEmpty()
+		
+		
 		return t;
 	}
 	
@@ -135,5 +147,37 @@ public class list
 			System.out.println(pa.getInfo().print());
 			pa = pa.getPtrNext();
 		}
+	}
+	
+	public void move(infoCounter t) {
+		node<infoCounter> pa = p; 
+		node<infoCounter> pc = null;
+		node<infoCounter> pb = null;
+		if (pa != null) {
+			if (pa.getInfo().eq(t)) {
+				p = p.getPtrNext();
+				
+			} else {
+				pb = pa;
+				while (pb != null && pb.getInfo().eq(t)) {
+					pb = pb.getPtrNext();
+					pa = pa.getPtrNext();
+				}
+				
+				if (pb != null) {
+					pa.setPtrNext(pb.getPtrNext());
+					pa = pb;
+				}
+			}
+			
+			pc = p;
+			pa.setPtrNext(null);
+			while (pc.getPtrNext() != null) {
+				pc = pc.getPtrNext();
+			}
+			pc.setPtrNext(pa);
+		}
+		
+		
 	}
 }

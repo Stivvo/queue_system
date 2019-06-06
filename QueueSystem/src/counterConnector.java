@@ -47,18 +47,12 @@ public class counterConnector extends Thread{
 				String readed = read.readLine();
 				thSCounter = new serverCounter(q, s, LS, LC, LW, sock, working);
 				
-				int t =  readed.charAt(0) - 65;
-				System.out.println("counterConnector t: " + t);
 				
-				System.out.println(
-				"readed.charAt: " + readed.charAt(0) + 
-					"readed.substring(0): " + readed.substring(0));
 				infoCounter counter = new infoCounter(
 					readed.charAt(0), Integer.parseInt
 						(readed.substring(1)), QueueManagement.getNow(), sock);
 				
 				mutexL.p();
-				System.out.println("counter.print: " + counter.print());
 				working.in(counter);
 				this.counter.in(new infoCounter(
 					readed.charAt(0), Integer.parseInt

@@ -34,7 +34,7 @@ public class CounterReciver extends Thread{
 		while (true) {
 			try {
 				message = reader.readLine();
-				System.out.println("CounterReciver message: " + message);
+				
 			} catch (IOException e) {
 				System.out.println("error reading message through BufferedReader");
 			}
@@ -47,11 +47,6 @@ public class CounterReciver extends Thread{
 					active.setActive();
 					F.setTitle(F.getTitle().substring(0, F.getTitle().indexOf(off)));
 				}
-				
-				if (active.isActive())
-					System.out.println("ATTIVA id: " + this.id);
-				else
-					System.out.println("DISATTIVA id: " + this.id);
 			}
 		}
 	}

@@ -43,7 +43,7 @@ public class serverCounter extends Thread {
 		{
 			try {
 				operate = reader.readLine();
-				System.out.println("operate: " + operate);
+				
 			} catch (SocketException e) {
 				try {
 					sock.close();
@@ -61,16 +61,16 @@ public class serverCounter extends Thread {
 			i = ((int)operate.charAt(0)) - 65;
 			sub = Integer.valueOf(operate.substring(1));
 			
-			System.out.println("i = " + i + " sub: " + sub);
+	
 			
 			if (i == 3 || i == 4)
 			{
 				if (!q[1].isEmpty() && QueueManagement.isSomeoneWaiting(q, s) == 0) {
-					System.out.println("j = 1");
+		
 					j = 1;
 				} else {
 					j = QueueManagement.getIndexBlockedQueue(q, s);
-					System.out.println("j2 = " + j);
+		
 				}	
 			}
 			else
@@ -90,8 +90,7 @@ public class serverCounter extends Thread {
 					
 					if (working.search(temp, true).getNum() == -1)
 						System.out.println("Error while updating time");
-					else
-						System.out.println("updating " + temp.print());
+					
 				}
 				s[j].v();
 			}

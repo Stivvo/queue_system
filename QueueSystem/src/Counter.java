@@ -87,8 +87,6 @@ public class Counter
 		 */
 		//following two lines should be UNCOMMENTED when properly using the application
 		
-		System.out.println("COUNTER, Type: " + 
-				this.getType() + ", Num: " + this.getNum());
 		try {
 			initialize();
 		} catch (UnknownHostException e) {

@@ -27,16 +27,36 @@ public class counterSleeper extends Thread {
 		
 		while (true)
 		{ //Searches for inactive counters and closes them
-			System.out.println("print working");
-			working.stampa();
-			System.out.println("print sleeping");
-			sleeping.stampa();
-			
 			t = working.search();
 			PrintWriter p;
 			
-			if (t.getNum() != -1) {
+			if (QueueManagement.isSomeoneWaiting(q, s) > 0 && t.getNum() != -1) {
+				
+				if (t.getType() < 'D') {//se è un counter specifico
+					s[t.getType() - 65].p();
+					int avg = q[t.getType() - 65].getAvg();
+					if (avg > 20) {//non chiude se c'è un attesa maggiore di 20 minuti
+						t = new infoCounter('A', -1);
+					}
+					s[t.getType() - 65].v();
+				} else { // se lo sportello è polifunzionale
+					if (QueueManagement.isSomeoneWaiting(q, s) > 1) { /*non chiude se ci sono più code 
+																	con attesa maggiore a 20 minuti*/
+						t = new infoCounter('A', -1);
+					} else {
+						int j = QueueManagement.getIndexBlockedQueue(q, s);
+						if (working.search('A'+j).getNum() == -1) {/* non chiude se non c'è lo sportello specializzato*/
+							t = new infoCounter('A', -1);
+						}
+					}
+				}
+				
+				
+			}
+			if (t.getNum() != -1) {	//chiusura dello sportello
+				
 				try {
+					
 					if (t.getSocket() == null)
 						t.setSock(counter.search(t, false).getSocket());
 					
@@ -50,38 +70,35 @@ public class counterSleeper extends Thread {
 				}
 			}
 				
-			if (QueueManagement.isSomeoneWaiting(q, s) > 0) {
-				int flag = QueueManagement.getIndexBlockedQueue(q, s);
-				t2 = new infoCounter('A', -1);
+
+			t2 = new infoCounter('A', -1);
+			if (QueueManagement.isSomeoneWaiting(q, s) > 0) { 
 				
-				if (flag != -1) { 
-					t2 = sleeping.search((char)(65 + flag));
+				
+				
+				if (QueueManagement.isSomeoneWaiting(q, s) > 1)  // più code con attesa maggiore a 20 minuti
+				{
+					t2 = sleeping.search('D');//tentativo di apertura di un sportello polifunzionale
 					
-					if (t2.getNum() == -1)  
-					{//apro un polifunzionale se non c'Ã¨ nessuno specifico oppure ci sono piÃ¹ code in attesa
-						System.out.println("May open polifunc");
-						t2 = sleeping.search('D');
-					}
-					
-					if (t2.getNum() != -1) {
-						try {
-							if (t2.getSocket() == null)
-								t2.setSock(counter.search(t, false).getSocket());
-							
-							p = new PrintWriter(t2.getSocket().getOutputStream());
-							sleeping.rm(t2);
-							t2.setT(QueueManagement.getNow());
-							working.in(t2);
-							
-							System.out.println("opening " + t2.print());
-							p.println("i" + t2.getNum());
-							p.flush();
-						} catch (IOException e) {
-							e.printStackTrace();
+					if (t2.getNum() == -1) {
+						for (int j = 0; j < 3; j++) {/*tentativo di apertura dei sportelli specializzati per le code
+						 							con attesa maggiore a 20 minuti*/
+							s[j].p();
+							if (q[j].getAvg() >= 10) {
+								closeCounter(sleeping.search((char) ('A' + j)));
+							}
+							s[j].v();
 						}
-					} 
-				}
-			} //end if QueueManagement.isSomeoneWaiting();
+					}
+				} else {
+					t2 = sleeping.search((char)(65 + QueueManagement.getIndexBlockedQueue(q, s)));
+					{/*tentativo di apertura dello sportello specializzato per la coda
+							con attesa maggiore a 20 minuti*/
+					closeCounter(t2);
+				}	
+				
+			}
+				
 			try {
 				Thread.sleep(1000); //reduce CPU usage
 			} catch (InterruptedException e) {
@@ -89,5 +106,25 @@ public class counterSleeper extends Thread {
 				throw new RuntimeException();
 			}
 		}
+		}
 	}
+
+
+public void closeCounter(infoCounter t) {
+	if (t.getNum() != -1) {
+		try {
+			if (t.getSocket() == null)
+				t.setSock(counter.search(t, false).getSocket());
+			
+			PrintWriter p = new PrintWriter(t.getSocket().getOutputStream());
+			sleeping.rm(t);
+			t.setT(QueueManagement.getNow());
+			working.in(t);
+			p.println("i" + t.getNum());
+			p.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	} 
+}
 }

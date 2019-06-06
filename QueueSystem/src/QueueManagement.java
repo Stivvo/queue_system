@@ -31,7 +31,9 @@ public class QueueManagement {
 		{
 				if (!q[i].isEmpty())
 				{
-					if (q[i].getDim() >= 5)
+					if (getNow().getEpochSecond() -
+							q[i].front().getInfo().getT().getEpochSecond() 
+							>= 10)
 						flag++;
 				}
 		}
@@ -51,9 +53,11 @@ public class QueueManagement {
 		{
 			if (!q[i].isEmpty())
 			{
-				ltemp = q[i].getDim();
+				ltemp = getNow().getEpochSecond() - 
+						q[i].front().getInfo().getT().getEpochSecond();
 				
-				if (ltemp > longest) {
+				if (ltemp > longest)
+				{
 					longest = ltemp;
 					iMax = i;
 				}

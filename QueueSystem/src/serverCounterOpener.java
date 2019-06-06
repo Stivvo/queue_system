@@ -34,22 +34,25 @@ public class serverCounterOpener extends Thread
 			String toRead = " ";
 			try {
 				 toRead = read.readLine();
+				 infoCounter inf = new infoCounter(
+							toRead.charAt(0),
+							Integer.valueOf(toRead.substring(1)).intValue());
+					
+				mutexL.p();
+				
+				if (counter.search(inf.getNum()).getNum() != -1)
+					write.println("already exists");
+				else
+					write.println("ok"); 
+							
+				write.flush();
+				mutexL.v();
 			} catch (IOException e) {
 				e.printStackTrace();
-			}		
-			infoCounter inf = new infoCounter(
-				toRead.charAt(0),
-				Integer.valueOf(toRead.substring(1)).intValue());
-		
-			mutexL.p();
+			} catch (NullPointerException e) {
+				
+			}
 			
-			if (counter.search(inf.getNum()).getNum() != -1)
-				write.println("already exists");
-			else
-				write.println("ok"); 
-						
-			write.flush();
-			mutexL.v();
 		}
 	}
 	
