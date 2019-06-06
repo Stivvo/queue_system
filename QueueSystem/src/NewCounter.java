@@ -83,20 +83,20 @@ public class NewCounter extends Thread
 	
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 363, 203);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		SpinnerModel sm = new SpinnerNumberModel(0, 0, 100, 1);
 		
 		JSpinner spinner = new JSpinner(sm);
-		spinner.setBounds(41, 93, 105, 22);
+		spinner.setBounds(29, 93, 105, 22);
 		spinner.getModel();
 		frame.getContentPane().add(spinner);
 		
 		JButton btnFinance = new JButton("Finance");
 		
-		btnFinance.setBounds(276, 130, 150, 27);
+		btnFinance.setBounds(184, 51, 150, 27);
 		frame.getContentPane().add(btnFinance);
 		
 		btnFinance.addActionListener(new ActionListener() {
@@ -105,7 +105,7 @@ public class NewCounter extends Thread
 			}});
 		
 		JButton btnComunication = new JButton("Comunication");
-		btnComunication.setBounds(276, 90, 150, 27);
+		btnComunication.setBounds(184, 90, 150, 27);
 		frame.getContentPane().add(btnComunication);
 		
 		btnComunication.addActionListener(new ActionListener() {
@@ -114,7 +114,7 @@ public class NewCounter extends Thread
 			}});
 		
 		JButton btnPackage = new JButton("Package");
-		btnPackage.setBounds(276, 169, 150, 27);
+		btnPackage.setBounds(184, 129, 150, 27);
 		frame.getContentPane().add(btnPackage);
 		
 		btnPackage.addActionListener(new ActionListener() {
@@ -123,7 +123,7 @@ public class NewCounter extends Thread
 			}});
 		
 		JButton btnPolifunzione = new JButton("Multipurpose");
-		btnPolifunzione.setBounds(276, 51, 150, 27);
+		btnPolifunzione.setBounds(184, 12, 150, 27);
 		frame.getContentPane().add(btnPolifunzione);
 		
 		btnPolifunzione.addActionListener(new ActionListener() {
@@ -132,7 +132,7 @@ public class NewCounter extends Thread
 			}});
 		
 		JLabel lblNumeroSportello = new JLabel("Counter number");
-		lblNumeroSportello.setBounds(41, 56, 150, 17);
+		lblNumeroSportello.setBounds(29, 56, 150, 17);
 		frame.getContentPane().add(lblNumeroSportello);
 	}
 }
