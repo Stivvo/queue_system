@@ -24,7 +24,6 @@ public class counterSleeper extends Thread {
 	{
 		infoCounter t = new infoCounter('A', -1);
 		infoCounter t2 = new infoCounter('A', -1);
-		int i = 0;
 		
 		while (true)
 		{ //Searches for inactive counters and closes them
@@ -38,7 +37,6 @@ public class counterSleeper extends Thread {
 			
 			if (t.getNum() != -1) {					
 				try {
-					
 					if (t.getSocket() == null)
 						t.setSock(counter.search(t, false).getSocket());
 					
@@ -52,38 +50,38 @@ public class counterSleeper extends Thread {
 				}
 			}
 				
-			int flag = QueueManagement.getIndexAvg(q, s);
-			t2 = new infoCounter('A', -1);
-			
-			if (flag != -1) { 
-				t2 = sleeping.search((char)(65 + flag));
+			if (QueueManagement.isSomeoneWaiting(q, s) > 0) {
+				int flag = QueueManagement.getIndexBlockedQueue(q, s);
+				t2 = new infoCounter('A', -1);
 				
-				if (t2.getNum() == -1)  
-				{//apro un polifunzionale se non c'è nessuno specifico oppure ci sono più code in attesa
-					System.out.println("May open polifunc");
-					t2 = sleeping.search('D');
-				}
-				
-				if (t2.getNum() != -1) {
-					try {
-						if (t2.getSocket() == null)
-							t2.setSock(counter.search(t, false).getSocket());
-						
-						p = new PrintWriter(t2.getSocket().getOutputStream());
-						sleeping.rm(t2);
-						t2.setT(QueueManagement.getNow());
-						working.in(t2);
-						
-						System.out.println("opening " + t2.print());
-						p.println("i" + t2.getNum());
-						p.flush();
-					} catch (IOException e) {
-						e.printStackTrace();
+				if (flag != -1) { 
+					t2 = sleeping.search((char)(65 + flag));
+					
+					if (t2.getNum() == -1)  
+					{//apro un polifunzionale se non c'è nessuno specifico oppure ci sono più code in attesa
+						System.out.println("May open polifunc");
+						t2 = sleeping.search('D');
 					}
-				} 
-			}
-				
-			i = (i + 1) % 4;
+					
+					if (t2.getNum() != -1) {
+						try {
+							if (t2.getSocket() == null)
+								t2.setSock(counter.search(t, false).getSocket());
+							
+							p = new PrintWriter(t2.getSocket().getOutputStream());
+							sleeping.rm(t2);
+							t2.setT(QueueManagement.getNow());
+							working.in(t2);
+							
+							System.out.println("opening " + t2.print());
+							p.println("i" + t2.getNum());
+							p.flush();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					} 
+				}
+			} //end if QueueManagement.isSomeoneWaiting();
 			try {
 				Thread.sleep(1000); //reduce CPU usage
 			} catch (InterruptedException e) {
